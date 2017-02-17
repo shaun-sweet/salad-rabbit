@@ -1,94 +1,48 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 
 
 var Dropbox = require('dropbox');
 var dbx = new Dropbox({ accessToken: 'DDIAux8ajggAAAAAAAAIFMQMfRsFSEa5KdP45To_6wW5iFJrtQfNtkeXwTxvzRce' });
-var reader = new FileReader();
-reader.addEventListener("loadend", function() {
-   // reader.result contains the contents of blob as a typed array
-   console.log(JSON.parse(reader.result));
-});
-
-dbx.filesDownload({path: '/file.salad'})
-  .then(function(response) {
-    console.log(response);
-    reader.readAsText(response.fileBlob)
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-dbx.filesListFolder({path: ''})
-  .then(function(response) {
-    console.log(response);
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-// dbx.filesUpload({
-//   contents: JSON.stringify({helloWorld: "this is a test"}),
-//   path: "/file.salad",
-//   mode: {".tag": "overwrite"},
-//   autorename: false,
-//   mute: false,
+// var reader = new FileReader();
+// reader.addEventListener("loadend", function() {
+//    // reader.result contains the contents of blob as a typed array
+//    console.log(JSON.parse(reader.result));
+// });
 //
-// })
-//   .then((response) => console.log(response))
-//   .catch((error) => console.error(error));
+// dbx.filesDownload({path: '/file.salad'})
+//   .then(function(response) {
+//     console.log(response);
+//     reader.readAsText(response.fileBlob)
+//   })
+//   .catch(function(error) {
+//     console.log(error);
+//   });
+// dbx.filesListFolder({path: ''})
+//   .then(function(response) {
+//     console.log(response);
+//   })
+//   .catch(function(error) {
+//     console.log(error);
+//   });
+dbx.filesUpload({
+  contents: JSON.stringify({helloWorld: "vivian likes auto saving features coupled with hot reloading web servers"}),
+  path: "/file.salad",
+  mode: {".tag": "overwrite"},
+  autorename: false,
+  mute: false,
 
+})
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
+import seed from './seed';;
 
 
 class App extends Component {
 
   constructor() {
     super();
-    this.state = {
-      closed_accounts: [
-        {
-          name: "Checking",
-          type: "Checking",
-          balance: 0,
-          note: "String"
-        }
-      ],
-      accounts: [
-        {
-          name: "Checking",
-          type: "checking",
-          balance: 100000,
-          note: "String"
-        },
-        {
-          name: "Credit Card",
-          type: "credit card",
-          balance: -100,
-          note: "String"
-        }
-      ],
-      transactions: [
-        {
-          account: "Checking",
-          date: Date.now,
-          payee: "Dominos",
-          category: "Food",
-          memo: "twas good",
-          outflow: 30.05,
-          inflow: null,
-          cleared: true
-        }
-      ],
-      categories: [
-        {
-          master_category: "Monthly Bills",
-          sub_categories: [
-            {
-              name: "Rent",
-              budgeted_amount: 500
-            }
-          ]
-        }
-      ]
-    }
+    this.state = seed;
 
   }
   render() {
