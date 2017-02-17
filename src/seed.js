@@ -1,4 +1,4 @@
-module.exports = x{
+module.exports = {
   closed_accounts: [
     {
       name: "Checking",
