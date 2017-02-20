@@ -11,7 +11,7 @@ class Accounts extends Component {
 
   render() {
     return (
-      <div className='about'>
+      <div className='accounts'>
         Accounts
       </div>
     );
