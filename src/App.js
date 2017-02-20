@@ -38,6 +38,7 @@ class App extends Component {
             mother fucking internet and all the doc formatting images left my cache and it was terrible... anyways hopefully this small writeup
             helps a bit.  Also you can pull url params as well as query string params, but I forget the syntax for snagging that.  its in the props somewhere.
 
+            Also this fancy fat comment is called a HEREDOC.  IDK what it stands for or means but its for formatting large comments.
 
            `
           {this.props.children}
