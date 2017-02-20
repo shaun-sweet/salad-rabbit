@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './css/App.css';
-
+import injectTapEventPlugin from 'react-tap-event-plugin';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 var Dropbox = require('dropbox');
 var dbx = new Dropbox({ accessToken: 'DDIAux8ajggAAAAAAAAIFMQMfRsFSEa5KdP45To_6wW5iFJrtQfNtkeXwTxvzRce' });
@@ -26,7 +29,7 @@ var dbx = new Dropbox({ accessToken: 'DDIAux8ajggAAAAAAAAIFMQMfRsFSEa5KdP45To_6w
 //     console.log(error);
 //   });
 dbx.filesUpload({
-  contents: JSON.stringify({helloWorld: "vivian likes auto saving features coupled with hot reloading web servers"}),
+  contents: JSON.stringify({helloWorld: "vivian likes auto saving features coupled with hot reloading web "}),
   path: "/file.salad",
   mode: {".tag": "overwrite"},
   autorename: false,
@@ -35,20 +38,30 @@ dbx.filesUpload({
 })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-import seed from './seed';;
+import seed from './seed';
 
+function sleeping() {
+  console.log('hiiiiii');
+  this.setState({
+    grooming: "the dog"
+  })
+}
 
 class App extends Component {
 
-  constructor() {
-    super();
-    this.state = seed;
+  // constructor() {
+  //   super();
+  //   this.state = seed;
+  //
+  // }
 
-  }
+  state = seed;
+  sleeping = sleeping.bind(this);
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
+        <div onClick={this.sleeping} className="App-header">
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
