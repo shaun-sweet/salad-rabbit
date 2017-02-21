@@ -1,0 +1,1 @@
+## Replacement application for YNAB
