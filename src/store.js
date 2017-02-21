@@ -4,6 +4,8 @@ import thunk from 'redux-thunk'
 import reducers from './reducers'
 const middleware = applyMiddleware(thunk, logger())
 export default createStore(reducers, middleware);
+
+// this var is just to see the data model, it really does nothing
 var save = {
   closed_accounts: [
     {
