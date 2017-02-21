@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './css/App.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './helpers';
+import axios from 'axios'
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
 injectTapEventPlugin();
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -34,22 +37,25 @@ const reducers = combineReducers({
   categories: categoriesReducer,
 })
 
-const logger = (store) => (action) => (next) => {
-
-}
-const middleware = applyMiddleware()
+const middleware = applyMiddleware(thunk, logger())
 const store = createStore(reducers, middleware);
 
 store.subscribe(() => {
   console.log('store update: ', store.getState());
 });
 
-store.dispatch({type: "ADD_ACCOUNT", payload: {
-  name: "Checking",
-  type: "checking",
-  balance: 100000,
-  note: "String"
-}});
+store.dispatch((dispatch) => {
+  dispatch({type: "ADD_ACCOUNT", payload: {
+    name: "Checking",
+    type: "checking",
+    balance: 100000,
+    note: "String"
+  }});
+  axios.get("http://rest.learncode.academy/api/wstern/users")
+    .then((response) => {
+      dispatch({type: "ADD_USERS", payload: response.data})
+    })
+});
 
 store.dispatch({type: "ADD_TRANSACTION", payload: {
   account: "Checking",
