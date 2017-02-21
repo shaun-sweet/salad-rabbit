@@ -45,3 +45,34 @@ module.exports = {
     }
   ]
 }
+
+transactions: {
+  uniqueId: 0,
+  list: [
+    {
+      account: "Checking",
+      date: Date.now,
+      payee: "Dominos",
+      category: "Food",
+      memo: "twas good",
+      outflow: 30.05,
+      inflow: null,
+      cleared: true
+    }
+  ]
+}
+
+var stateAction = {
+  add: {
+    transaction: "ADD_TRANSACTION",
+    account: "ADD_ACCOUNT",
+    category: "ADD_CATEGORY"
+  }
+}
+
+store.dispatch({type: stateAction.add.account, payload: {
+  name: "Checking",
+  type: "checking",
+  balance: 100000,
+  note: "String"
+}});
