@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/App.js
 import React, {Component} from 'react';
 import logo from './logo.svg';
 
@@ -85,6 +86,73 @@ class App extends Component {
           <a target="_blank" className={styles.readmeLink} href="https://github.com/kitze/create-react-app/tree/master/packages/react-scripts">
             Link to full README.md
           </a>
+=======
+import React, { Component } from 'react';
+import './css/App.css';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
+var Dropbox = require('dropbox');
+var dbx = new Dropbox({ accessToken: 'DDIAux8ajggAAAAAAAAIFMQMfRsFSEa5KdP45To_6wW5iFJrtQfNtkeXwTxvzRce' });
+// var reader = new FileReader();
+// reader.addEventListener("loadend", function() {
+//    // reader.result contains the contents of blob as a typed array
+//    console.log(JSON.parse(reader.result));
+// });
+//
+// dbx.filesDownload({path: '/file.salad'})
+//   .then(function(response) {
+//     console.log(response);
+//     reader.readAsText(response.fileBlob)
+//   })
+//   .catch(function(error) {
+//     console.log(error);
+//   });
+// dbx.filesListFolder({path: ''})
+//   .then(function(response) {
+//     console.log(response);
+//   })
+//   .catch(function(error) {
+//     console.log(error);
+//   });
+dbx.filesUpload({
+  contents: JSON.stringify({helloWorld: "vivian likes auto saving features coupled with hot reloading web "}),
+  path: "/file.salad",
+  mode: {".tag": "overwrite"},
+  autorename: false,
+  mute: false,
+
+})
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
+import seed from './seed';
+
+function sleeping() {
+  console.log('hiiiiii');
+  this.setState({
+    grooming: "the dog"
+  })
+}
+
+class App extends Component {
+
+  // constructor() {
+  //   super();
+  //   this.state = seed;
+  //
+  // }
+
+  state = seed;
+  sleeping = sleeping.bind(this);
+
+  render() {
+    return (
+      <div className="App">
+        <div onClick={this.sleeping} className="App-header">
+          <h2>Welcome to React</h2>
+>>>>>>> 19d66a8d0042f1ea9f3fc6630242e096d44aa007:src/dropbox.js
         </div>
       </div>
     )
