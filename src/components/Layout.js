@@ -4,8 +4,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { addAccount } from '../actions/accountsActions'
 import Navigation from './Navigation'
 import NavButton from './NavButton'
+import OnBudgetAccounts from './OnBudgetAccounts'
+import ClosedAccounts from './ClosedAccounts'
+import AddAccountButton from './AddAccountButton'
 import '../styles/app.css'
-import '../styles/layout.css'
+import '../styles/Layout.css'
 injectTapEventPlugin();
 var mapStateToProps = function(store) {
   return {
@@ -28,9 +31,9 @@ class Layout extends Component {
                 <NavButton linkTo="/" label="Budget" />
                 <NavButton linkTo="accounts" label="All Accounts" />
               </Navigation>
-              <div className="on-budget-accounts">
-
-              </div>
+              <OnBudgetAccounts />
+              <ClosedAccounts />
+              <AddAccountButton />
             </nav>
             <section id='display'>
               {this.props.children}
