@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { addAccount } from '../actions/accountsActions'
 import Navigation from './Navigation'
-import OnBudgetAccounts from './OnBudgetAccounts'
-import ClosedAccounts from './ClosedAccounts'
+import BudgetAccountsContainer from './BudgetAccountsContainer'
+import ClosedAccountsContainer from './ClosedAccountsContainer'
 import AddAccountButton from './AddAccountButton'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../styles/app.css'
 import '../styles/Layout.css'
 injectTapEventPlugin();
@@ -17,28 +18,30 @@ var mapStateToProps = function(store) {
 
 class Layout extends Component {
 
-  addAccountCallback() {
+  handleAddAccount() {
     return this.props.dispatch(addAccount())
   }
 
   render() {
       return (
-        <div className="app-container">
-          <main>
-            <div className='left-side-bar'>
-              <Navigation />
-              <OnBudgetAccounts />
-              <ClosedAccounts />
-              <AddAccountButton onClick={this.addAccountCallback.bind(this)}/>
-            </div>
-            <section id='display'>
-              {this.props.children}
-            </section>
-          </main>
-          <footer>
-            This is the footer
-          </footer>
-        </div>
+        <MuiThemeProvider>
+          <div className="app-container">
+            <main>
+              <div className='left-side-bar'>
+                <Navigation />
+                <BudgetAccountsContainer />
+                <ClosedAccountsContainer />
+                <AddAccountButton onClick={this.handleAddAccount.bind(this)}/>
+              </div>
+              <section id='display'>
+                {this.props.children}
+              </section>
+            </main>
+            <footer>
+              This is the footer
+            </footer>
+          </div>
+        </MuiThemeProvider>
       );
   }
 }
