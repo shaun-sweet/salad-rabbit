@@ -4,16 +4,16 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import Accounts from './components/Accounts'
+import AccountsView from './components/AccountsView'
 import Layout from './components/Layout'
-import Budget from './components/Budget'
+import BudgetView from './components/BudgetView'
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
-        <IndexRoute component={Budget}/>
-        <Route path="accounts" component={Accounts} />
+        <IndexRoute component={BudgetView}/>
+        <Route path="accounts" component={AccountsView} />
       </Route>
     </Router>
   </Provider>,
