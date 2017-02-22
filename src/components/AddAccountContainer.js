@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import { addAccount } from '../actions/accountsActions'
 import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
@@ -19,7 +20,10 @@ class AddAccountContainer extends Component {
     open: false,
     value: 1,
     account: {
-
+      name: "",
+      type: "",
+      balance: "",
+      note: ""
     }
   };
 
@@ -51,21 +55,26 @@ class AddAccountContainer extends Component {
             <TextField
               defaultValue="New Account"
               floatingLabelText="Name"
+              name="name"
+              onChange={this.handleChange.bind(this)}
             />
             <br />
             <TextField
+              name="balance"
               defaultValue="0.00"
               floatingLabelText="Current Balance"
+              onChange={this.handleChange.bind(this)}
             />
             <br />
             <SelectField
+              name="type"
               floatingLabelText="Account Type"
               value={this.state.value}
-              onChange={this.handleChange}
+              onChange={this.handleAccountTypeChange.bind(this)}
             >
-              <MenuItem value={1} primaryText="Checking" />
-              <MenuItem value={2} primaryText="Savings" />
-              <MenuItem value={3} primaryText="Credit Card" />
+              <MenuItem ref="type" value={1} primaryText="Checking" />
+              <MenuItem ref="type" value={2} primaryText="Savings" />
+              <MenuItem ref="type" value={3} primaryText="Credit Card" />
             </SelectField>
           </Dialog>
         </div>
@@ -73,10 +82,43 @@ class AddAccountContainer extends Component {
   }
 
   handleSubmit = (event) => {
-    console.log(event.target.value);
+    this.props.dispatch(addAccount(this.state.account));
+    this.handleClose();
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange(event, value) {
+    const name = event.target.name;
+    this.setState({
+      account: {
+        ...this.state.account,
+        [name]: value
+      }
+    });
+  }
+
+  handleAccountTypeChange(event,index, value){
+    console.log(value);
+    console.log(this.state);
+    var val;
+    if (value === 1) {
+      val = "Checking";
+    }
+    if (value === 2) {
+      val = "Savings";
+    }
+    if (value === 3) {
+      val = "Credit Card";
+    }
+    this.setState({
+      value: value,
+      account: {
+        ...this.state.account,
+        type: val
+      }
+    });
+  }
+
+
 
   handleOpen = () => {
     this.setState({open: true});
