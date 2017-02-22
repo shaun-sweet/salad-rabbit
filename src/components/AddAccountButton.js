@@ -5,7 +5,7 @@ export default class AddAccountButton extends Component {
 
   render() {
     return (
-      <RaisedButton label="Add Account" {...this.props} />
+      <RaisedButton className="add-account-button" label="Add Account" {...this.props} />
     );
   }
 }

@@ -13,7 +13,26 @@ export default class ClosedAccountsContainer extends Component {
     };
   }
 
-
+  render() {
+    return (
+      <Card className="closed-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+        <CardHeader
+          title="Closed Accounts"
+          actAsExpander={true}
+          showExpandableButton={true}
+        />
+        <CardMedia
+          expandable={true}
+        >
+        </CardMedia>
+        <CardText expandable={true}>
+         <ul>
+           Closed Accounts Here
+         </ul>
+        </CardText>
+      </Card>
+    );
+  }
 
   handleExpandChange = (expanded) => {
    this.setState({expanded: expanded});
@@ -31,24 +50,4 @@ export default class ClosedAccountsContainer extends Component {
    this.setState({expanded: false});
  };
 
- render() {
-   return (
-     <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-       <CardHeader
-         title="Closed Accounts"
-         actAsExpander={true}
-         showExpandableButton={true}
-       />
-       <CardMedia
-         expandable={true}
-       >
-       </CardMedia>
-       <CardText expandable={true}>
-        <ul>
-          Closed Accounts Here
-        </ul>
-       </CardText>
-     </Card>
-   );
- }
 }

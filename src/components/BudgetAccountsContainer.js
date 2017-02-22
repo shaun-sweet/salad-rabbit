@@ -40,7 +40,7 @@ class BudgetAccountsContainer extends Component {
 
  render() {
    return (
-     <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+     <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
        <CardHeader
          title="Budget Accounts"
          subtitle="$300,000"
