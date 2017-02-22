@@ -5,7 +5,7 @@ import { addAccount } from '../actions/accountsActions'
 import Navigation from './Navigation'
 import BudgetAccountsContainer from './BudgetAccountsContainer'
 import ClosedAccountsContainer from './ClosedAccountsContainer'
-import AddAccountButton from './AddAccountButton'
+import AddAccountContainer from './AddAccountContainer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../styles/app.css'
 import '../styles/Layout.css'
@@ -31,7 +31,7 @@ class Layout extends Component {
                 <Navigation />
                 <BudgetAccountsContainer />
                 <ClosedAccountsContainer />
-                <AddAccountButton onClick={this.handleAddAccount.bind(this)}/>
+                <AddAccountContainer onClick={this.handleAddAccount.bind(this)}/>
               </div>
               <section id='display'>
                 {this.props.children}
