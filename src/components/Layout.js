@@ -18,10 +18,6 @@ var mapStateToProps = function(store) {
 
 class Layout extends Component {
 
-  handleAddAccount() {
-    return this.props.dispatch(addAccount())
-  }
-
   render() {
       return (
         <MuiThemeProvider>
@@ -31,7 +27,7 @@ class Layout extends Component {
                 <Navigation />
                 <BudgetAccountsContainer />
                 <ClosedAccountsContainer />
-                <AddAccountContainer onClick={this.handleAddAccount.bind(this)}/>
+                <AddAccountContainer />
               </div>
               <section id='display'>
                 {this.props.children}
