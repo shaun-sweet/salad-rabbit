@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import '../styles/ClosedAccounts.css'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
+import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 
 export default class ClosedAccountsContainer extends Component {
 

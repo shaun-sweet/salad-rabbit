@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import '../styles/OnBudgetAccounts.css'
 import BudgetAccountListItem from './BudgetAccountListItem'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
+import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
+import numeral from 'numeral'
 import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
@@ -43,7 +42,7 @@ class BudgetAccountsContainer extends Component {
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
        <CardHeader
          title="Budget Accounts"
-         subtitle="$300,000"
+         subtitle={numeral(3000).format('$0,0.00')}
          actAsExpander={true}
          showExpandableButton={true}
        />
