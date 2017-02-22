@@ -39,6 +39,7 @@ class AddAccountContainer extends Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleSubmit}
+        
       />,
     ];
     return (
