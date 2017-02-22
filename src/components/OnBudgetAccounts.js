@@ -11,7 +11,7 @@ var mapStateToProps = function(store) {
 class OnBudgetAccounts extends Component {
 
   accountsList() {
-    return this.props.accounts.map(account => <BudgetAccountListItem {...account} />);
+    return this.props.accounts.map((account, index) => <BudgetAccountListItem {...account} key={index} />);
   }
 
   render() {
