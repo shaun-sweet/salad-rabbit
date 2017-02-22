@@ -1,12 +1,29 @@
 import React, { Component } from 'react'
 import '../styles/OnBudgetAccounts.css'
-export default class OnBudgetAccounts extends Component {
+import BudgetAccountListItem from './BudgetAccountListItem'
+import { connect } from 'react-redux'
+
+var mapStateToProps = function(store) {
+  return {
+    accounts: store.accounts
+  };
+}
+class OnBudgetAccounts extends Component {
+
+  accountsList() {
+    return this.props.accounts.map(account => <BudgetAccountListItem {...account} />);
+  }
 
   render() {
     return (
       <div className="on-budget-accounts">
-        On Budget Account Component
+        <h1> On Budget Accounts </h1>
+        <ul>
+          {this.accountsList()}
+        </ul>
       </div>
     );
   }
 }
+
+module.exports = connect(mapStateToProps)(OnBudgetAccounts);

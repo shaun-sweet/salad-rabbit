@@ -4,7 +4,7 @@ export default class AddAccountButton extends Component {
 
   render() {
     return (
-      <button className="add-account-button"> Add Account </button>
+      <button {...this.props} className="add-account-button"> Add Account </button>
     );
   }
 }

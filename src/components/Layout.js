@@ -17,20 +17,20 @@ var mapStateToProps = function(store) {
 
 class Layout extends Component {
 
-  componentWillMount() {
-    this.props.dispatch(addAccount())
+  addAccountCallback() {
+    return this.props.dispatch(addAccount())
   }
 
   render() {
       return (
         <div className="app-container">
           <main>
-            <nav className='left-side-bar'>
+            <div className='left-side-bar'>
               <Navigation />
               <OnBudgetAccounts />
               <ClosedAccounts />
-              <AddAccountButton />
-            </nav>
+              <AddAccountButton onClick={this.addAccountCallback.bind(this)}/>
+            </div>
             <section id='display'>
               {this.props.children}
             </section>
