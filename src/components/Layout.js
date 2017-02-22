@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { addAccount } from '../actions/accountsActions'
 import Navigation from './Navigation'
-import NavButton from './NavButton'
 import OnBudgetAccounts from './OnBudgetAccounts'
 import ClosedAccounts from './ClosedAccounts'
 import AddAccountButton from './AddAccountButton'
@@ -27,10 +26,7 @@ class Layout extends Component {
         <div className="app-container">
           <main>
             <nav className='left-side-bar'>
-              <Navigation>
-                <NavButton linkTo="/" label="Budget" />
-                <NavButton linkTo="accounts" label="All Accounts" />
-              </Navigation>
+              <Navigation />
               <OnBudgetAccounts />
               <ClosedAccounts />
               <AddAccountButton />

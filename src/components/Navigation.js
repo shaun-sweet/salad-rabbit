@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import NavButton from './NavButton'
 
 export default class Navigation extends Component {
 
   render() {
     return (
         <ul>
-          {this.props.children}
+          <NavButton linkTo="/" label="Budget" />
+          <NavButton linkTo="accounts" label="All Accounts" />
         </ul>
     );
   }
