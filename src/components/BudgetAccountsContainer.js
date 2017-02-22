@@ -19,24 +19,6 @@ class BudgetAccountsContainer extends Component {
     };
   }
 
-
-
-  handleExpandChange = (expanded) => {
-   this.setState({expanded: expanded});
- };
-
- handleToggle = (event, toggle) => {
-   this.setState({expanded: toggle});
- };
-
- handleExpand = () => {
-   this.setState({expanded: true});
- };
-
- handleReduce = () => {
-   this.setState({expanded: false});
- };
-
  render() {
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -59,9 +41,25 @@ class BudgetAccountsContainer extends Component {
    );
  }
 
- accountsList() {
-   return this.props.accounts.map((account, index) => <BudgetAccountListItem {...account} key={index} />);
- }
+  handleExpandChange = (expanded) => {
+    this.setState({expanded: expanded});
+  };
+
+  handleToggle = (event, toggle) => {
+    this.setState({expanded: toggle});
+  };
+
+  handleExpand = () => {
+    this.setState({expanded: true});
+  };
+
+  handleReduce = () => {
+    this.setState({expanded: false});
+  };
+
+  accountsList() {
+    return this.props.accounts.map((account, index) => <BudgetAccountListItem {...account} key={index} />);
+  }
 
 }
 
