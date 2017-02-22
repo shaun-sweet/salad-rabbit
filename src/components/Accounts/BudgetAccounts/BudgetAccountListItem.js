@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD:src/components/Accounts/BudgetAccounts/BudgetAccountListItem.js
 import '../../../styles/BudgetAccountListItem.css'
-import numeral from 'numeral'
-=======
-import '../styles/BudgetAccountListItem.css'
-import { usd } from '../helpers'
->>>>>>> bf84b2c17fa68028d8e9a69b9c918e09298624a8:src/components/BudgetAccountListItem.js
+import { usd } from '../../../helpers'
 
 export default class BudgetAccountListItem extends Component {
 
