@@ -45,6 +45,9 @@ var s = {
   categories: [
     {
       master_category: "Monthly Bills",
+      total_budgeted: 0,
+      total_outflows: 0,
+      total_balance: 0,
       sub_categories: [
         {
           name: "Rent",

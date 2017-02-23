@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import BudgetHeader from './BudgetHeader'
-import BudgetCategories from './BudgetCategories'
+import BudgetCategoriesContainer from './BudgetCategoriesContainer'
 import AddBudgetCategory from './AddBudgetCategory'
 
 export default class BudgetView extends Component {
@@ -10,7 +10,7 @@ export default class BudgetView extends Component {
       <div id="budget">
         <BudgetHeader/>
         <AddBudgetCategory/>
-        <BudgetCategories/>
+        <BudgetCategoriesContainer/>
       </div>
     );
   }
