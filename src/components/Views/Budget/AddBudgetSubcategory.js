@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-import { addSubcategory } from '../../actions/categoriesActions'
+import { addSubcategory } from '../../../actions/categoriesActions'
 import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
@@ -37,7 +37,7 @@ export default class AddBudgetSubcategory extends Component {
 	        primary={true}
 	        keyboardFocused={true}
 	        onTouchTap={this.handleSubmit}
-	        
+
 	      />,
 	    ];
 		return (
