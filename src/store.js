@@ -48,10 +48,12 @@ var s = {
       total_budgeted: 0,
       total_outflows: 0,
       total_balance: 0,
-      sub_categories: [
+      subcategories: [
         {
           name: "Rent",
-          budgeted_amount: 500
+          budgeted: 500,
+          outflow: 0,
+          balance: 0
         }
       ]
     }

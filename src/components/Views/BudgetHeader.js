@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 export default class BudgetHeader extends Component {
 
   render() {
-    console.log(this.props.accounts);
     //total all available funds
     const available = this.props.accounts.reduce((accumulator, element)=> accumulator + parseInt(element.balance), 0);
     //total all budgeted columns

@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-import { addCategory } from '../../actions/categoriesActions'
+import { addSubcategory } from '../../actions/categoriesActions'
 import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
@@ -13,17 +13,16 @@ var mapStateToProps = function(store) {
     categories: store.categories
   };
 }
-export default class AddBudgetCategory extends Component {
+export default class AddBudgetSubcategory extends Component {
 	state = {
 	    open: false,
 	    value: 1,
-	    category: {
-	      master_category: "Monthly Bills",
-	      total_budgeted: 1,
-	      total_outflows: 0,
-	      total_balance: 0,
-	      subcategories: []
-	    }
+	    subcategory: {
+          name: "Rent",
+          budgeted: 500,
+          outflow: 0,
+          balance: 0
+        }
     };
 
 	render() {
@@ -43,10 +42,10 @@ export default class AddBudgetCategory extends Component {
 	    ];
 		return (
 	      <div className="add-budget-category">
-	        <RaisedButton className="add-category-button" label="Add Category" onTouchTap={this.handleOpen} />
+	        <RaisedButton className="add-category-button" label="Add Subcategory" onTouchTap={this.handleOpen} />
 	        <Dialog
 	            className="add-category-form"
-	            title="Add a Budget Category"
+	            title="Add a Budget Subcategory"
 	            actions={actions}
 	            modal={false}
 	            open={this.state.open}
@@ -54,7 +53,7 @@ export default class AddBudgetCategory extends Component {
 	          >
 	            <TextField
 	              defaultValue=""
-	              floatingLabelText="Category Name"
+	              floatingLabelText="Subcategory Name"
 	              name="name"
 	              onChange={this.handleChange.bind(this)}
 	            />
@@ -64,16 +63,16 @@ export default class AddBudgetCategory extends Component {
 	}
 
 	handleSubmit = (event) => {
-	this.props.dispatch(addCategory(this.state.category));
+	this.props.dispatch(addSubcategory(this.state.subcategory, this.props.index));
 	this.handleClose();
 	}
 
 	handleChange(event, value) {
 	const name = event.target.name;
 	this.setState({
-	  category: {
-	    ...this.state.category,
-	    master_category: value
+	  subcategory: {
+	    ...this.state.subcategory,
+	    name: value
 	  }
 	});
 	}
@@ -87,4 +86,4 @@ export default class AddBudgetCategory extends Component {
 	};
 }
 
-module.exports = connect(mapStateToProps)(AddBudgetCategory);
+module.exports = connect(mapStateToProps)(AddBudgetSubcategory);

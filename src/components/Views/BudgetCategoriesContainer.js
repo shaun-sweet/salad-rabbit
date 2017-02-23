@@ -7,12 +7,12 @@ export default class BudgetCategoriesContainer extends Component {
   render() {
    return (
      <div id="budget-categories">
-        {this.accountsList()}
+        {this.categoriesList()}
      </div>
    );
  }
 
-  accountsList() {
-    return this.props.categories.map((category, index) => <BudgetCategory {...category} key={index}/>);
+  categoriesList() {
+    return this.props.categories.map((category, index) => <BudgetCategory {...category} index={index} key={index}/>);
   }
 }
