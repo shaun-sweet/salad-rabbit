@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import '../../../styles/AccountsView.css'
+import '../../../styles/AccountsTransactionView.css'
 
 
 export default class AccountsTransactionView extends Component {
@@ -10,6 +10,10 @@ export default class AccountsTransactionView extends Component {
     return (
       <div id='accounts-transaction-view'>
           <TableExampleSimple  />
+          <div className="transaction-controls">
+            <RaisedButton className="add-transaction-button" label="Add Transaction" />
+            <RaisedButton className="make-transfer-button" label="Make Transfer" />
+          </div>
       </div>
     );
   }
