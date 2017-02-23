@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../../styles/BudgetAccountListItem.css'
 import { usd } from '../../../helpers'
 
 export default class BudgetAccountListItem extends Component {

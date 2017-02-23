@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "create-react-app-sass": "^1.1.0",
     "electron": "^1.4.15",
     "foreman": "^2.0.0",
+    "node-sass": "^4.5.0",
     "react-scripts": "0.9.0"
   },
   "dependencies": {
@@ -24,8 +24,8 @@
   },
   "main": "src/electron-starter.js",
   "scripts": {
-    "start": "react-scripts-with-sass start",
-    "build": "react-scripts-with-sass build",
+    "start": "nf start",
+    "build": "node-sass src/styles/stylesheet.sass --output src/styles/css/ && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",

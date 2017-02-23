@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import '../../../styles/AccountsTransactionView.css'
 
 
 export default class AccountsTransactionView extends Component {

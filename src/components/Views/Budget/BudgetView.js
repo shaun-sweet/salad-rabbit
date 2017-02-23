@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import '../../../styles/BudgetView.css'
 import BudgetHeader from './BudgetHeader'
 import BudgetCategoriesContainer from './BudgetCategoriesContainer'
 import AddBudgetCategory from './AddBudgetCategory'

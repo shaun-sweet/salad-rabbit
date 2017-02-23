@@ -7,8 +7,7 @@ import BudgetAccountsContainer from './Accounts/BudgetAccounts/BudgetAccountsCon
 import ClosedAccountsContainer from './Accounts/ClosedAccountsContainer'
 import AddAccountContainer from './Accounts/AddAccountContainer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../styles/app.css'
-import '../styles/Layout.css'
+import '../styles/css/stylesheet.css'
 injectTapEventPlugin();
 var mapStateToProps = function(store) {
   return {

@@ -3,7 +3,6 @@
 # dependencies
 /node_modules
 
-
 # testing
 /coverage
 
@@ -14,4 +13,5 @@
 .DS_Store
 .env
 npm-debug.log
+/.sass-cache
 *.css
