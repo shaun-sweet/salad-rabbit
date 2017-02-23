@@ -19,24 +19,48 @@ export default class AddBudgetCategory extends Component {
 	    value: 1,
 	    category: {
 	      master_category: "Monthly Bills",
-	      total_budgeted: 0,
+	      total_budgeted: 1,
 	      total_outflows: 0,
 	      total_balance: 0,
 	      sub_categories: []
 	    }
     };
 
-    componentWillMount(){
-    	console.log("fired");
-    	this.props.dispatch(addCategory(this.state.category));
-    }
-
 	render() {
-	return (
-	  <div id="add-budget-category">
-	    ADD BUDGET CATEGORY BUTTON
-	  </div>
-	);
+		const actions = [
+	      <FlatButton
+	        label="Cancel"
+	        primary={true}
+	        onTouchTap={this.handleClose}
+	      />,
+	      <FlatButton
+	        label="Submit"
+	        primary={true}
+	        keyboardFocused={true}
+	        onTouchTap={this.handleSubmit}
+	        
+	      />,
+	    ];
+		return (
+	      <div className="add-budget-category">
+	        <RaisedButton className="add-category-button" label="Add Category" onTouchTap={this.handleOpen} />
+	        <Dialog
+	            className="add-category-form"
+	            title="Add a Budget Category"
+	            actions={actions}
+	            modal={false}
+	            open={this.state.open}
+	            onRequestClose={this.handleClose}
+	          >
+	            <TextField
+	              defaultValue=""
+	              floatingLabelText="Category Name"
+	              name="name"
+	              onChange={this.handleChange.bind(this)}
+	            />
+	         </Dialog>
+	       </div>
+	    );
 	}
 
 	handleSubmit = (event) => {
@@ -48,8 +72,8 @@ export default class AddBudgetCategory extends Component {
 	const name = event.target.name;
 	this.setState({
 	  category: {
-	    ...this.state.account,
-	    [name]: value
+	    ...this.state.category,
+	    master_category: value
 	  }
 	});
 	}

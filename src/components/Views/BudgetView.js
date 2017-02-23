@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../../styles/BudgetView.css'
 import BudgetHeader from './BudgetHeader'
 import BudgetCategoriesContainer from './BudgetCategoriesContainer'
 import AddBudgetCategory from './AddBudgetCategory'
@@ -14,8 +15,8 @@ export default class BudgetView extends Component {
 
   render() {
     return (
-      <div id="budget">
-        <BudgetHeader/>
+      <div id="budget-view">
+        <BudgetHeader categories={this.props.categories}/>
         <AddBudgetCategory/>
         <BudgetCategoriesContainer categories={this.props.categories}/>
       </div>
