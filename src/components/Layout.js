@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { addAccount } from '../actions/accountsActions'
 import Navigation from './Navigation/NavigationContainer'
 import BudgetAccountsContainer from './Accounts/BudgetAccounts/BudgetAccountsContainer'
 import ClosedAccountsContainer from './Accounts/ClosedAccountsContainer'
