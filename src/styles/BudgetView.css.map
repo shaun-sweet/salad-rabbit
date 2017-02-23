@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,YAAY;EACX,KAAK,EAAE,IAAI;EACX,gBAAgB,EAAE,IAAI",
+"sources": ["BudgetView.sass"],
+"names": [],
+"file": "BudgetView.css"
+}
