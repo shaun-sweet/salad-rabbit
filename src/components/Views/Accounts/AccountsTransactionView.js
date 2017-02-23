@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
+import RaisedButton from 'material-ui/RaisedButton';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import '../../../styles/AccountsView.css'
 
 
-var style = {
-  flex: "1 1 auto",
-  overflowY: "auto",
-  minHeight: "0px",
-  height: undefined,
-}
-export default class AccountsView extends Component {
+export default class AccountsTransactionView extends Component {
   render() {
     return (
       <div id='accounts-transaction-view'>
@@ -20,11 +15,8 @@ export default class AccountsView extends Component {
   }
 }
 
-
-
-
 const TableExampleSimple = () => (
-  <Table wrapperStyle={style}>
+  <Table>
     <TableHeader>
       <TableRow>
         <TableHeaderColumn>ID</TableHeaderColumn>
