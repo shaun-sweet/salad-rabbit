@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../styles/AddAccountContainer.css'
+
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -39,7 +39,7 @@ class AddAccountContainer extends Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleSubmit}
-        
+
       />,
     ];
     return (

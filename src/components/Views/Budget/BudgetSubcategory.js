@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField';
-import '../../../styles/BudgetSubcategory.css'
+// import '../../../styles/BudgetSubcategory.css'
 import { changeBudgetedAmount } from '../../../actions/categoriesActions'
 import { connect } from 'react-redux'
 

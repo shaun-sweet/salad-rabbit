@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../styles/ClosedAccounts.css'
+// import '../../styles/ClosedAccounts.css'
 import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 
 export default class ClosedAccountsContainer extends Component {

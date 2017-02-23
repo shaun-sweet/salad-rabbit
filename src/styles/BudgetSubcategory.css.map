@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,mBAAmB;EAClB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,gBAAgB,EAAE,SAAS;;AAE5B,OAAO;EACN,IAAI,EAAE,CAAC;EACP,SAAS,EAAE,CAAC",
-"sources": ["BudgetSubcategory.sass"],
-"names": [],
-"file": "BudgetSubcategory.css"
-}
