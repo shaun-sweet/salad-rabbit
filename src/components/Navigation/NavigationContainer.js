@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import NavButton from './NavButton'
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
-// import '../../styles/NavigationContainer.css'
 import FontIcon from 'material-ui/FontIcon';
 const style = {
   display: 'inline-block',

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import '../../../styles/OnBudgetAccounts.css'
 import BudgetAccountListItem from './BudgetAccountListItem'
 import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 import numeral from 'numeral'
