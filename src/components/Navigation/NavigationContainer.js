@@ -4,6 +4,10 @@ import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
 import '../../styles/NavigationContainer.css'
 import FontIcon from 'material-ui/FontIcon';
+const style = {
+  display: 'inline-block',
+  margin: '16px 32px 16px 0',
+};
 export default class Navigation extends Component {
 
   render() {
@@ -23,10 +27,7 @@ export default class Navigation extends Component {
 
 
 
-const style = {
-  display: 'inline-block',
-  margin: '16px 32px 16px 0',
-};
+
 //
 // const MenuExampleSimple = () => (
 //

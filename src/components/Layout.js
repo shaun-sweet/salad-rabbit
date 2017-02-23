@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import Navigation from './Navigation/NavigationContainer'
+import Paper from 'material-ui/Paper'
 import BudgetAccountsContainer from './Accounts/BudgetAccounts/BudgetAccountsContainer'
 import ClosedAccountsContainer from './Accounts/ClosedAccountsContainer'
 import AddAccountContainer from './Accounts/AddAccountContainer'
@@ -28,9 +29,9 @@ class Layout extends Component {
                 <ClosedAccountsContainer />
                 <AddAccountContainer />
               </div>
-              <section id='display'>
+              <Paper id='display' zDepth={1}>
                 {this.props.children}
-              </section>
+              </Paper>
             </main>
             <footer>
               This is the footer

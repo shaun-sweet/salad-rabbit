@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import AccountsView from './components/Views/AccountsView'
-import BudgetView from './components/Views/BudgetView'
+import AccountsView from './components/Views/Accounts/AccountsView'
+import BudgetView from './components/Views/Budget/BudgetView'
 import Layout from './components/Layout'
 
 ReactDOM.render(
