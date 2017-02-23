@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
+import BudgetHeader from './BudgetHeader'
+import BudgetCategories from './BudgetCategories'
+import AddBudgetCategory from './AddBudgetCategory'
 
 export default class BudgetView extends Component {
 
   render() {
     return (
       <div id="budget">
-        This is the budget Div that displays the main budget windowl
+        <BudgetHeader/>
+        <AddBudgetCategory/>
+        <BudgetCategories/>
       </div>
     );
   }
