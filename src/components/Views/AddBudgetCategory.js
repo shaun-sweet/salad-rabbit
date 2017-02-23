@@ -27,6 +27,7 @@ export default class AddBudgetCategory extends Component {
     };
 
     componentWillMount(){
+    	console.log("fired");
     	this.props.dispatch(addCategory(this.state.category));
     }
 
