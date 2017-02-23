@@ -4,15 +4,15 @@ export default class BudgetHeader extends Component {
 
   render() {
     //total all available funds
-    const available = this.props.accounts.reduce((accumulator, element)=> accumulator + parseInt(element.balance), 0);
+    const accounts = this.props.accounts.reduce((accumulator, element)=> accumulator + parseInt(element.balance), 0);
     //total all budgeted columns
-    const budgeted = this.props.categories.reduce((accumulator, element)=> accumulator + element.total_budgeted, 0);
+    const budgeted = this.props.categories.reduce((accumulator, element)=> accumulator + element.subcategories.reduce((acc, elem)=>acc + elem.budgeted, 0), 0);
     //total all outflows columns
-    const outflows = this.props.categories.reduce((accumulator, element)=> accumulator + element.total_outflows, 0);
+    const outflows = this.props.categories.reduce((accumulator, element)=> accumulator + element.subcategories.reduce((acc, elem)=>acc + elem.outflow, 0), 0);
     return (
       <div id="budget">
         <div id="available-to-budget">
-        	Available to Budget: {available}
+        	Available to Budget: {accounts - budgeted}
         </div>
         <div className="budget-columns">
         	<div id="budgeted">

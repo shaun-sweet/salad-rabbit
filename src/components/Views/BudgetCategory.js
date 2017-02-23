@@ -3,9 +3,14 @@ import '../../styles/BudgetCategory.css'
 import BudgetSubcategory from './BudgetSubcategory'
 import AddBudgetSubcategory from './AddBudgetSubcategory'
 
-export default class BudgetCategory extends Component {
+export default class BudgetCategory extends Component {    
 
   render() {
+    //total all budgeted columns
+    const budgeted = this.props.subcategories.reduce((accumulator, element)=> accumulator + element.budgeted, 0);
+    //total all outflows columns
+    const outflows = this.props.subcategories.reduce((accumulator, element)=> accumulator + element.outflow, 0);
+
     return (
       <div className="budget-category-container">
         <div className="budget-category">
@@ -14,13 +19,13 @@ export default class BudgetCategory extends Component {
             <AddBudgetSubcategory index={this.props.index}/>
          	</div>
          	<div className="budget column">
-          	{this.props.total_budgeted}
+          	{budgeted}
          	</div>
          	<div className="outflows column">
-         		{this.props.total_outflows}
+         		{outflows}
          	</div>
          	<div className="balance column">
-         		{this.props.total_balance}
+         		{budgeted-outflows}
          	</div>
         </div>
         {this.subcategoriesList()}

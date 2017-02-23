@@ -19,9 +19,6 @@ export default class AddBudgetCategory extends Component {
 	    value: 1,
 	    category: {
 	      master_category: "Monthly Bills",
-	      total_budgeted: 1,
-	      total_outflows: 0,
-	      total_balance: 0,
 	      subcategories: []
 	    }
     };

@@ -29,7 +29,7 @@ export default class BudgetSubcategory extends Component {
        		{this.props.outflow}
        	</div>
        	<div className="balance column">
-       		{this.props.balance}
+       		{this.props.budgeted - this.props.outflow}
        	</div>
       </div>
     );
