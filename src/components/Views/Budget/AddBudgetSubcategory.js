@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import { addSubcategory } from '../../../actions/categoriesActions'
 import { connect } from 'react-redux'
@@ -68,7 +66,6 @@ export default class AddBudgetSubcategory extends Component {
 	}
 
 	handleChange(event, value) {
-	const name = event.target.name;
 	this.setState({
 	  subcategory: {
 	    ...this.state.subcategory,
