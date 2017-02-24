@@ -1,33 +1,50 @@
 import React, { Component } from 'react'
+import {Table, Column, Cell} from 'fixed-data-table';
 
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 export default class TransactionListTable extends Component {
 
   render() {
     return (
-      <Table fixedHeader={false}>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>Account</TableHeaderColumn>
-            <TableHeaderColumn>Date</TableHeaderColumn>
-            <TableHeaderColumn>Payee</TableHeaderColumn>
-            <TableHeaderColumn>Category</TableHeaderColumn>
-            <TableHeaderColumn>Memo</TableHeaderColumn>
-            <TableHeaderColumn>Outflow</TableHeaderColumn>
-            <TableHeaderColumn>Inflow</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableRowColumn>1</TableRowColumn>
-            <TableRowColumn>John Smith</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-          </TableRow>
-        </TableBody>
+      <Table
+        rowsCount={50}
+        rowHeight={50}
+        width={600}
+        height={600}>
+        <Column
+          cell={<Cell>Basic content</Cell>}
+          width={200}
+          isResizeable={true}
+        />
+        <Column
+          cell={<Cell>Basic content</Cell>}
+          width={200}
+          isResizeable={true}
+        />
+        <Column
+          cell={<Cell>Basic content</Cell>}
+          width={200}
+          isResizeable={true}
+        />
+        <Column
+          cell={<Cell>Basic content</Cell>}
+          width={200}
+          isResizeable={true}
+        />
+        <Column
+          cell={<Cell>Basic content</Cell>}
+          width={200}
+          isResizeable={true}
+        />
+        <Column
+          cell={<Cell>Basic content</Cell>}
+          width={200}
+          isResizeable={true}
+        />
+        <Column
+          cell={<Cell>Basic content</Cell>}
+          width={200}
+          isResizeable={true}
+        />
       </Table>
     );
   }

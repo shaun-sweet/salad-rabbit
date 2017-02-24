@@ -1,3 +1,2 @@
-startupcompile: node-sass src/styles/stylesheet.sass --output src/styles/css/
+sass: sass --watch src/styles/stylesheet.sass:src/styles/css/stylesheet.css
 react: react-scripts start
-sass: node-sass src/styles/stylesheet.sass --watch --output src/styles/css/
