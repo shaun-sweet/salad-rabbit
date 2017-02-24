@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AddBudgetCategory from './AddBudgetCategory'
+import AddBudgetMasterCategory from './AddBudgetMasterCategory'
 import {usd, sumArray} from '../../../helpers/index'
 
 export default class BudgetHeader extends Component {
@@ -8,9 +8,9 @@ export default class BudgetHeader extends Component {
     //total all available funds
     const accounts = sumArray(this.props.accounts, (item) => item.balance);
     //total all budgeted columns
-    const budgeted = sumArray(this.props.categories, (item) => sumArray(item.subcategories, (subitem)=> subitem.budgeted));
+    const budgeted = sumArray(this.props.master_categories, (item) => sumArray(item.categories, (subitem)=> subitem.budgeted));
     //total all outflows columns
-    const outflows = sumArray(this.props.categories, (item) => sumArray(item.subcategories, (subitem)=> subitem.outflow));
+    const outflows = sumArray(this.props.master_categories, (item) => sumArray(item.categories, (subitem)=> subitem.outflow));
 
     return (
       <div id="budget">
@@ -18,10 +18,10 @@ export default class BudgetHeader extends Component {
         	Available to Budget: {usd(accounts - budgeted)}
         </div>
         <div className="budget-row">
-            <div id="category-name" className="budget-columns">
+            <div id="master-category-name" className="budget-columns">
                 
-                Master Categories 
-                <AddBudgetCategory/>
+                Categories 
+                <AddBudgetMasterCategory/>
         
             </div>
         	<div id="budgeted" className="budget-columns">

@@ -1,16 +1,18 @@
-export function addCategory(category) {
+export function addMasterCategory(master_category) {
+
+    console.log(master_category);
   return {
-    type: "ADD_CATEGORY", payload: {
-      ...category
+    type: "ADD_MASTER_CATEGORY", payload: {
+      ...master_category
     }
   }
 }
 
-export function addSubcategory(subcategory, index) {
-  console.log(subcategory, index);
+export function addCategory(category, index) {
+  console.log(category, index);
   return {
-    type: "ADD_SUBCATEGORY", payload: {
-      subcategory: subcategory,
+    type: "ADD_CATEGORY", payload: {
+      category: category,
       index: index
     }
   }

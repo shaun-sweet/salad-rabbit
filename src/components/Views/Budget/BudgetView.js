@@ -15,8 +15,8 @@ export default class BudgetView extends Component {
   render() {
     return (
       <div id="budget-view">
-        <BudgetHeader accounts={this.props.accounts} categories={this.props.categories}/>
-        <BudgetCategoriesContainer categories={this.props.categories}/>
+        <BudgetHeader accounts={this.props.accounts} master_categories={this.props.categories}/>
+        <BudgetCategoriesContainer master_categories={this.props.categories}/>
       </div>
     );
   }

@@ -1,39 +1,46 @@
 import React, { Component } from 'react'
-import BudgetSubcategory from './BudgetSubcategory'
-import AddBudgetSubcategory from './AddBudgetSubcategory'
-import {usd, sumArray} from '../../../helpers/index'
+import TextField from 'material-ui/TextField';
+import { changeBudgetedAmount } from '../../../actions/categoriesActions'
+import { connect } from 'react-redux'
+import {usd} from '../../../helpers/index'
+
+
+var mapStateToProps = function(store) {
+  return {
+    master_categories: store.master_categories
+  };
+}
 
 export default class BudgetCategory extends Component {
 
   render() {
-    //total all budgeted columns
-    const budgeted = sumArray(this.props.subcategories, (item) => item.budgeted);
-    //total all outflows columns
-    const outflows = sumArray(this.props.subcategories, (item) => item.outflow);
-
     return (
-      <div className="budget-category-container">
-        <div className="budget-category">
-          <div className="master-category column">
-          	{this.props.master_category}
-            <AddBudgetSubcategory index={this.props.index}/>
-         	</div>
-         	<div className="budget column">
-          	{usd(budgeted)}
-         	</div>
-         	<div className="outflows column">
-         		{usd(outflows)}
-         	</div>
-         	<div className="balance column">
-         		{usd(budgeted-outflows)}
-         	</div>
-        </div>
-        {this.subcategoriesList()}
+      <div className="budget-category">
+        <div className="name column">
+        	{this.props.name}
+       	</div>
+       	<div className="budget column">
+        	<TextField
+              id="budget-text-field"
+              defaultValue={usd(this.props.budgeted)}
+              onChange={this.handleChange.bind(this)}
+            />
+       	</div>
+       	<div className="outflow column">
+       		{usd(this.props.outflow)}
+       	</div>
+       	<div className="balance column">
+       		{usd(this.props.budgeted - this.props.outflow)}
+       	</div>
       </div>
     );
   }
 
-  subcategoriesList() {
-    return this.props.subcategories.map((subcategory, index) => <BudgetSubcategory {...subcategory} indexParent={this.props.index} index={index} key={index}/>);
+  handleChange(event, value) {
+    var indexParent = this.props.indexParent;
+    var index = this.props.index;
+    this.props.dispatch(changeBudgetedAmount(value, indexParent, index));
   }
 }
+
+module.exports = connect(mapStateToProps)(BudgetCategory);

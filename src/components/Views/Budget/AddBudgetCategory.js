@@ -17,9 +17,11 @@ export default class AddBudgetCategory extends Component {
 	    open: false,
 	    value: 1,
 	    category: {
-	      master_category: "Monthly Bills",
-	      subcategories: []
-	    }
+          name: "",
+          budgeted: 0,
+          outflow: 0,
+          balance: 0
+        }
     };
 
 	render() {
@@ -39,8 +41,9 @@ export default class AddBudgetCategory extends Component {
 	    ];
 		return (
 	      <div className="add-budget-category">
-	        <FloatingActionButton className="add-category-button" mini={true} onTouchTap={this.handleOpen}><ContentAdd />
-	        </FloatingActionButton>
+	        <FloatingActionButton secondary={true} mini={true} onTouchTap={this.handleOpen}>
+		      <ContentAdd />
+		    </FloatingActionButton>
 	        <Dialog
 	            className="add-category-form"
 	            title="Add a Budget Category"
@@ -61,16 +64,16 @@ export default class AddBudgetCategory extends Component {
 	}
 
 	handleSubmit = (event) => {
-	this.props.dispatch(addCategory({...this.state.category}));
+	this.props.dispatch(addCategory(this.state.category, this.props.index));
 	this.handleClose();
 	}
 
 	handleChange(event, value) {
 	this.setState({
 	  category: {
-	      master_category: value,
-	      subcategories: []
-	    }
+	    ...this.state.category,
+	    name: value
+	  }
 	});
 	}
 
