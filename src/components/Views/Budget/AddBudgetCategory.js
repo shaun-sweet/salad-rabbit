@@ -61,7 +61,7 @@ export default class AddBudgetCategory extends Component {
 	}
 
 	handleSubmit = (event) => {
-	this.props.dispatch(addCategory(this.state.category));
+	this.props.dispatch(addCategory({...this.state.category}));
 	this.handleClose();
 	}
 
@@ -69,9 +69,9 @@ export default class AddBudgetCategory extends Component {
 	const name = event.target.name;
 	this.setState({
 	  category: {
-	    ...this.state.category,
-	    master_category: value
-	  }
+	      master_category: value,
+	      subcategories: []
+	    }
 	});
 	}
 

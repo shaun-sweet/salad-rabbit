@@ -18,8 +18,8 @@ export default class AddBudgetSubcategory extends Component {
 	    open: false,
 	    value: 1,
 	    subcategory: {
-          name: "Rent",
-          budgeted: 500,
+          name: "",
+          budgeted: 0,
           outflow: 0,
           balance: 0
         }
