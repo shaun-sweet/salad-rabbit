@@ -42,12 +42,9 @@ var s = {
       cleared: true
     }
   ],
-  categories: [
+  master_categories: [
     {
-      master_category: "Monthly Bills",
-      total_budgeted: 0,
-      total_outflows: 0,
-      total_balance: 0,
+      name: "Monthly Bills",
       categories: [
         {
           name: "Rent",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import BudgetCategory from './BudgetCategory'
+import BudgetMasterCategory from './BudgetMasterCategory'
 
 
 export default class BudgetCategoriesContainer extends Component {
@@ -7,12 +7,12 @@ export default class BudgetCategoriesContainer extends Component {
   render() {
    return (
      <div id="budget-categories">
-        {this.categoriesList()}
+        {this.masterCategoriesList()}
      </div>
    );
  }
 
-  categoriesList() {
-    return this.props.categories.map((category, index) => <BudgetCategory {...category} index={index} key={index}/>);
+  masterCategoriesList() {
+    return this.props.master_categories.map((master_category, index) => <BudgetMasterCategory {...master_category} index={index} key={index}/>);
   }
 }
