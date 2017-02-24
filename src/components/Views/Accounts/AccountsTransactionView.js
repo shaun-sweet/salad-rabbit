@@ -6,13 +6,18 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 class AccountsTransactionView extends Component {
 
-  state = {
-    height: 0,
-    width: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      height: 0,
+      width: 0
+    }
+    this.handleResize = this.handleResize.bind(this);
   }
 
+
   componentDidMount(){
-    window.addEventListener("resize", this.handleResize.bind(this));
+    window.addEventListener("resize", this.handleResize);
     this.setState({
       width: this.refs.view_container.scrollWidth,
       height: this.refs.view_container.scrollHeight
@@ -20,7 +25,7 @@ class AccountsTransactionView extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
+    // window.removeEventListener("resize", this.handleResize);
   }
 
   render() {
