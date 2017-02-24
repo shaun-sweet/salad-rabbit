@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import BudgetHeader from './BudgetHeader'
 import BudgetCategoriesContainer from './BudgetCategoriesContainer'
-import AddBudgetCategory from './AddBudgetCategory'
 import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
@@ -17,7 +16,6 @@ export default class BudgetView extends Component {
     return (
       <div id="budget-view">
         <BudgetHeader accounts={this.props.accounts} categories={this.props.categories}/>
-        <AddBudgetCategory/>
         <BudgetCategoriesContainer categories={this.props.categories}/>
       </div>
     );

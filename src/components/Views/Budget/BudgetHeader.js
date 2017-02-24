@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import AddBudgetCategory from './AddBudgetCategory'
+import numeral from 'numeral'
 
 export default class BudgetHeader extends Component {
 
@@ -12,17 +14,23 @@ export default class BudgetHeader extends Component {
     return (
       <div id="budget">
         <div id="available-to-budget">
-        	Available to Budget: {accounts - budgeted}
+        	Available to Budget: {numeral(accounts - budgeted).format('$0,0.00')}
         </div>
-        <div className="budget-columns">
-        	<div id="budgeted">
-	        	Budgeted: {budgeted}
+        <div className="budget-row">
+            <div id="category-name" className="budget-columns">
+                
+                Master Categories 
+                <AddBudgetCategory/>
+        
+            </div>
+        	<div id="budgeted" className="budget-columns">
+	        	Budgeted: {numeral(budgeted).format('$0,0.00')}
 	        </div>
-        	<div id="outflows">
-        		Outflows:{outflows}
+        	<div id="outflows" className="budget-columns">
+        		Outflows: {numeral(outflows).format('$0,0.00')}
         	</div>
-        	<div id="balance">
-        		Balance: {budgeted-outflows}
+        	<div id="balance" className="budget-columns">
+        		Balance: {numeral(budgeted - outflows).format('$0,0.00')}
         	</div>
 	    </div>
       </div>

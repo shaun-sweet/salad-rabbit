@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TextField from 'material-ui/TextField';
 import { changeBudgetedAmount } from '../../../actions/categoriesActions'
 import { connect } from 'react-redux'
+import numeral from 'numeral'
 
 var mapStateToProps = function(store) {
   return {
@@ -20,15 +21,15 @@ export default class BudgetSubcategory extends Component {
        	<div className="budget column">
         	<TextField
               id="budget-text-field"
-              defaultValue={this.props.budgeted}
+              defaultValue={numeral(this.props.budgeted).format('$0,0.00')}
               onChange={this.handleChange.bind(this)}
             />
        	</div>
        	<div className="outflow column">
-       		{this.props.outflow}
+       		{numeral(this.props.outflow).format('$0,0.00')}
        	</div>
        	<div className="balance column">
-       		{this.props.budgeted - this.props.outflow}
+       		{numeral(this.props.budgeted - this.props.outflow).format('$0,0.00')}
        	</div>
       </div>
     );
