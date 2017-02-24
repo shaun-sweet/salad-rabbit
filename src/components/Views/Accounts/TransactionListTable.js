@@ -1,51 +1,85 @@
 import React, { Component } from 'react'
 import {Table, Column, Cell} from 'fixed-data-table';
+import FakeObjectDataListStore from '../../../helpers/fakeDataStore'
+
+const TextCell = ({rowIndex, data, columnKey, ...props}) => (
+  <Cell {...props}>
+    {data.getObjectAt(rowIndex)[columnKey]}
+  </Cell>
+);
 
 export default class TransactionListTable extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dataList: new FakeObjectDataListStore(1000000),
+      columnWidths: {
+        firstName: 240,
+        lastName: 150,
+        sentence: 140,
+        companyName: 60,
+      },
+    };
+
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+  _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    this.setState(({columnWidths}) => ({
+      columnWidths: {
+        ...columnWidths,
+        [columnKey]: newColumnWidth,
+      }
+    }));
+  }
 
   render() {
+    var {dataList, columnWidths} = this.state;
     return (
       <Table
-        rowsCount={50}
-        rowHeight={50}
-        width={600}
-        height={600}>
+        rowHeight={30}
+        headerHeight={50}
+        rowsCount={dataList.getSize()}
+        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+        isColumnResizing={false}
+        width={this.props.width}
+        height={this.props.height}
+        {...this.props}>
         <Column
-          cell={<Cell>Basic content</Cell>}
-          width={200}
-          isResizeable={true}
+          columnKey="firstName"
+          header={<Cell>First Name</Cell>}
+          cell={<TextCell data={dataList} />}
+          fixed={true}
+          width={columnWidths.firstName}
+          isResizable={true}
         />
         <Column
-          cell={<Cell>Basic content</Cell>}
-          width={200}
-          isResizeable={true}
+          columnKey="lastName"
+          header={<Cell>Last Name (min/max constrained)</Cell>}
+          cell={<TextCell data={dataList} />}
+          width={columnWidths.lastName}
+          isResizable={true}
+          minWidth={70}
+          maxWidth={170}
         />
         <Column
-          cell={<Cell>Basic content</Cell>}
-          width={200}
-          isResizeable={true}
+          columnKey="companyName"
+          header={<Cell>Company</Cell>}
+          cell={<TextCell data={dataList} />}
+          width={columnWidths.companyName}
+          isResizable={true}
         />
         <Column
-          cell={<Cell>Basic content</Cell>}
-          width={200}
-          isResizeable={true}
-        />
-        <Column
-          cell={<Cell>Basic content</Cell>}
-          width={200}
-          isResizeable={true}
-        />
-        <Column
-          cell={<Cell>Basic content</Cell>}
-          width={200}
-          isResizeable={true}
-        />
-        <Column
-          cell={<Cell>Basic content</Cell>}
-          width={200}
-          isResizeable={true}
+          columnKey="sentence"
+          header={<Cell>Sentence</Cell>}
+          cell={<TextCell data={dataList} />}
+          width={columnWidths.sentence}
+          isResizable={true}
         />
       </Table>
     );
   }
 }
+
+module.exports = TransactionListTable;
