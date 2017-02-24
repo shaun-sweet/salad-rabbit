@@ -42,13 +42,15 @@ var s = {
       cleared: true
     }
   ],
-  categories: [
+  master_categories: [
     {
-      master_category: "Monthly Bills",
-      sub_categories: [
+      name: "Monthly Bills",
+      categories: [
         {
           name: "Rent",
-          budgeted_amount: 500
+          budgeted: 500,
+          outflow: 0,
+          balance: 0
         }
       ]
     }
