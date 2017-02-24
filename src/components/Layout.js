@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { addAccount } from '../actions/accountsActions'
-import Navigation from './Navigation'
-import NavButton from './NavButton'
-import '../styles/app.css'
-import '../styles/layout.css'
+import Navigation from './Navigation/NavigationContainer'
+import Paper from 'material-ui/Paper'
+import BudgetAccountsContainer from './Accounts/BudgetAccounts/BudgetAccountsContainer'
+import ClosedAccountsContainer from './Accounts/ClosedAccountsContainer'
+import AddAccountContainer from './Accounts/AddAccountContainer'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import '../styles/css/stylesheet.css'
+import 'fixed-data-table/dist/fixed-data-table.css'
 injectTapEventPlugin();
 var mapStateToProps = function(store) {
   return {
@@ -15,31 +18,26 @@ var mapStateToProps = function(store) {
 
 class Layout extends Component {
 
-  componentWillMount() {
-    this.props.dispatch(addAccount())
-  }
-
   render() {
       return (
-        <div className="app-container">
-          <main>
-            <nav className='left-side-bar'>
-              <Navigation>
-                <NavButton linkTo="/" label="Budget" />
-                <NavButton linkTo="accounts" label="All Accounts" />
-              </Navigation>
-              <div className="on-budget-accounts">
-
+        <MuiThemeProvider>
+          <div className="app-container">
+            <main>
+              <div className='left-side-bar'>
+                <Navigation />
+                <BudgetAccountsContainer />
+                <ClosedAccountsContainer />
+                <AddAccountContainer />
               </div>
-            </nav>
-            <section id='display'>
-              {this.props.children}
-            </section>
-          </main>
-          <footer>
-            This is the footer
-          </footer>
-        </div>
+              <Paper id='display' zDepth={1}>
+                {this.props.children}
+              </Paper>
+            </main>
+            <footer>
+              This is the footer
+            </footer>
+          </div>
+        </MuiThemeProvider>
       );
   }
 }
