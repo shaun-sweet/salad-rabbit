@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import AddBudgetCategory from './AddBudgetCategory'
-import {usd} from '../../../helpers/index'
+import {usd, sumArray} from '../../../helpers/index'
 
 export default class BudgetHeader extends Component {
 
   render() {
     //total all available funds
-    const accounts = this.props.accounts.reduce((accumulator, element)=> accumulator + parseInt(element.balance, 10), 0);
+    const accounts = sumArray(this.props.accounts, (item) => item.balance);
     //total all budgeted columns
-    const budgeted = this.props.categories.reduce((accumulator, element)=> accumulator + element.subcategories.reduce((acc, elem)=>acc + parseInt(elem.budgeted, 10), 0), 0);
+    const budgeted = sumArray(this.props.categories, (item) => sumArray(item.subcategories, (subitem)=> subitem.budgeted));
     //total all outflows columns
-    const outflows = this.props.categories.reduce((accumulator, element)=> accumulator + element.subcategories.reduce((acc, elem)=>acc + parseInt(elem.outflow, 10), 0), 0);
+    const outflows = sumArray(this.props.categories, (item) => sumArray(item.subcategories, (subitem)=> subitem.outflow));
 
     return (
       <div id="budget">

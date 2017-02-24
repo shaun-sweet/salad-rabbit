@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import BudgetSubcategory from './BudgetSubcategory'
 import AddBudgetSubcategory from './AddBudgetSubcategory'
-import {usd} from '../../../helpers/index'
+import {usd, sumArray} from '../../../helpers/index'
 
 export default class BudgetCategory extends Component {
 
   render() {
     //total all budgeted columns
-    const budgeted = this.props.subcategories.reduce((accumulator, element)=> accumulator + parseInt(element.budgeted, 10), 0);
+    const budgeted = sumArray(this.props.subcategories, (item) => item.budgeted);
     //total all outflows columns
-    const outflows = this.props.subcategories.reduce((accumulator, element)=> accumulator + parseInt(element.outflow, 10), 0);
+    const outflows = sumArray(this.props.subcategories, (item) => item.outflow);
 
     return (
       <div className="budget-category-container">
