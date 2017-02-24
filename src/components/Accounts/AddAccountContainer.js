@@ -8,11 +8,7 @@ import TextField from 'material-ui/TextField';
 import { addAccount } from '../../actions/accountsActions'
 import { connect } from 'react-redux'
 
-var mapStateToProps = function(store) {
-  return {
-    accounts: store.accounts
-  };
-}
+
 class AddAccountContainer extends Component {
 
   state = {
@@ -126,6 +122,12 @@ class AddAccountContainer extends Component {
     this.setState({open: false});
   };
 
+}
+
+var mapStateToProps = function(store) {
+  return {
+    accounts: store.accounts
+  };
 }
 
 module.exports = connect(mapStateToProps)(AddAccountContainer);
