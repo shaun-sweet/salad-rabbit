@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AddBudgetCategory from './AddBudgetCategory'
-import numeral from 'numeral'
+import {usd} from '../../../helpers/index'
 
 export default class BudgetHeader extends Component {
 
@@ -11,10 +11,11 @@ export default class BudgetHeader extends Component {
     const budgeted = this.props.categories.reduce((accumulator, element)=> accumulator + element.subcategories.reduce((acc, elem)=>acc + parseInt(elem.budgeted, 10), 0), 0);
     //total all outflows columns
     const outflows = this.props.categories.reduce((accumulator, element)=> accumulator + element.subcategories.reduce((acc, elem)=>acc + parseInt(elem.outflow, 10), 0), 0);
+
     return (
       <div id="budget">
         <div id="available-to-budget">
-        	Available to Budget: {numeral(accounts - budgeted).format('$0,0.00')}
+        	Available to Budget: {usd(accounts - budgeted)}
         </div>
         <div className="budget-row">
             <div id="category-name" className="budget-columns">
@@ -24,13 +25,13 @@ export default class BudgetHeader extends Component {
         
             </div>
         	<div id="budgeted" className="budget-columns">
-	        	Budgeted: {numeral(budgeted).format('$0,0.00')}
+	        	Budgeted: {usd(budgeted)}
 	        </div>
         	<div id="outflows" className="budget-columns">
-        		Outflows: {numeral(outflows).format('$0,0.00')}
+        		Outflows: {usd(outflows)}
         	</div>
         	<div id="balance" className="budget-columns">
-        		Balance: {numeral(budgeted - outflows).format('$0,0.00')}
+        		Balance: {usd(budgeted - outflows)}
         	</div>
 	    </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BudgetSubcategory from './BudgetSubcategory'
 import AddBudgetSubcategory from './AddBudgetSubcategory'
-import numeral from 'numeral'
+import {usd} from '../../../helpers/index'
 
 export default class BudgetCategory extends Component {
 
@@ -19,13 +19,13 @@ export default class BudgetCategory extends Component {
             <AddBudgetSubcategory index={this.props.index}/>
          	</div>
          	<div className="budget column">
-          	{numeral(budgeted).format('$0,0.00')}
+          	{usd(budgeted)}
          	</div>
          	<div className="outflows column">
-         		{numeral(outflows).format('$0,0.00')}
+         		{usd(outflows)}
          	</div>
          	<div className="balance column">
-         		{numeral(budgeted-outflows).format('$0,0.00')}
+         		{usd(budgeted-outflows)}
          	</div>
         </div>
         {this.subcategoriesList()}
