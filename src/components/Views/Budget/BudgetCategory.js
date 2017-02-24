@@ -6,9 +6,9 @@ export default class BudgetCategory extends Component {
 
   render() {
     //total all budgeted columns
-    const budgeted = this.props.subcategories.reduce((accumulator, element)=> accumulator + element.budgeted, 0);
+    const budgeted = this.props.subcategories.reduce((accumulator, element)=> accumulator + parseInt(element.budgeted, 10), 0);
     //total all outflows columns
-    const outflows = this.props.subcategories.reduce((accumulator, element)=> accumulator + element.outflow, 0);
+    const outflows = this.props.subcategories.reduce((accumulator, element)=> accumulator + parseInt(element.outflow, 10), 0);
 
     return (
       <div className="budget-category-container">

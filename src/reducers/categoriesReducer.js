@@ -14,11 +14,11 @@ export default function reducer(state=[], action) {
       break;
     case "CHANGE_BUDGETED_AMOUNT":
       //make copy of old master category of the subcategory you're changing
-      var category = {...state[action.payload.parentIndex]};
+      var oldCategory = {...state[action.payload.indexParent]};
       //set the budgeted amount in the subcategory to the new value
-      category.subcategories[action.payload.index].budgeted = action.payload.value;
+      oldCategory.subcategories[action.payload.index].budgeted = action.payload.value;
       //add the rest of the array to either side of the changed master category
-      state = state.slice(0, action.payload.parentIndex).concat([category]).concat(state.slice(action.payload.parentIndex + 1));
+      state = state.slice(0, action.payload.indexParent).concat([oldCategory]).concat(state.slice(action.payload.indexParent + 1));
       break;
   }
 

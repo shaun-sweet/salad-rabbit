@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import { addCategory } from '../../../actions/categoriesActions'
 import { connect } from 'react-redux'
@@ -61,17 +59,16 @@ export default class AddBudgetCategory extends Component {
 	}
 
 	handleSubmit = (event) => {
-	this.props.dispatch(addCategory(this.state.category));
+	this.props.dispatch(addCategory({...this.state.category}));
 	this.handleClose();
 	}
 
 	handleChange(event, value) {
-	const name = event.target.name;
 	this.setState({
 	  category: {
-	    ...this.state.category,
-	    master_category: value
-	  }
+	      master_category: value,
+	      subcategories: []
+	    }
 	});
 	}
 

@@ -35,10 +35,10 @@ export default class BudgetSubcategory extends Component {
   }
 
   handleChange(event, value) {
-    // var indexParent = this.props.indexParent;
-    // var index = this.props.index;
-    // console.log(indexParent, index);
-    // this.props.dispatch(changeBudgetedAmount(value, indexParent, index));
+    var indexParent = this.props.indexParent;
+    var index = this.props.index;
+    console.log(indexParent, index);
+    this.props.dispatch(changeBudgetedAmount(value, indexParent, index));
     console.log('budget changed to ' + value);
   }
 }
