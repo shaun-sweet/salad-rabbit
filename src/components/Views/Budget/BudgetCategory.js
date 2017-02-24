@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { changeBudgetedAmount } from '../../../actions/categoriesActions'
 import { connect } from 'react-redux'
@@ -12,19 +14,53 @@ var mapStateToProps = function(store) {
 }
 
 export default class BudgetCategory extends Component {
+  state = {
+    open: false,
+    value: 1,
+    budgeted: this.props.budgeted,
+  };
 
   render() {
+    const actions = [
+        <FlatButton
+          label="Cancel"
+          primary={true}
+          onTouchTap={this.handleClose}
+        />,
+        <FlatButton
+          label="Submit"
+          primary={true}
+          keyboardFocused={true}
+          onTouchTap={this.handleSubmit}
+
+        />,
+      ];
     return (
       <div className="budget-category">
         <div className="name column">
         	{this.props.name}
        	</div>
        	<div className="budget column">
-        	<TextField
+        	<div
               id="budget-text-field"
-              defaultValue={usd(this.props.budgeted)}
-              onChange={this.handleChange.bind(this)}
-            />
+              onClick={this.handleOpen}
+            >
+            {usd(this.state.budgeted)}
+          </div>
+           <Dialog
+              className="change-budgeted-amount"
+              title="Change Budgeted Amount"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              <TextField
+                defaultValue={usd(this.state.budgeted)}
+                name="name"
+                onChange={this.handleChange.bind(this)}
+              />
+           </Dialog>
        	</div>
        	<div className="outflow column">
        		{usd(this.props.outflow)}
@@ -36,11 +72,26 @@ export default class BudgetCategory extends Component {
     );
   }
 
-  handleChange(event, value) {
+  handleSubmit = (event) => {
     var indexParent = this.props.indexParent;
     var index = this.props.index;
-    this.props.dispatch(changeBudgetedAmount(value, indexParent, index));
+    this.props.dispatch(changeBudgetedAmount(this.state.budgeted, indexParent, index));
+    this.handleClose();
   }
+
+  handleChange(event, value) {
+  this.setState({
+      budgeted: value
+    });
+  }
+
+  handleOpen = () => {
+  this.setState({open: true});
+  };
+
+  handleClose = () => {
+  this.setState({open: false});
+  };
 }
 
 module.exports = connect(mapStateToProps)(BudgetCategory);
