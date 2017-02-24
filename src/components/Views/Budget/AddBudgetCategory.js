@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 import { addCategory } from '../../../actions/categoriesActions'
 import { connect } from 'react-redux'
@@ -38,7 +39,8 @@ export default class AddBudgetCategory extends Component {
 	    ];
 		return (
 	      <div className="add-budget-category">
-	        <RaisedButton className="add-category-button" label="Add Category" onTouchTap={this.handleOpen} />
+	        <FloatingActionButton className="add-category-button" mini={true} onTouchTap={this.handleOpen}><ContentAdd />
+	        </FloatingActionButton>
 	        <Dialog
 	            className="add-category-form"
 	            title="Add a Budget Category"

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AddBudgetCategory from './AddBudgetCategory'
 
 export default class BudgetHeader extends Component {
 
@@ -14,14 +15,20 @@ export default class BudgetHeader extends Component {
         <div id="available-to-budget">
         	Available to Budget: {accounts - budgeted}
         </div>
-        <div className="budget-columns">
-        	<div id="budgeted">
+        <div className="budget-row">
+            <div id="category-name" className="budget-columns">
+                
+                Master Categories 
+                <AddBudgetCategory/>
+        
+            </div>
+        	<div id="budgeted" className="budget-columns">
 	        	Budgeted: {budgeted}
 	        </div>
-        	<div id="outflows">
-        		Outflows:{outflows}
+        	<div id="outflows" className="budget-columns">
+        		Outflows: {outflows}
         	</div>
-        	<div id="balance">
+        	<div id="balance" className="budget-columns">
         		Balance: {budgeted-outflows}
         	</div>
 	    </div>
