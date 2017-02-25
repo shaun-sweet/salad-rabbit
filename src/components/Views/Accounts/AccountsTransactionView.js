@@ -18,7 +18,7 @@ class AccountsTransactionView extends Component {
   render() {
     const transactions = this.props.transactions.map((transaction, index) =>
        <Transaction
-         key={index+1}
+         key={index}
          account={transaction.account}
          date={transaction.date}
          payee={transaction.payee}
