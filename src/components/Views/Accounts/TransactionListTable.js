@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Transaction from './Transaction'
 export default class TransactionListTable extends Component {
   constructor(props) {
     super(props);

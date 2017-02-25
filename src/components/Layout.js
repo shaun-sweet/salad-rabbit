@@ -9,6 +9,10 @@ import AddAccountContainer from './Accounts/AddAccountContainer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../styles/css/stylesheet.css'
 injectTapEventPlugin();
+
+//testing the transaction bar, remove from this page when transaction bar is added to transactions page
+import AddTransaction from './Views/Accounts/AddTransaction'
+
 var mapStateToProps = function(store) {
   return {
     accounts: store.accounts
@@ -27,6 +31,7 @@ class Layout extends Component {
                 <BudgetAccountsContainer />
                 <ClosedAccountsContainer />
                 <AddAccountContainer />
+                <AddTransaction />
               </div>
               <Paper id='display' zDepth={1}>
                 {this.props.children}

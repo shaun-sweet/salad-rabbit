@@ -1,11 +1,21 @@
-#accounts-transaction-view
+#accounts-transaction-view,  .transaction-headers, .transaction-table, .row
   display: flex
+
+#accounts-transaction-view
+  flex: 1
   flex-direction: column
-  height: 100%
+
+.transaction-table
+  flex: 1
+  flex-direction: column
+
+.transaction-headers div, .cell, .table-wrapper
+  flex: 1
+
+.new-transaction
   width: 100%
+  border: none
+  box-shadow: inset 0px 0px 5px -2px rgba(0,0,0,0.75)
 
-.transaction-controls
-  margin-top: 1em
-
-.add-transaction-button
+.transaction-controls .add-transaction-button
   margin-right: 1em
