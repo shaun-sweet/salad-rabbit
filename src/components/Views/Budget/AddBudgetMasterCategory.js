@@ -60,9 +60,10 @@ export default class AddBudgetMasterCategory extends Component {
 	    );
 	}
 
+
 	handleSubmit = (event) => {
-	this.props.dispatch(addMasterCategory({...this.state.master_category}));
-	this.handleClose();
+  	this.props.dispatch(addMasterCategory({...this.state.master_category}));
+  	this.handleClose();
 	}
 
 	handleChange(event, value) {
