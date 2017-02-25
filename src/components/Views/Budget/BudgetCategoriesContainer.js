@@ -5,11 +5,11 @@ import BudgetMasterCategory from './BudgetMasterCategory'
 export default class BudgetCategoriesContainer extends Component {
 
   render() {
-   return (
-     <div id="budget-categories">
-        {this.masterCategoriesList()}
-     </div>
-   );
+    return (
+      <div id="budget-categories">
+         {this.masterCategoriesList()}
+      </div>
+    );
  }
 
   masterCategoriesList() {

@@ -18,22 +18,20 @@ export default class BudgetHeader extends Component {
         	Available to Budget: {usd(accounts - budgeted)}
         </div>
         <div className="budget-row">
-            <div id="master-category-name" className="budget-columns">
-                
-                Categories 
-                <AddBudgetMasterCategory/>
-        
-            </div>
+          <div id="master-category-name" className="budget-columns">
+            Categories
+            <AddBudgetMasterCategory/>
+          </div>
         	<div id="budgeted" className="budget-columns">
-	        	Budgeted: {usd(budgeted)}
-	        </div>
+          	Budgeted: {usd(budgeted)}
+          </div>
         	<div id="outflows" className="budget-columns">
         		Outflows: {usd(outflows)}
         	</div>
         	<div id="balance" className="budget-columns">
         		Balance: {usd(budgeted - outflows)}
         	</div>
-	    </div>
+	      </div>
       </div>
     );
   }

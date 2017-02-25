@@ -26,7 +26,7 @@
   "main": "src/electron-starter.js",
   "scripts": {
     "start": "nf start",
-    "build": "node-sass src/styles/stylesheet.sass --output src/styles/css/ && react-scripts build",
+    "build": "sass src/styles/stylesheet.sass:src/styles/css/stylesheet.css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
