@@ -5,28 +5,28 @@ export default class Transaction extends Component {
     return (
       <div className="row">
         <div className="cell">
-          cellone
+          {this.props.account}
         </div>
         <div className="cell">
-          cell one
+          {this.props.date}
         </div>
         <div className="cell">
-          cell one
+          {this.props.payee}
         </div>
         <div className="cell">
-          cell one
+          {this.props.category}
         </div>
         <div className="cell">
-          cell one
+          {this.props.memo}
         </div>
         <div className="cell">
-          cell one
+          {this.props.outflow}
         </div>
         <div className="cell">
-          cell one
+          {this.props.inflow}
         </div>
         <div className="cell">
-          cello nefsdaljfa sldjflk sda
+          {this.props.cleared}
         </div>
       </div>
     )
