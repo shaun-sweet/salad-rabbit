@@ -2,16 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import TransactionListTable from './TransactionListTable.js'
 import Transaction from './Transaction'
-import RaisedButton from 'material-ui/RaisedButton';
-import NewTransaction from './NewTransaction'
+import RaisedButton from 'material-ui/RaisedButton'
+import NewTransactionBar from './NewTransactionBar'
+import TransactionControls from './TransactionControls'
 
 class AccountsTransactionView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      formData: {},
       addingTransaction: false
     }
     this.handleAddingTransaction = this.handleAddingTransaction.bind(this);
+    this.handleCancelTransaction = this.handleCancelTransaction.bind(this);
   }
 
 
@@ -31,15 +34,29 @@ class AccountsTransactionView extends Component {
     return (
       <div ref="view_container" id='accounts-transaction-view'>
         <TransactionListTable>
-          {this.state.addingTransaction ? <NewTransaction /> : null}
           {transactions}
         </TransactionListTable>
-        <div className="transaction-controls">
-          <RaisedButton onClick={this.handleAddingTransaction} className="add-transaction-button" label="Add Transaction" />
-          <RaisedButton className="make-transfer-button" label="Make Transfer" />
-        </div>
+        {this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
       </div>
     );
+  }
+
+  showNewTransactionBar() {
+    return (
+      <NewTransactionBar
+        handleCancelTransaction={this.handleCancelTransaction}
+      />);
+  }
+
+  showTransactionControls() {
+    return (
+      <TransactionControls
+        handleAddingTransaction={this.handleAddingTransaction}
+      />);
+  }
+
+  handleCancelTransaction() {
+    this.setState({addingTransaction: false})
   }
 
   handleAddingTransaction() {
