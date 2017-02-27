@@ -4,35 +4,42 @@ import RaisedButton from 'material-ui/RaisedButton'
 export default class NewTransactionBar extends Component {
 
   render() {
+    const inputProps = (key) => ({
+      onChange: this.props.onChange,
+      name: key,
+      placeholder: key,
+      type: 'text',
+      className: 'new-transaction'
+    });
     return (
       <div className='new-transaction-bar'>
         <div className="row">
           <div>
-            <input className='new-transaction' type='text' placeholder='account'/>
+            <input {...inputProps('account')} />
           </div>
           <div>
-            <input className='new-transaction' type='text' placeholder='date'/>
+            <input {...inputProps('date')} />
           </div>
           <div>
-            <input className='new-transaction' type='text' placeholder='payee'/>
+            <input {...inputProps('payee')} />
           </div>
           <div>
-            <input className='new-transaction' type='text' placeholder='category'/>
+            <input {...inputProps('category')} />
           </div>
           <div>
-            <input className='new-transaction' type='text' placeholder='memo'/>
+            <input {...inputProps('memo')} />
           </div>
           <div>
-            <input className='new-transaction' type='text' placeholder='outflow'/>
+            <input {...inputProps('outflow')} />
           </div>
           <div>
-            <input className='new-transaction' type='text' placeholder='inflow'/>
+            <input {...inputProps('inflow')} />
           </div>
           <div>
-            <input className='new-transaction' type='text' placeholder='cleared'/>
+            <input {...inputProps('cleared')} />
           </div>
         </div>
-        <RaisedButton className="save-transaction-button" label="Save" />
+        <RaisedButton onClick={this.props.handleSaveNewTransaction} className="save-transaction-button" label="Save" />
         <RaisedButton onClick={this.props.handleCancelTransaction} className="cancel-transfer-button" label="Cancel" />
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { addTransaction } from '../../../actions/transactionsActions'
 import TransactionListTable from './TransactionListTable.js'
 import Transaction from './Transaction'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -13,6 +14,8 @@ class AccountsTransactionView extends Component {
       formData: {},
       addingTransaction: false
     }
+    this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleSaveNewTransaction = this.handleSaveNewTransaction.bind(this);
     this.handleAddingTransaction = this.handleAddingTransaction.bind(this);
     this.handleCancelTransaction = this.handleCancelTransaction.bind(this);
   }
@@ -45,6 +48,8 @@ class AccountsTransactionView extends Component {
     return (
       <NewTransactionBar
         handleCancelTransaction={this.handleCancelTransaction}
+        onChange={this.handleFormChange}
+        handleSaveNewTransaction={this.handleSaveNewTransaction}
       />);
   }
 
@@ -55,12 +60,31 @@ class AccountsTransactionView extends Component {
       />);
   }
 
+  handleFormChange(e) {
+    e.preventDefault;
+    const name = e.target.name;
+    const val = e.target.value;
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        [name]: val
+      }
+    });
+  }
+
   handleCancelTransaction() {
     this.setState({addingTransaction: false})
   }
 
   handleAddingTransaction() {
     this.setState({addingTransaction: true});
+  }
+
+  handleSaveNewTransaction() {
+    this.props.dispatch((dispatch) =>{
+      dispatch(addTransaction(this.state.formData));
+      this.setState({addingTransaction: false});
+    })
   }
 
 }

@@ -13,8 +13,6 @@ export default function reducer(state=[{
     case "ADD_TRANSACTION":
       state = state.concat([action.payload])
       break;
-
-
   }
   return state;
 }
