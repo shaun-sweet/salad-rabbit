@@ -28,7 +28,7 @@ export default class AddTransaction extends Component{
 			    	{this.accountsMenuItems()}
 			   		{this.categoriesMenuItems()}
 			    </DropDownMenu>
-			</div>
+        </div>
 		  </div>
 		);
 	}

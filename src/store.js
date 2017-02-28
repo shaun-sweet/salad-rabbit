@@ -56,3 +56,19 @@ var s = {
     }
   ]
 }
+
+{
+  transactions: {
+    uniqueID: 0
+    list:[{
+      account: "Checking",
+      date: Date.now,
+      payee: "Dominos",
+      category: "Food",
+      memo: "twas good",
+      outflow: 30.05,
+      inflow: null,
+      cleared: true
+    }]
+  }
+}

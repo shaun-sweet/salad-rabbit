@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
+import CategoryDropdown from './CategoryDropdown'
 
 export default class NewTransactionBar extends Component {
 
@@ -24,7 +25,11 @@ export default class NewTransactionBar extends Component {
             <input {...inputProps('payee')} />
           </div>
           <div>
-            <input {...inputProps('category')} />
+            {/* <input {...inputProps('category')}  /> */}
+            <CategoryDropdown
+              accounts={this.props.accounts}
+              categories={this.props.categories}
+            />
           </div>
           <div>
             <input {...inputProps('memo')} />

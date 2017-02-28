@@ -1,4 +1,14 @@
-export default function reducer(state=[], action) {
+export default function reducer(state=[{
+  name: "Monthly Bills",
+  categories: [
+    {
+      name: "Rent",
+      budgeted: 500,
+      outflow: 0,
+      balance: 0
+    }
+  ]
+}], action) {
   // eslint-disable-next-line
   switch (action.type) {
     case "ADD_MASTER_CATEGORY":

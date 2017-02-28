@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { addTransaction } from '../../../actions/transactionsActions'
 import TransactionListTable from './TransactionListTable.js'
 import Transaction from './Transaction'
-import RaisedButton from 'material-ui/RaisedButton'
 import NewTransactionBar from './NewTransactionBar'
 import TransactionControls from './TransactionControls'
 
@@ -50,6 +49,8 @@ class AccountsTransactionView extends Component {
         handleCancelTransaction={this.handleCancelTransaction}
         onChange={this.handleFormChange}
         handleSaveNewTransaction={this.handleSaveNewTransaction}
+        accounts={this.props.accounts}
+        categories={this.props.categories}
       />);
   }
 
@@ -61,7 +62,6 @@ class AccountsTransactionView extends Component {
   }
 
   handleFormChange(e) {
-    e.preventDefault;
     const name = e.target.name;
     const val = e.target.value;
     this.setState({
@@ -93,7 +93,7 @@ var mapStateToProps = function(store) {
   return {
     accounts: store.accounts,
     transactions: store.transactions,
-    master_categories: store.master_categories
+    categories: store.categories
   };
 }
 module.exports = connect(mapStateToProps)(AccountsTransactionView);
