@@ -22,17 +22,7 @@ class AccountsTransactionView extends Component {
 
   render() {
     const transactions = this.props.transactions.map((transaction, index) =>
-       <Transaction
-         key={index}
-         account={transaction.account}
-         date={transaction.date}
-         payee={transaction.payee}
-         category={transaction.category}
-         memo={transaction.memo}
-         outflow={transaction.outflow}
-         inflow={transaction.inflow}
-         cleared={transaction.cleared}
-       />);
+       Transaction(transaction));
     return (
       <div ref="view_container" id='accounts-transaction-view'>
         <TransactionListTable>
@@ -40,7 +30,7 @@ class AccountsTransactionView extends Component {
         </TransactionListTable>
         {this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
       </div>
-    );
+);
   }
 
   showNewTransactionBar() {
@@ -61,7 +51,7 @@ class AccountsTransactionView extends Component {
       />);
   }
 
-  handleFormChange(e) {
+  handleFormChange = (e) => {
     const name = e.target.name;
     const val = e.target.value;
     this.setState({
