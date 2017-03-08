@@ -58,18 +58,55 @@ var s = {
   ]
 }
 
-{
+let r = {
+  accountsIdGenerator: 1,
+  transactionsIdGenerator: 1,
+  masterCategoryIdGenerator: 1,
+  categoryIdGenerator: 1,
   transactions: {
-    uniqueID: 0
-    list:[{
-      account: "Checking",
+    "1": {
+      account: 1,
       date: Date.now,
-      payee: "Dominos",
-      category: "Food",
-      memo: "twas good",
-      outflow: 30.05,
+      payee: "Sprint",
+      category: 2,
+      memo: "twas cellphoney",
+      outflow: 90.05,
       inflow: null,
       cleared: true
-    }]
-  }
+    }
+  },
+  masterCategories: {
+    "1": {
+      name: "Monthly Bills",
+      categories: [1,2]
+    }
+  },
+  categories: {
+    "1": {
+      masterCategory: 1,
+      name: "Rent",
+      budgeted: 500,
+      outflow: 0,
+      inflow: 0,
+      balance: 0
+    },
+    "2": {
+      masterCategory: 1,
+      name: "Cell Phone",
+      budgeted: 100.23,
+      outflow: 0,
+      inflow: 0,
+      balance: 0
+    }
+  },
+  accounts: {
+    "1": {
+      name: "Checking",
+      type: "checking",
+      balance: 100000,
+      note: "string"
+    }
+  },
+  closedAccounts: [],
+  openAccounts: []
 }

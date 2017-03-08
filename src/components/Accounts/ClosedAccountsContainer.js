@@ -23,6 +23,7 @@ export default class ClosedAccountsContainer extends Component {
         >
         </CardMedia>
         <CardText expandable={true}>
+
          <ul>
            Closed Accounts Here
          </ul>
