@@ -6,6 +6,15 @@ import Transaction from './Transaction'
 import NewTransactionBar from './NewTransactionBar'
 import TransactionControls from './TransactionControls'
 
+let mapStateToProps = function(store) {
+  return {
+    accounts: store.accounts,
+    transactions: store.transactions,
+    categories: store.categories,
+    transactionsIdGenerator: store.transactionsIdGenerator
+  };
+}
+
 class AccountsTransactionView extends Component {
   constructor(props) {
     super(props);
@@ -71,19 +80,13 @@ class AccountsTransactionView extends Component {
   }
 
   handleSaveNewTransaction() {
+    let transaction = {...this.state.formData, id: this.props.transactionsIdGenerator};
     this.props.dispatch((dispatch) =>{
-      dispatch(addTransaction(this.state.formData));
+      dispatch(addTransaction(transaction));
       this.setState({addingTransaction: false});
     })
   }
 
 }
 
-var mapStateToProps = function(store) {
-  return {
-    accounts: store.accounts,
-    transactions: store.transactions,
-    categories: store.categories
-  };
-}
 module.exports = connect(mapStateToProps)(AccountsTransactionView);

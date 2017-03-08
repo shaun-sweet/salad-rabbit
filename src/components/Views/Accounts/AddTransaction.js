@@ -3,10 +3,11 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem';
 import {connect} from 'react-redux'
 
-var mapStateToProps = function(store) {
+let mapStateToProps = function(store) {
   return {
   	accounts: store.accounts,
-    categories: store.categories
+    categories: store.categories,
+    transactionsIdGenerator: store.transactionsIdGenerator
   };
 }
 
