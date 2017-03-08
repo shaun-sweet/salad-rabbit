@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-import Navigation from './Navigation/NavigationContainer'
-import Paper from 'material-ui/Paper'
-import BudgetAccountsContainer from './Accounts/BudgetAccounts/BudgetAccountsContainer'
-import ClosedAccountsContainer from './Accounts/ClosedAccountsContainer'
-import AddAccountContainer from './Accounts/AddAccountContainer'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../styles/css/stylesheet.css'
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import injectTapEventPlugin from "react-tap-event-plugin";
+import Navigation from "./Navigation/NavigationContainer";
+import Paper from "material-ui/Paper";
+import BudgetAccountsContainer from "./Accounts/BudgetAccounts/BudgetAccountsContainer";
+import ClosedAccountsContainer from "./Accounts/ClosedAccountsContainer";
+import AddAccountContainer from "./Accounts/AddAccountContainer";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import "../styles/css/stylesheet.css";
+//testing the transaction bar, remove from this page when transaction bar is added to transactions page
+import AddTransaction from "./Views/Accounts/AddTransaction";
 injectTapEventPlugin();
 
-//testing the transaction bar, remove from this page when transaction bar is added to transactions page
-import AddTransaction from './Views/Accounts/AddTransaction'
 
 var mapStateToProps = function(store) {
   return {
@@ -30,7 +30,7 @@ class Layout extends Component {
                 <Navigation />
                 <BudgetAccountsContainer />
                 <ClosedAccountsContainer />
-                <AddAccountContainer />
+                <AddAccountContainer  />
                 <AddTransaction />
               </div>
               <Paper id='display' zDepth={1}>
