@@ -80,7 +80,13 @@ class AccountsTransactionView extends Component {
   }
 
   handleSaveNewTransaction() {
-    let transaction = {...this.state.formData, id: this.props.transactionsIdGenerator};
+    let id = this.props.transactionsIdGenerator;
+    let transaction = {
+      [id]: {
+      ...this.state.formData,
+      id: this.props.transactionsIdGenerator
+      }
+    }
     this.props.dispatch((dispatch) =>{
       dispatch(addTransaction(transaction));
       this.setState({addingTransaction: false});
