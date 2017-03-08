@@ -1,9 +1,10 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
 const middleware = applyMiddleware(thunk, logger())
-export default createStore(reducers, middleware);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export default createStore(reducers, composeEnhancers(middleware));
 
 // is just to see the data model, it really does nothing
 // eslint-disable-next-line

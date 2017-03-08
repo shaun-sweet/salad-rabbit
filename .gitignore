@@ -11,6 +11,7 @@
 
 # misc
 *.map
+.idea
 .DS_Store
 .env
 .sass-cache
