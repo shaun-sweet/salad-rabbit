@@ -1,9 +1,10 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
 const middleware = applyMiddleware(thunk, logger())
-export default createStore(reducers, middleware);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export default createStore(reducers, composeEnhancers(middleware));
 
 // is just to see the data model, it really does nothing
 // eslint-disable-next-line
@@ -42,15 +43,33 @@ var s = {
       cleared: true
     }
   ],
-  categories: [
+  master_categories: [
     {
-      master_category: "Monthly Bills",
-      sub_categories: [
+      name: "Monthly Bills",
+      categories: [
         {
           name: "Rent",
-          budgeted_amount: 500
+          budgeted: 500,
+          outflow: 0,
+          balance: 0
         }
       ]
     }
   ]
+}
+
+{
+  transactions: {
+    uniqueID: 0
+    list:[{
+      account: "Checking",
+      date: Date.now,
+      payee: "Dominos",
+      category: "Food",
+      memo: "twas good",
+      outflow: 30.05,
+      inflow: null,
+      cleared: true
+    }]
+  }
 }

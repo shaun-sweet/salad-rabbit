@@ -3,7 +3,6 @@
 # dependencies
 /node_modules
 
-
 # testing
 /coverage
 
@@ -11,7 +10,10 @@
 /build
 
 # misc
+*.map
+.idea
 .DS_Store
 .env
+.sass-cache
 npm-debug.log
 *.css
