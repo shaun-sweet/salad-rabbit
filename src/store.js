@@ -8,56 +8,6 @@ export default createStore(reducers, composeEnhancers(middleware));
 
 // is just to see the data model, it really does nothing
 // eslint-disable-next-line
-var s = {
-  closed_accounts: [
-    {
-      name: "Checking",
-      type: "Checking",
-      balance: 0,
-      note: "String"
-    }
-  ],
-  accounts: [
-    {
-      name: "Checking",
-      type: "checking",
-      balance: 100000,
-      note: "String"
-    },
-    {
-      name: "Credit Card",
-      type: "credit card",
-      balance: -100,
-      note: "String"
-    }
-  ],
-  transactions: [
-    {
-      account: "Checking",
-      date: Date.now,
-      payee: "Dominos",
-      category: "Food",
-      memo: "twas good",
-      outflow: 30.05,
-      inflow: null,
-      cleared: true
-    }
-  ],
-  master_categories: [
-    {
-      name: "Monthly Bills",
-      categories: [
-        {
-          name: "Rent",
-          budgeted: 500,
-          outflow: 0,
-          balance: 0
-        }
-      ]
-    }
-  ]
-}
-
 let r = {
   accountsIdGenerator: 1,
   transactionsIdGenerator: 1,
@@ -65,6 +15,7 @@ let r = {
   categoryIdGenerator: 1,
   transactions: {
     "1": {
+      id: 1,
       account: 1,
       date: Date.now,
       payee: "Sprint",
@@ -77,12 +28,14 @@ let r = {
   },
   masterCategories: {
     "1": {
+      id: 1,
       name: "Monthly Bills",
       categories: [1,2]
     }
   },
   categories: {
     "1": {
+      id: 1,
       masterCategory: 1,
       name: "Rent",
       budgeted: 500,
@@ -91,6 +44,7 @@ let r = {
       balance: 0
     },
     "2": {
+      id: 2,
       masterCategory: 1,
       name: "Cell Phone",
       budgeted: 100.23,
@@ -101,6 +55,7 @@ let r = {
   },
   accounts: {
     "1": {
+      id: 1,
       name: "Checking",
       type: "checking",
       balance: 100000,
