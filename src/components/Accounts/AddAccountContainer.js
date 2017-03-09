@@ -17,10 +17,10 @@ class AddAccountContainer extends Component {
     open: false,
     value: 1,
     account: {
-      name: "Checking",
-      type: "checking",
-      balance: 100000,
-      note: "string",
+      name: "",
+      type: "",
+      balance: 0,
+      note: "",
       open: true
     }
   };
