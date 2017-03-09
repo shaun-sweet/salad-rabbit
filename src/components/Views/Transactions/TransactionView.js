@@ -5,6 +5,7 @@ import TransactionListTable from './TransactionListTable.js'
 import Transaction from './Transaction'
 import NewTransactionBar from './NewTransactionBar'
 import TransactionControls from './TransactionControls'
+import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
 
 let mapStateToProps = function(store) {
   return {
@@ -30,14 +31,7 @@ class TransactionView extends Component {
 
 
   render() {
-    const transactionsList = Object.keys(this.props.transactions).map((transactionId, index)=>{
-      let transaction = {...this.props.transactions[transactionId]};
-      // TODO:
-      // add once we change reducer.  Don't forget to change Transaction.js values as well
-      // transaction.category = this.props.categories[transaction.category];
-      // transaction.account = this.props.accounts[transaction.account];
-      return (<Transaction {...transaction} key={transaction.id} />);
-    });
+    const transactionsList = this.denormalizeTransactions();
 
     return (
       <div ref="view_container" id='accounts-transaction-view'>
@@ -47,6 +41,15 @@ class TransactionView extends Component {
         {this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
       </div>
     );
+  }
+
+  denormalizeTransactions(){
+    return Object.keys(this.props.transactions).map((transactionId, index)=>{
+      let transaction = {...this.props.transactions[transactionId]};
+      transaction.category = this.props.categories[transaction.category];
+      transaction.account = this.props.accounts[transaction.account];
+      return (<Transaction {...transaction} key={transaction.id} />);
+    });
   }
 
   showNewTransactionBar() {
@@ -96,6 +99,7 @@ class TransactionView extends Component {
     }
     this.props.dispatch((dispatch) =>{
       dispatch(addTransaction(transaction));
+      dispatch(incrementTransactionId());
       this.setState({addingTransaction: false});
     })
   }
