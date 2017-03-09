@@ -8,7 +8,6 @@ var mapStateToProps = function(store) {
     categories: store.categories,
     accounts: store.accounts,
     masterCategories: store.masterCategories,
-    dicks: 1
   };
 }
 
