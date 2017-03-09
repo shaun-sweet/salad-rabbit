@@ -30,7 +30,7 @@ export default class AddBudgetCategory extends Component {
 	        label="Cancel"
 	        primary={true}
 	        onTouchTap={this.handleClose}
-	      />,
+       />,
 	      <FlatButton
 	        label="Submit"
 	        primary={true}
@@ -57,7 +57,7 @@ export default class AddBudgetCategory extends Component {
               floatingLabelText="Category Name"
               name="name"
               onChange={this.handleChange.bind(this)}
-	            />
+            />
           </Dialog>
         </div>
 	    );

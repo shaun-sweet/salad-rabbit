@@ -15,7 +15,7 @@ let mapStateToProps = function(store) {
   };
 }
 
-class AccountsTransactionView extends Component {
+class TransactionView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -102,4 +102,4 @@ class AccountsTransactionView extends Component {
 
 }
 
-module.exports = connect(mapStateToProps)(AccountsTransactionView);
+module.exports = connect(mapStateToProps)(TransactionView);

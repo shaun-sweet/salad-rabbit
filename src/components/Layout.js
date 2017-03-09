@@ -9,7 +9,7 @@ import AddAccountContainer from "./Accounts/AddAccountContainer";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import "../styles/css/stylesheet.css";
 //testing the transaction bar, remove from this page when transaction bar is added to transactions page
-import AddTransaction from "./Views/Accounts/AddTransaction";
+import AddTransaction from "./Views/Transactions/AddTransaction";
 injectTapEventPlugin();
 
 
