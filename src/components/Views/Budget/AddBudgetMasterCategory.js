@@ -5,11 +5,13 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 import { addMasterCategory } from '../../../actions/categoriesActions'
+import { incrementMasterCategoryId } from '../../../actions/masterCategoryIdGeneratorActions'
 import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
   return {
-    categories: store.categories
+    categories: store.categories,
+    masterCategoryIdGenerator: store.masterCategoryIdGenerator
   };
 }
 export default class AddBudgetMasterCategory extends Component {
@@ -18,7 +20,8 @@ export default class AddBudgetMasterCategory extends Component {
     value: 1,
     master_category: {
       name: "",
-      categories: []
+      categories: [],
+      hidden: false
     }
   };
 
@@ -62,7 +65,10 @@ export default class AddBudgetMasterCategory extends Component {
 
 
 	handleSubmit = (event) => {
-  	this.props.dispatch(addMasterCategory({...this.state.master_category}));
+  	this.props.dispatch((dispatch)=>{
+      dispatch(addMasterCategory({[this.props.masterCategoryIdGenerator]: {...this.state.master_category, id: this.props.masterCategoryIdGenerator}}));
+      dispatch(incrementMasterCategoryId());
+    });
   	this.handleClose();
 	}
 

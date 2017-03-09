@@ -6,6 +6,11 @@ export default function reducer(state={
     hidden: false
   }
 }, action) {
+  switch(action.type){
+  	case 'ADD_MASTER_CATEGORY':
+  		state = {...state, ...action.payload};
+  	break;
+  }
 
   return state;
 }

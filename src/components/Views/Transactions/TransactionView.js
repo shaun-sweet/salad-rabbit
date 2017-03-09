@@ -31,7 +31,7 @@ class TransactionView extends Component {
 
 
   render() {
-    const transactionsList = this.denormalizeTransactions();
+    const transactionsList = this.denormalizeTransactions().map((transaction, index)=><Transaction {...transaction} key={transaction.id} />);
 
     return (
       <div ref="view_container" id='accounts-transaction-view'>
@@ -48,7 +48,7 @@ class TransactionView extends Component {
       let transaction = {...this.props.transactions[transactionId]};
       transaction.category = this.props.categories[transaction.category];
       transaction.account = this.props.accounts[transaction.account];
-      return (<Transaction {...transaction} key={transaction.id} />);
+      return transaction;
     });
   }
 

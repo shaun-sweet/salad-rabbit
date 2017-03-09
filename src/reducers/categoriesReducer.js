@@ -24,6 +24,5 @@ export default function reducer(state={
 }, action) {
   // eslint-disable-next-line
 
-
   return state;
 }
