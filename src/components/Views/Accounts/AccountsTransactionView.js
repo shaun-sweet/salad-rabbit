@@ -30,10 +30,12 @@ class AccountsTransactionView extends Component {
 
 
   render() {
-    const transactionsList = Object.keys(transactions).map((transactionId, index)=>{
+    const transactionsList = Object.keys(this.props.transactions).map((transactionId, index)=>{
       let transaction = {...this.props.transactions[transactionId]};
-      transaction.category = this.props.categories[transaction.category];
-      transaction.account = this.props.accounts[transactions.account];
+      // TODO:
+      // add once we change reducer.  Don't forget to change Transaction.js values as well
+      // transaction.category = this.props.categories[transaction.category];
+      // transaction.account = this.props.accounts[transaction.account];
       return (<Transaction {...transaction} key={transaction.id} />);
     });
 

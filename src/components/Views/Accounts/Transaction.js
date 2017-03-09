@@ -3,7 +3,7 @@ import React from 'react'
 const Transaction = (props) => (
   <div className="row">
     <div className="cell">
-      {props.account.name}
+      {props.name}
     </div>
     <div className="cell">
       {props.date}
@@ -12,7 +12,7 @@ const Transaction = (props) => (
       {props.payee}
     </div>
     <div className="cell">
-      {props.category.name}
+      {props.name}
     </div>
     <div className="cell">
       {props.memo}
