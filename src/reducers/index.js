@@ -7,7 +7,7 @@ import accountsIdGenerator from './accountsIdGeneratorReducer'
 import categoryIdGenerator from './categoryIdGeneratorReducer'
 import masterCategoryIdGenerator from './masterCategoryIdGeneratorReducer'
 import transactionsIdGenerator from './transactionsIdGeneratorReducer'
-import masterCategory from './masterCategoryReducer'
+import masterCategories from './masterCategoriesReducer'
 import openAccounts from './openAccountsReducer'
 import closedAccounts from './closedAccountsReducer'
 
@@ -16,7 +16,7 @@ export default combineReducers({
   transactionsIdGenerator,
   masterCategoryIdGenerator,
   categoryIdGenerator,
-  masterCategory,
+  masterCategories,
   accounts,
   transactions,
   categories,

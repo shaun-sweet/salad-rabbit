@@ -15,20 +15,21 @@ var mapStateToProps = function(store) {
 export default class BudgetView extends Component {
 
   render() {
-    console.log(this.denormalizeCategories());
+    let denormalizedCategories = this.denormalizeCategories();
     return (
       <div id="budget-view">
-        <BudgetHeader accounts={this.props.accounts} master_categories={this.props.categories}/>
-        <BudgetCategoriesContainer master_categories={this.props.categories}/>
+        <BudgetHeader accounts={this.props.accounts} master_categories={denormalizedCategories}/>
+        <BudgetCategoriesContainer master_categories={denormalizedCategories}/>
       </div>
     );
   }
 
   denormalizeCategories(){
     let masterCategories = this.props.masterCategories;
-    Object.keys(masterCategories).map((masterCategoryId)=>{
-      console.log(masterCategories[masterCategoryId]);
-      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=> this.props.categories[categoryId])};
+    return Object.keys(masterCategories).map((masterCategoryId)=>{
+      let masterCategory = masterCategories[masterCategoryId];
+      masterCategory.categories = masterCategories[masterCategoryId].categories.map((categoryId)=> this.props.categories[categoryId]);
+      return masterCategory;
     })
   }
 }

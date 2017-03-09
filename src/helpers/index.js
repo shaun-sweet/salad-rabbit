@@ -5,5 +5,5 @@ export function usd(number) {
 }
 
 export function sumArray(array, callback){
-	return array.reduce((accumulator, element)=> accumulator + parseInt(callback(element), 10), 0)
+	return array.reduce((accumulator, element)=> accumulator + parseFloat(callback(element), 10), 0)
 }
