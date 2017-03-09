@@ -27,10 +27,8 @@ export default class BudgetView extends Component {
   denormalizeCategories(){
     let masterCategories = this.props.masterCategories;
     return Object.keys(masterCategories).map((masterCategoryId)=>{
-      let masterCategory = {...masterCategories[masterCategoryId]};
-      masterCategory.categories = masterCategories[masterCategoryId].categories.map((categoryId)=> 
-        this.props.categories[categoryId]);
-      return masterCategory;
+      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=> 
+        this.props.categories[categoryId])};
     })
   }
 
