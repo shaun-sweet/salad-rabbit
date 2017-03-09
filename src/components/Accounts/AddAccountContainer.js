@@ -6,6 +6,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import { addAccount } from '../../actions/accountsActions'
+import { addOpenAccount } from '../../actions/openAccountsActions'
+import { incrementAccountsId } from '../../actions/accountsIdGeneratorActions'
 import { connect } from 'react-redux'
 
 
@@ -15,10 +17,11 @@ class AddAccountContainer extends Component {
     open: false,
     value: 1,
     account: {
-      name: "",
-      type: "",
-      balance: "",
-      note: ""
+      name: "Checking",
+      type: "checking",
+      balance: 100000,
+      note: "string",
+      open: true
     }
   };
 
@@ -78,9 +81,13 @@ class AddAccountContainer extends Component {
   }
 
   handleSubmit = (event) => {
-    this.props.dispatch(addAccount(this.state.account));
+    this.props.dispatch( (dispatch) => {
     this.handleClose();
-  }
+    dispatch(addAccount({[this.props.accountId]: {...this.state.account, id: this.props.accountId}}));
+    dispatch(addOpenAccount([this.props.accountId]));
+    dispatch(incrementAccountsId());
+    });
+}
 
   handleChange(event, value) {
     const name = event.target.name;
@@ -93,8 +100,6 @@ class AddAccountContainer extends Component {
   }
 
   handleAccountTypeChange(event,index, value){
-    console.log(value);
-    console.log(this.state);
     var val;
     if (value === 1) {
       val = "Checking";

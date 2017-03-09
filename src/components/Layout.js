@@ -15,7 +15,8 @@ injectTapEventPlugin();
 
 var mapStateToProps = function(store) {
   return {
-    accounts: store.accounts
+    accounts: store.accounts,
+    accountsIdGenerator: store.accountsIdGenerator
   };
 }
 
@@ -30,7 +31,7 @@ class Layout extends Component {
                 <Navigation />
                 <BudgetAccountsContainer />
                 <ClosedAccountsContainer />
-                <AddAccountContainer  />
+                <AddAccountContainer accounts={this.props.accounts} accountId={this.props.accountsIdGenerator}/>
                 {/*<AddTransaction />*/}
               </div>
               <Paper id='display' zDepth={1}>

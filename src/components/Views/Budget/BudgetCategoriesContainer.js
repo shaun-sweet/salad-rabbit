@@ -5,7 +5,6 @@ import BudgetMasterCategory from './BudgetMasterCategory'
 export default class BudgetCategoriesContainer extends Component {
 
   render() {
-  	console.log(this.props.master_categories);
     return (
       <div id="budget-categories">
          {this.masterCategoriesList()}
