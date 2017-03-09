@@ -18,7 +18,7 @@ class AddAccountContainer extends Component {
     value: 1,
     account: {
       name: "",
-      type: "",
+      type: "checking",
       balance: 0,
       note: "",
       open: true
@@ -86,6 +86,13 @@ class AddAccountContainer extends Component {
     dispatch(addAccount({[this.props.accountId]: {...this.state.account, id: this.props.accountId}}));
     dispatch(addOpenAccount([this.props.accountId]));
     dispatch(incrementAccountsId());
+    this.setState({account: {
+      name: "Checking",
+      type: "checking",
+      balance: 0,
+      note: "string",
+      open: true
+      }})
     });
 }
 
