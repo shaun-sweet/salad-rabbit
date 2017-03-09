@@ -30,7 +30,8 @@ let r = {
     "1": {
       id: 1,
       name: "Monthly Bills",
-      categories: [1,2]
+      categories: [1,2],
+      hidden: false
     }
   },
   categories: {
@@ -41,7 +42,8 @@ let r = {
       budgeted: 500,
       outflow: 0,
       inflow: 0,
-      balance: 0
+      balance: 0,
+      hidden: false
     },
     "2": {
       id: 2,
@@ -50,7 +52,8 @@ let r = {
       budgeted: 100.23,
       outflow: 0,
       inflow: 0,
-      balance: 0
+      balance: 0,
+      hidden: false
     }
   },
   accounts: {
@@ -59,9 +62,10 @@ let r = {
       name: "Checking",
       type: "checking",
       balance: 100000,
-      note: "string"
+      note: "string",
+      open: true
     }
   },
   closedAccounts: [],
-  openAccounts: []
+  openAccounts: [1]
 }

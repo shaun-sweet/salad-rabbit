@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
   return {
+    openAccounts: store.openAccounts,
+    closedAccounts: store.closedAccounts,
     accounts: store.accounts
   };
 }
@@ -19,6 +21,9 @@ class BudgetAccountsContainer extends Component {
   }
 
  render() {
+    let openAccounts = this.denormalizeOpenAccounts().map((accountId, index) =>
+      <BudgetAccountListItem {...this.props.accounts[accountId]} key={accountId} />
+    );
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
        <CardHeader
@@ -33,7 +38,7 @@ class BudgetAccountsContainer extends Component {
        </CardMedia>
        <CardText expandable={true}>
         <ul>
-          {this.accountsList()}
+          {openAccounts}
         </ul>
        </CardText>
      </Card>
@@ -56,8 +61,10 @@ class BudgetAccountsContainer extends Component {
     this.setState({expanded: false});
   };
 
-  accountsList() {
-    return this.props.accounts.map((account, index) => <BudgetAccountListItem {...account} key={index} />);
+  denormalizeOpenAccounts() {
+    return this.props.openAccounts.map((accountId, index) => {
+      return this.props.accounts[accountId];
+    });
   }
 
 }
