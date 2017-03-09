@@ -30,12 +30,17 @@ class AccountsTransactionView extends Component {
 
 
   render() {
-    const transactions = this.props.transactions.map((transaction, index) =>
-       Transaction(transaction));
+    const transactionsList = Object.keys(transactions).map((transactionId, index)=>{
+      let transaction = {...this.props.transactions[transactionId]};
+      transaction.category = this.props.categories[transaction.category];
+      transaction.account = this.props.accounts[transactions.account];
+      return (<Transaction {...transaction} key={transaction.id} />);
+    });
+
     return (
       <div ref="view_container" id='accounts-transaction-view'>
         <TransactionListTable>
-          {transactions}
+          {transactionsList}
         </TransactionListTable>
         {this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
       </div>

@@ -25,7 +25,7 @@ export default class AddTransaction extends Component{
 		  <div className='add-transaction'>
 		  	<div className='change-transaction-category'>
 			  	{this.state.chosen_category.name}
-			    <DropDownMenu className = "category-menu" value={this.state.chosen_category.name} onChange={this.handleCategoryChange}>
+			    <DropDownMenu className="category-menu" value={this.state.chosen_category.name} onChange={this.handleCategoryChange}>
 			    	{this.accountsMenuItems()}
 			   		{this.categoriesMenuItems()}
 			    </DropDownMenu>
