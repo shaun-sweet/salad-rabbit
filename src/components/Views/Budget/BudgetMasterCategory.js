@@ -17,18 +17,18 @@ export default class BudgetMasterCategory extends Component {
       <div className="budget-master-category-container">
         <div className="budget-master-category">
           <div className="master-category column">
-          	{this.props.name}
+            {this.props.name}
             <AddBudgetCategory index={this.props.index}/>
-         	</div>
-         	<div className="budget column">
-          	{usd(budgeted)}
-         	</div>
-         	<div className="outflows column">
-         		{usd(outflows)}
-         	</div>
-         	<div className="balance column">
-         		{usd(budgeted-outflows)}
-         	</div>
+          </div>
+          <div className="budget column">
+            {usd(budgeted)}
+          </div>
+          <div className="outflows column">
+            {usd(outflows)}
+          </div>
+          <div className="balance column">
+            {usd(budgeted-outflows)}
+          </div>
         </div>
         {this.categoriesList()}
       </div>

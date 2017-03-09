@@ -38,9 +38,9 @@ class BudgetAccountsContainer extends Component {
        >
        </CardMedia>
        <CardText expandable={true}>
-        <ul>
-          {openAccounts}
-        </ul>
+         <ul>
+           {openAccounts}
+         </ul>
        </CardText>
      </Card>
    );

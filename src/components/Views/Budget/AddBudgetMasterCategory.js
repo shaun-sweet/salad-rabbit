@@ -42,21 +42,21 @@ export default class AddBudgetMasterCategory extends Component {
         <FloatingActionButton className="add-master-category-button" mini={true} onTouchTap={this.handleOpen}><ContentAdd />
         </FloatingActionButton>
         <Dialog
-            className="add-master-category-form"
-            title="Add a Budget Master Category"
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-          >
-            <TextField
-              defaultValue=""
-              floatingLabelText="Master Category Name"
-              name="name"
-              onChange={this.handleChange.bind(this)}
-            />
-         </Dialog>
-       </div>
+          className="add-master-category-form"
+          title="Add a Budget Master Category"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+          <TextField
+            defaultValue=""
+            floatingLabelText="Master Category Name"
+            name="name"
+            onChange={this.handleChange.bind(this)}
+          />
+        </Dialog>
+      </div>
     );
 	}
 

@@ -37,29 +37,29 @@ export default class AddBudgetCategory extends Component {
 	        keyboardFocused={true}
 	        onTouchTap={this.handleSubmit}
 
-	      />,
+       />,
 	    ];
 		return (
 	      <div className="add-budget-category">
 	        <FloatingActionButton secondary={true} mini={true} onTouchTap={this.handleOpen}>
-		      <ContentAdd />
-		    </FloatingActionButton>
+            <ContentAdd />
+          </FloatingActionButton>
 	        <Dialog
-	            className="add-category-form"
-	            title="Add a Budget Category"
-	            actions={actions}
-	            modal={false}
-	            open={this.state.open}
-	            onRequestClose={this.handleClose}
-	          >
-	            <TextField
-	              defaultValue=""
-	              floatingLabelText="Category Name"
-	              name="name"
-	              onChange={this.handleChange.bind(this)}
+            className="add-category-form"
+            title="Add a Budget Category"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+         >
+            <TextField
+              defaultValue=""
+              floatingLabelText="Category Name"
+              name="name"
+              onChange={this.handleChange.bind(this)}
 	            />
-	         </Dialog>
-	       </div>
+          </Dialog>
+        </div>
 	    );
 	}
 
