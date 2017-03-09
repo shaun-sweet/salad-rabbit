@@ -3,6 +3,7 @@ import BudgetAccountListItem from './BudgetAccountListItem'
 import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 import numeral from 'numeral'
 import { connect } from 'react-redux'
+import {usd} from '../../../helpers/index.js'
 
 var mapStateToProps = function(store) {
   return {
@@ -21,14 +22,14 @@ class BudgetAccountsContainer extends Component {
   }
 
  render() {
-    let openAccounts = this.denormalizeOpenAccounts().map((accountId, index) =>
-      <BudgetAccountListItem {...this.props.accounts[accountId]} key={accountId} />
+    let openAccounts = this.denormalizeOpenAccounts().map((account, index) =>
+      <BudgetAccountListItem {...account} key={account.id} />
     );
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
        <CardHeader
          title="Budget Accounts"
-         subtitle={numeral(3000).format('$0,0.00')}
+         subtitle={usd(3000)}
          actAsExpander={true}
          showExpandableButton={true}
        />
