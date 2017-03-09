@@ -46,7 +46,7 @@ class AccountsTransactionView extends Component {
         </TransactionListTable>
         {this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
       </div>
-);
+    );
   }
 
   showNewTransactionBar() {

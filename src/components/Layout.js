@@ -31,7 +31,7 @@ class Layout extends Component {
                 <BudgetAccountsContainer />
                 <ClosedAccountsContainer />
                 <AddAccountContainer  />
-                <AddTransaction />
+                {/*<AddTransaction />*/}
               </div>
               <Paper id='display' zDepth={1}>
                 {this.props.children}
