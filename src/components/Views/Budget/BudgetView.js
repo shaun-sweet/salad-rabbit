@@ -16,6 +16,7 @@ export default class BudgetView extends Component {
 
   render() {
     let denormalizedCategories = this.denormalizeCategories();
+    console.log(denormalizedCategories);
     return (
       <div id="budget-view">
         <BudgetHeader accounts={this.denormalizeOpenAccounts()} master_categories={denormalizedCategories}/>

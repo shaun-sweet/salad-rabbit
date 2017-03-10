@@ -77,7 +77,7 @@ export default class AddBudgetCategory extends Component {
       }));
       dispatch(addCategoryToMaster({
         [master_category.id]:{
-          ...master_category, categories: master_category.categories.concat([categoryId])
+          ...master_category, categories: master_category.categories.map((category)=>category.id).concat([categoryId])
         }        
       }));      
       dispatch(incrementCategoryId());
