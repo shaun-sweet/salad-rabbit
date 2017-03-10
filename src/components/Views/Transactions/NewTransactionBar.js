@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import CategoryDropdown from './CategoryDropdown'
 
 export default class NewTransactionBar extends Component {
 
@@ -16,7 +15,10 @@ export default class NewTransactionBar extends Component {
       <div className='new-transaction-bar'>
         <div className="row">
           <div>
-            <input {...inputProps('account')} />
+            <AccountDropdown
+              onChange={this.props.onChange}
+              accounts={this.props.accounts}
+            />
           </div>
           <div>
             <input {...inputProps('date')} />
@@ -25,10 +27,9 @@ export default class NewTransactionBar extends Component {
             <input {...inputProps('payee')} />
           </div>
           <div>
-            {/* <input {...inputProps('category')}  /> */}
             <CategoryDropdown
-              accounts={this.props.accounts}
-              categories={this.props.categories}
+              onChange={this.props.onChange}
+              categories={this.props.masterCategories}
             />
           </div>
           <div>
@@ -50,3 +51,28 @@ export default class NewTransactionBar extends Component {
     );
   }
 }
+
+const AccountDropdown = (props) => (
+  <select onChange={props.onChange} name='account'>
+    {props.accounts.map((account) => {
+      return <option key={account.id} value={account.id}>{account.name}</option>
+    })}
+  </select>
+)
+
+
+const CategoryDropdown = (props) => (
+  <select onChange={props.onChange} name='category'>
+    {props.categories.map((masterCategory) => {
+      return (
+        <optgroup key={masterCategory.id} label={masterCategory.name}>
+          {masterCategory.categories.map((category) => {
+            return (
+              <option key={category.id} value={category.id}>{category.name}</option>
+            );
+          })}
+        </optgroup>
+      );
+    })}
+  </select>
+)

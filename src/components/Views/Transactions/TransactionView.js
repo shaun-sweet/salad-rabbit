@@ -10,6 +10,8 @@ import { incrementTransactionId } from '../../../actions/transactionsIdGenerator
 let mapStateToProps = function(store) {
   return {
     accounts: store.accounts,
+    openAccounts: store.openAccounts,
+    masterCategories: store.masterCategories,
     transactions: store.transactions,
     categories: store.categories,
     transactionsIdGenerator: store.transactionsIdGenerator
@@ -20,30 +22,27 @@ class TransactionView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formData: {},
+      formData: {
+        account: 1,
+        category: 1
+      },
       addingTransaction: false
     }
-    this.handleFormChange = this.handleFormChange.bind(this);
-    this.handleSaveNewTransaction = this.handleSaveNewTransaction.bind(this);
-    this.handleAddingTransaction = this.handleAddingTransaction.bind(this);
-    this.handleCancelTransaction = this.handleCancelTransaction.bind(this);
   }
 
-
   render() {
-    const transactionsList = this.denormalizeTransactions().map((transaction, index)=><Transaction {...transaction} key={transaction.id} />);
-
+    const transactionsList = this.denormalizeTransactions().map((transaction) => <Transaction {...transaction} key={transaction.id} />);
     return (
       <div ref="view_container" id='accounts-transaction-view'>
         <TransactionListTable>
           {transactionsList}
         </TransactionListTable>
-        {this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
+        { this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
       </div>
     );
   }
 
-  denormalizeTransactions(){
+  denormalizeTransactions = () => {
     return Object.keys(this.props.transactions).map((transactionId, index)=>{
       let transaction = {...this.props.transactions[transactionId]};
       transaction.category = this.props.categories[transaction.category];
@@ -52,18 +51,32 @@ class TransactionView extends Component {
     });
   }
 
-  showNewTransactionBar() {
+  denormalizeMasterCategories = () => {
+    let masterCategories = this.props.masterCategories;
+    return Object.keys(masterCategories).map((masterCategoryId)=>{
+      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=>
+        this.props.categories[categoryId])};
+    })
+  }
+
+  denormalizeOpenAccounts = () => {
+    return this.props.openAccounts.map((accountId) => {
+      return this.props.accounts[accountId];
+    });
+  }
+
+  showNewTransactionBar = () => {
     return (
       <NewTransactionBar
         handleCancelTransaction={this.handleCancelTransaction}
         onChange={this.handleFormChange}
         handleSaveNewTransaction={this.handleSaveNewTransaction}
-        accounts={this.props.accounts}
-        categories={this.props.categories}
+        accounts={this.denormalizeOpenAccounts()}
+        masterCategories={this.denormalizeMasterCategories()}
       />);
   }
 
-  showTransactionControls() {
+  showTransactionControls = () => {
     return (
       <TransactionControls
         handleAddingTransaction={this.handleAddingTransaction}
@@ -81,15 +94,15 @@ class TransactionView extends Component {
     });
   }
 
-  handleCancelTransaction() {
+  handleCancelTransaction = () => {
     this.setState({addingTransaction: false})
   }
 
-  handleAddingTransaction() {
+  handleAddingTransaction = () => {
     this.setState({addingTransaction: true});
   }
 
-  handleSaveNewTransaction() {
+  handleSaveNewTransaction = () => {
     let id = this.props.transactionsIdGenerator;
     let transaction = {
       [id]: {
