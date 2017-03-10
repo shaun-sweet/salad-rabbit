@@ -5,6 +5,8 @@ import { addTransaction } from '../../../actions/transactionsActions'
 import TransactionListTable from './TransactionListTable.js'
 import Transaction from './Transaction'
 import NewTransactionBar from './NewTransactionBar'
+import { normalizeCurrency } from '../../../helpers'
+
 import TransactionControls from './TransactionControls'
 import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
 
@@ -22,7 +24,7 @@ let mapStateToProps = function(store) {
 class TransactionView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.initialState = {
       formData: {
         account: 1,
         category: 1,
@@ -30,6 +32,8 @@ class TransactionView extends Component {
       },
       addingTransaction: false
     }
+    this.state = this.initialState;
+
   }
 
   render() {
@@ -107,6 +111,34 @@ class TransactionView extends Component {
     });
   }
 
+  validateFormInput(formData) {
+    let transactionId = this.props.transactionsIdGenerator;
+    let validatedData;
+    // checks to make sure the inflow and outflow aren both set.  if so, sets inflow to null
+    if (formData[transactionId].inflow && formData[transactionId].outflow) {
+      validatedData = {
+        [transactionId]: {
+          ...formData[transactionId],
+          outflow: normalizeCurrency(formData[transactionId].outflow),
+          inflow: null
+        }
+      }
+    }else{
+      validatedData = formData;
+      // checks all keys for blank strings, if its blank it sets the value to null.
+      for (let transProp in formData[transactionId]) {
+        if (validatedData[transactionId][transProp] === "") {
+          validatedData[transactionId][transProp] = null;
+        }
+      }
+    }
+    // sanitizes all redux store data before submitting it to the store.
+    validatedData[transactionId].inflow = normalizeCurrency(validatedData[transactionId].inflow);
+    validatedData[transactionId].outflow = normalizeCurrency(validatedData[transactionId].outflow);
+    validatedData[transactionId].date = validatedData[transactionId].date.format("L");
+    return validatedData;
+  }
+
   handleCancelTransaction = () => {
     this.setState({addingTransaction: false})
   }
@@ -116,19 +148,23 @@ class TransactionView extends Component {
   }
 
   handleSaveNewTransaction = () => {
-    let id = this.props.transactionsIdGenerator;
-    let transaction = {
-      [id]: {
-        ...this.state.formData,
-        date: this.state.formData.date.format("L"),
-        id: this.props.transactionsIdGenerator
-      }
-    }
+    let transaction = this.normalizeFormData();
     this.props.dispatch((dispatch) =>{
       dispatch(addTransaction(transaction));
       dispatch(incrementTransactionId());
-      this.setState({addingTransaction: false});
+      this.setState(this.initialState);
     })
+  }
+
+  // normalizing of data before sending it to the redux store
+  normalizeFormData = () => {
+    let id = this.props.transactionsIdGenerator;
+    return this.validateFormInput({
+      [id]: {
+        ...this.state.formData,
+        id: this.props.transactionsIdGenerator
+      }
+    });
   }
 
 }
