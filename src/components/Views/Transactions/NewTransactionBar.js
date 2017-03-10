@@ -4,7 +4,6 @@ import DatePicker from 'react-datepicker'
 require('react-datepicker/dist/react-datepicker.css');
 
 export default class NewTransactionBar extends Component {
-
   render() {
     const inputProps = (key) => ({
       onChange: this.props.onChange,

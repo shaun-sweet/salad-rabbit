@@ -1,4 +1,5 @@
 import React from 'react'
+import { usd, normalizeCurrency } from '../../../helpers'
 
 const Transaction = (props) => (
   <div className="row" key={props.id}>
@@ -18,10 +19,10 @@ const Transaction = (props) => (
       {props.memo}
     </div>
     <div className="cell">
-      {props.outflow}
+      {usd(props.outflow)}
     </div>
     <div className="cell">
-      {props.inflow}
+      {usd(props.inflow)}
     </div>
     <div className="cell">
       {props.cleared}
