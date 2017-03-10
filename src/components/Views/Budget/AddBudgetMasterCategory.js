@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 
 var mapStateToProps = function(store) {
   return {
-    categories: store.categories,
     masterCategoryIdGenerator: store.masterCategoryIdGenerator
   };
 }
