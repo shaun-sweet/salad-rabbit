@@ -1,7 +1,11 @@
 import numeral from 'numeral'
 
 export function usd(num) {
-  return numeral(num).format('$0,0.00');
+  if (num === null) {
+    return
+  }else{
+    return numeral(num).format('$0,0.00');
+  }
 }
 
 export function sumArray(array, callback){

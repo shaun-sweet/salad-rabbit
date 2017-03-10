@@ -26,6 +26,7 @@ const Transaction = (props) => (
     </div>
     <div className="cell">
       {props.cleared}
+      {normalizeCurrency("12.1d231541afgdafd")}
     </div>
   </div>
 )
