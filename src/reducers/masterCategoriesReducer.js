@@ -10,6 +10,9 @@ export default function reducer(state={
   	case 'ADD_MASTER_CATEGORY':
   		state = {...state, ...action.payload};
   	break;
+    case 'ADD_CATEGORY_TO_MASTER':
+      state = {...state, ...action.payload};
+    break;
   }
 
   return state;

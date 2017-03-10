@@ -7,9 +7,9 @@ export default class BudgetMasterCategory extends Component {
 
   render() {
     //total all budgeted columns
-    const budgeted = sumArray(this.props.categories, (item) => item.budgeted);
+    const budgeted = sumArray(this.props.master_category.categories, (item) => item.budgeted);
     // //total all outflows columns
-    const outflows = sumArray(this.props.categories, (item) => item.outflow);
+    const outflows = sumArray(this.props.master_category.categories, (item) => item.outflow);
     // const budgeted = 0;
     // const outflows = 0;
 
@@ -17,8 +17,8 @@ export default class BudgetMasterCategory extends Component {
       <div className="budget-master-category-container">
         <div className="budget-master-category">
           <div className="master-category column">
-            {this.props.name}
-            <AddBudgetCategory index={this.props.index}/>
+            {this.props.master_category.name}
+            <AddBudgetCategory master_category={this.props.master_category} />
           </div>
           <div className="budget column">
             {usd(budgeted)}
@@ -36,6 +36,6 @@ export default class BudgetMasterCategory extends Component {
   }
 
   categoriesList() {
-    return this.props.categories.map((category, index) => <BudgetCategory {...category} indexParent={this.props.index} index={index} key={index}/>);
+    return this.props.master_category.categories.map((category, index) => <BudgetCategory {...category} key={category.id}/>);
   }
 }
