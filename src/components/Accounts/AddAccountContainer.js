@@ -9,6 +9,7 @@ import { addAccount } from '../../actions/accountsActions'
 import { addOpenAccount } from '../../actions/openAccountsActions'
 import { incrementAccountsId } from '../../actions/accountsIdGeneratorActions'
 import { connect } from 'react-redux'
+import { normalizeCurrency } from '../../helpers/index'
 
 
 class AddAccountContainer extends Component {
@@ -37,7 +38,7 @@ class AddAccountContainer extends Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleSubmit}
-        
+
       />,
     ];
     return (
@@ -55,14 +56,14 @@ class AddAccountContainer extends Component {
             defaultValue="New Account"
             floatingLabelText="Name"
             name="name"
-            onChange={this.handleChange.bind(this)}
+            onChange={this.handleAccountNameChange.bind(this)}
           />
           <br />
           <TextField
             name="balance"
             defaultValue="0.00"
             floatingLabelText="Current Balance"
-            onChange={this.handleChange.bind(this)}
+            onChange={this.handleAccountAmountChange.bind(this)}
           />
           <br />
           <SelectField
@@ -96,14 +97,22 @@ class AddAccountContainer extends Component {
     });
 }
 
-  handleChange(event, value) {
-    const name = event.target.name;
+  handleAccountNameChange(event, value) {
     this.setState({
       account: {
         ...this.state.account,
-        [name]: value
+        name: value
       }
     });
+  }
+
+  handleAccountAmountChange(event, value){
+    this.setState({
+      account: {
+        ...this.state.account,
+        balance: normalizeCurrency(value)
+      }
+    })
   }
 
   handleAccountTypeChange(event,index, value){
