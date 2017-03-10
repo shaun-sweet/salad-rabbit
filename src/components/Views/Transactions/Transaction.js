@@ -1,30 +1,30 @@
 import React from 'react'
 
-const Transaction = (transObj) => (
+const Transaction = (props) => (
   <div className="row">
     <div className="cell">
-      {transObj.account}
+      {props.account.name}
     </div>
     <div className="cell">
-      {transObj.date}
+      {props.date}
     </div>
     <div className="cell">
-      {transObj.payee}
+      {props.payee}
     </div>
     <div className="cell">
-      {transObj.category}
+      {props.category.name}
     </div>
     <div className="cell">
-      {transObj.memo}
+      {props.memo}
     </div>
     <div className="cell">
-      {transObj.outflow}
+      {props.outflow}
     </div>
     <div className="cell">
-      {transObj.inflow}
+      {props.inflow}
     </div>
     <div className="cell">
-      {transObj.cleared}
+      {props.cleared}
     </div>
   </div>
 )

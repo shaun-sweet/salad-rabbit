@@ -42,25 +42,25 @@ export default class BudgetCategory extends Component {
        	</div>
        	<div className="budget column">
         	<div
-              id="budget-text-field"
-              onClick={this.handleOpen}
-            >
+            id="budget-text-field"
+            onClick={this.handleOpen}
+         >
             {usd(this.state.budgeted)}
           </div>
-           <Dialog
-              className="change-budgeted-amount"
-              title="Change Budgeted Amount"
-              actions={actions}
-              modal={false}
-              open={this.state.open}
-              onRequestClose={this.handleClose}
-            >
-              <TextField
-                defaultValue={usd(this.state.budgeted)}
-                name="name"
-                onChange={this.handleChange.bind(this)}
-              />
-           </Dialog>
+          <Dialog
+            className="change-budgeted-amount"
+            title="Change Budgeted Amount"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+            <TextField
+              defaultValue={usd(this.state.budgeted)}
+              name="name"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Dialog>
        	</div>
        	<div className="outflow column">
        		{usd(this.props.outflow)}

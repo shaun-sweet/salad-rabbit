@@ -6,19 +6,37 @@ import { connect } from 'react-redux'
 var mapStateToProps = function(store) {
   return {
     categories: store.categories,
-    accounts: store.accounts
+    accounts: store.accounts,
+    openAccounts: store.openAccounts,
+    masterCategories: store.masterCategories,
   };
 }
 
 export default class BudgetView extends Component {
 
   render() {
+    let denormalizedCategories = this.denormalizeCategories();
+    console.log(denormalizedCategories);
     return (
       <div id="budget-view">
-        <BudgetHeader accounts={this.props.accounts} master_categories={this.props.categories}/>
-        <BudgetCategoriesContainer master_categories={this.props.categories}/>
+        <BudgetHeader accounts={this.denormalizeOpenAccounts()} master_categories={denormalizedCategories}/>
+        <BudgetCategoriesContainer master_categories={denormalizedCategories}/>
       </div>
     );
+  }
+
+  denormalizeCategories(){
+    let masterCategories = this.props.masterCategories;
+    return Object.keys(masterCategories).map((masterCategoryId)=>{
+      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=> 
+        this.props.categories[categoryId])};
+    })
+  }
+
+  denormalizeOpenAccounts() {
+    return this.props.openAccounts.map((accountId, index) => {
+      return this.props.accounts[accountId];
+    });
   }
 }
 

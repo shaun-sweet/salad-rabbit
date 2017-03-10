@@ -3,10 +3,11 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem';
 import {connect} from 'react-redux'
 
-var mapStateToProps = function(store) {
+let mapStateToProps = function(store) {
   return {
   	accounts: store.accounts,
-    categories: store.categories
+    categories: store.categories,
+    transactionsIdGenerator: store.transactionsIdGenerator
   };
 }
 
@@ -24,7 +25,7 @@ export default class AddTransaction extends Component{
 		  <div className='add-transaction'>
 		  	<div className='change-transaction-category'>
 			  	{this.state.chosen_category.name}
-			    <DropDownMenu className = "category-menu" value={this.state.chosen_category.name} onChange={this.handleCategoryChange}>
+			    <DropDownMenu className="category-menu" value={this.state.chosen_category.name} onChange={this.handleCategoryChange}>
 			    	{this.accountsMenuItems()}
 			   		{this.categoriesMenuItems()}
 			    </DropDownMenu>

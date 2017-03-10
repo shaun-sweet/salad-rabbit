@@ -5,8 +5,18 @@ import TransactionListTable from './TransactionListTable.js'
 import Transaction from './Transaction'
 import NewTransactionBar from './NewTransactionBar'
 import TransactionControls from './TransactionControls'
+import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
 
-class AccountsTransactionView extends Component {
+let mapStateToProps = function(store) {
+  return {
+    accounts: store.accounts,
+    transactions: store.transactions,
+    categories: store.categories,
+    transactionsIdGenerator: store.transactionsIdGenerator
+  };
+}
+
+class TransactionView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,16 +31,25 @@ class AccountsTransactionView extends Component {
 
 
   render() {
-    const transactions = this.props.transactions.map((transaction, index) =>
-       Transaction(transaction));
+    const transactionsList = this.denormalizeTransactions().map((transaction, index)=><Transaction {...transaction} key={transaction.id} />);
+
     return (
       <div ref="view_container" id='accounts-transaction-view'>
         <TransactionListTable>
-          {transactions}
+          {transactionsList}
         </TransactionListTable>
         {this.state.addingTransaction ? this.showNewTransactionBar() : this.showTransactionControls() }
       </div>
-);
+    );
+  }
+
+  denormalizeTransactions(){
+    return Object.keys(this.props.transactions).map((transactionId, index)=>{
+      let transaction = {...this.props.transactions[transactionId]};
+      transaction.category = this.props.categories[transaction.category];
+      transaction.account = this.props.accounts[transaction.account];
+      return transaction;
+    });
   }
 
   showNewTransactionBar() {
@@ -71,19 +90,20 @@ class AccountsTransactionView extends Component {
   }
 
   handleSaveNewTransaction() {
+    let id = this.props.transactionsIdGenerator;
+    let transaction = {
+      [id]: {
+      ...this.state.formData,
+      id: this.props.transactionsIdGenerator
+      }
+    }
     this.props.dispatch((dispatch) =>{
-      dispatch(addTransaction(this.state.formData));
+      dispatch(addTransaction(transaction));
+      dispatch(incrementTransactionId());
       this.setState({addingTransaction: false});
     })
   }
 
 }
 
-var mapStateToProps = function(store) {
-  return {
-    accounts: store.accounts,
-    transactions: store.transactions,
-    categories: store.categories
-  };
-}
-module.exports = connect(mapStateToProps)(AccountsTransactionView);
+module.exports = connect(mapStateToProps)(TransactionView);

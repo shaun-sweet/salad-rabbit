@@ -6,6 +6,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import { addAccount } from '../../actions/accountsActions'
+import { addOpenAccount } from '../../actions/openAccountsActions'
+import { incrementAccountsId } from '../../actions/accountsIdGeneratorActions'
 import { connect } from 'react-redux'
 
 
@@ -16,9 +18,10 @@ class AddAccountContainer extends Component {
     value: 1,
     account: {
       name: "",
-      type: "",
-      balance: "",
-      note: ""
+      type: "checking",
+      balance: 0,
+      note: "",
+      open: true
     }
   };
 
@@ -34,53 +37,64 @@ class AddAccountContainer extends Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleSubmit}
-
+        
       />,
     ];
     return (
       <div className="add-account-container">
         <RaisedButton className="add-account-button" label="Add Account" onTouchTap={this.handleOpen} />
         <Dialog
-            className="add-account-form"
-            title="Create a New Account"
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
+          className="add-account-form"
+          title="Create a New Account"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+          <TextField
+            defaultValue="New Account"
+            floatingLabelText="Name"
+            name="name"
+            onChange={this.handleChange.bind(this)}
+          />
+          <br />
+          <TextField
+            name="balance"
+            defaultValue="0.00"
+            floatingLabelText="Current Balance"
+            onChange={this.handleChange.bind(this)}
+          />
+          <br />
+          <SelectField
+            name="type"
+            floatingLabelText="Account Type"
+            value={this.state.value}
+            onChange={this.handleAccountTypeChange.bind(this)}
           >
-            <TextField
-              defaultValue="New Account"
-              floatingLabelText="Name"
-              name="name"
-              onChange={this.handleChange.bind(this)}
-            />
-            <br />
-            <TextField
-              name="balance"
-              defaultValue="0.00"
-              floatingLabelText="Current Balance"
-              onChange={this.handleChange.bind(this)}
-            />
-            <br />
-            <SelectField
-              name="type"
-              floatingLabelText="Account Type"
-              value={this.state.value}
-              onChange={this.handleAccountTypeChange.bind(this)}
-            >
-              <MenuItem ref="type" value={1} primaryText="Checking" />
-              <MenuItem ref="type" value={2} primaryText="Savings" />
-              <MenuItem ref="type" value={3} primaryText="Credit Card" />
-            </SelectField>
-          </Dialog>
-        </div>
+            <MenuItem ref="type" value={1} primaryText="Checking" />
+            <MenuItem ref="type" value={2} primaryText="Savings" />
+            <MenuItem ref="type" value={3} primaryText="Credit Card" />
+          </SelectField>
+        </Dialog>
+      </div>
     );
   }
 
   handleSubmit = (event) => {
-    this.props.dispatch(addAccount(this.state.account));
+    this.props.dispatch( (dispatch) => {
     this.handleClose();
-  }
+    dispatch(addAccount({[this.props.accountId]: {...this.state.account, id: this.props.accountId}}));
+    dispatch(addOpenAccount([this.props.accountId]));
+    dispatch(incrementAccountsId());
+    this.setState({account: {
+      name: "Checking",
+      type: "checking",
+      balance: 0,
+      note: "string",
+      open: true
+      }})
+    });
+}
 
   handleChange(event, value) {
     const name = event.target.name;
@@ -93,8 +107,6 @@ class AddAccountContainer extends Component {
   }
 
   handleAccountTypeChange(event,index, value){
-    console.log(value);
-    console.log(this.state);
     var val;
     if (value === 1) {
       val = "Checking";

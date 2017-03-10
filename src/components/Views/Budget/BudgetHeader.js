@@ -5,12 +5,15 @@ import {usd, sumArray} from '../../../helpers/index'
 export default class BudgetHeader extends Component {
 
   render() {
-    //total all available funds
+    // total all available funds
     const accounts = sumArray(this.props.accounts, (item) => item.balance);
     //total all budgeted columns
     const budgeted = sumArray(this.props.master_categories, (item) => sumArray(item.categories, (subitem)=> subitem.budgeted));
-    //total all outflows columns
+    // //total all outflows columns
     const outflows = sumArray(this.props.master_categories, (item) => sumArray(item.categories, (subitem)=> subitem.outflow));
+    // const accounts = 0;
+    // const budgeted = 0;
+    // const outflows = 0;
 
     return (
       <div id="budget">

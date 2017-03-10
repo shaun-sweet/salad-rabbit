@@ -6,11 +6,18 @@ export function addMasterCategory(master_category) {
   }
 }
 
-export function addCategory(category, index) {
+export function addCategory(category) {
   return {
     type: "ADD_CATEGORY", payload: {
-      category: category,
-      index: index
+      ...category
+    }
+  }
+}
+
+export function addCategoryToMaster(newMasterCategory) {
+  return {
+    type: "ADD_CATEGORY_TO_MASTER", payload: {
+      ...newMasterCategory
     }
   }
 }
