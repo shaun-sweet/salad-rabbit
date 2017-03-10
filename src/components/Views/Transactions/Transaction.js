@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Transaction = (props) => (
-  <div className="row">
+  <div className="row" key={props.id}>
     <div className="cell">
       {props.account.name}
     </div>

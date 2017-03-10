@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
+import DatePicker from 'react-datepicker'
+require('react-datepicker/dist/react-datepicker.css');
 
 export default class NewTransactionBar extends Component {
 
@@ -21,7 +23,12 @@ export default class NewTransactionBar extends Component {
             />
           </div>
           <div>
-            <input {...inputProps('date')} />
+            <DatePicker
+              id="date-picker"
+              todayButton="Today"
+              onChange={this.props.onDateChange}
+              selected={this.props.selectedDate}
+            />
           </div>
           <div>
             <input {...inputProps('payee')} />
@@ -51,6 +58,8 @@ export default class NewTransactionBar extends Component {
     );
   }
 }
+
+
 
 const AccountDropdown = (props) => (
   <select onChange={props.onChange} name='account'>

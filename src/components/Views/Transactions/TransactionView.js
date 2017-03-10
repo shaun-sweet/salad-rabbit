@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import { connect } from 'react-redux'
 import { addTransaction } from '../../../actions/transactionsActions'
 import TransactionListTable from './TransactionListTable.js'
@@ -24,7 +25,8 @@ class TransactionView extends Component {
     this.state = {
       formData: {
         account: 1,
-        category: 1
+        category: 1,
+        date: moment(),
       },
       addingTransaction: false
     }
@@ -70,6 +72,8 @@ class TransactionView extends Component {
       <NewTransactionBar
         handleCancelTransaction={this.handleCancelTransaction}
         onChange={this.handleFormChange}
+        selectedDate={this.state.formData.date}
+        onDateChange={this.handleDateChange}
         handleSaveNewTransaction={this.handleSaveNewTransaction}
         accounts={this.denormalizeOpenAccounts()}
         masterCategories={this.denormalizeMasterCategories()}
@@ -81,6 +85,15 @@ class TransactionView extends Component {
       <TransactionControls
         handleAddingTransaction={this.handleAddingTransaction}
       />);
+  }
+
+  handleDateChange = (date) => {
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        date: date
+      }
+    })
   }
 
   handleFormChange = (e) => {
@@ -106,8 +119,9 @@ class TransactionView extends Component {
     let id = this.props.transactionsIdGenerator;
     let transaction = {
       [id]: {
-      ...this.state.formData,
-      id: this.props.transactionsIdGenerator
+        ...this.state.formData,
+        date: this.state.formData.date.format("L"),
+        id: this.props.transactionsIdGenerator
       }
     }
     this.props.dispatch((dispatch) =>{

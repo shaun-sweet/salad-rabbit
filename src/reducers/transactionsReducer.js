@@ -1,10 +1,10 @@
-// new reducer
+import moment from 'moment'
 
 export default function reducer(state={
   "1": {
     id: 1,
     account: 1,
-    date: Date.now,
+    date: moment().format("L"),
     payee: "Sprint",
     category: 2,
     memo: "twas cellphoney",
