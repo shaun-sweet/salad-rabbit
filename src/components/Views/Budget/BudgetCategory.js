@@ -3,15 +3,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { changeBudgetedAmount } from '../../../actions/categoriesActions'
-import { connect } from 'react-redux'
 import {usd} from '../../../helpers/index'
 
-
-var mapStateToProps = function(store) {
-  return {
-    master_categories: store.master_categories
-  };
-}
 
 export default class BudgetCategory extends Component {
   state = {
@@ -93,5 +86,3 @@ export default class BudgetCategory extends Component {
   this.setState({open: false});
   };
 }
-
-module.exports = connect(mapStateToProps)(BudgetCategory);
