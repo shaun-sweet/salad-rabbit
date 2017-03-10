@@ -6,6 +6,37 @@ class FakeObjectDataListStore {
     this._cache = [];
   }
 
+  createTransaction(id){
+    return {
+      id: id,
+      date: faker.date.past(),
+      payee: faker.company.companyName(),
+      memo: faker.lorem.sentence(),
+      outflow: faker.random.number(),
+      inflow: 0,
+      cleared: false
+    };
+  }
+
+  createMasterCategory(id) {
+    return {
+      id: id,
+      name: faker.finance.transactionType(),
+      hidden: false
+    };
+  }
+
+  createCategory(id) {
+    return {
+      id: id,
+      name: "Rent",
+      budgeted: faker.random.number(),=
+      hidden: false
+    };
+  }
+
+
+
   createFakeRowObjectData(/*number*/ index) /*object*/ {
     return {
       id: index,
