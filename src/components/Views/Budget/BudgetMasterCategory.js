@@ -6,12 +6,8 @@ import {usd, sumArray} from '../../../helpers/index'
 export default class BudgetMasterCategory extends Component {
 
   render() {
-    //total all budgeted columns
     const budgeted = sumArray(this.props.master_category.categories, (item) => item.budgeted);
-    // //total all outflows columns
     const outflows = sumArray(this.props.master_category.categories, (item) => item.outflow);
-    // const budgeted = 0;
-    // const outflows = 0;
 
     return (
       <div className="budget-master-category-container">

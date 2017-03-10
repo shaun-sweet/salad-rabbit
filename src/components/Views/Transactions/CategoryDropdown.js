@@ -4,8 +4,6 @@ import React, { Component } from 'react'
 
 export default class CategoryDropdown extends Component {
 
-
-// {name: account.name, index: index, type: "account"}
 	state = {
 		selectedCategory: 0
 	}
@@ -15,7 +13,7 @@ export default class CategoryDropdown extends Component {
 	    <select value={this.state.selectedCategory}>
         <option value=''></option>
       </select>
-        );
+    );
 	}
 
   handleCategoryChange = (event, index, value) => {
