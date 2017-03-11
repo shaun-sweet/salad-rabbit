@@ -16,11 +16,10 @@ export default class BudgetView extends Component {
 
   render() {
     let denormalizedCategories = this.denormalizeCategories();
-    console.log(denormalizedCategories);
     return (
       <div id="budget-view">
         <BudgetHeader accounts={this.denormalizeOpenAccounts()} master_categories={denormalizedCategories}/>
-        <BudgetCategoriesContainer master_categories={denormalizedCategories}/>
+        <BudgetCategoriesContainer dispatch={this.props.dispatch} master_categories={denormalizedCategories}/>
       </div>
     );
   }
@@ -28,7 +27,7 @@ export default class BudgetView extends Component {
   denormalizeCategories(){
     let masterCategories = this.props.masterCategories;
     return Object.keys(masterCategories).map((masterCategoryId)=>{
-      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=> 
+      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=>
         this.props.categories[categoryId])};
     })
   }

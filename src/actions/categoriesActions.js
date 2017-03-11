@@ -22,12 +22,10 @@ export function addCategoryToMaster(newMasterCategory) {
   }
 }
 
-export function changeBudgetedAmount(value, indexParent, index) {
+export function changeBudgetedAmount(newCategory) {
   return {
     type: "CHANGE_BUDGETED_AMOUNT", payload: {
-      value: value,
-      indexParent: indexParent,
-      index: index
+      ...newCategory
     }
   }
 }

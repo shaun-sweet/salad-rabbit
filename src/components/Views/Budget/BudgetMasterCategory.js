@@ -32,6 +32,6 @@ export default class BudgetMasterCategory extends Component {
   }
 
   categoriesList() {
-    return this.props.master_category.categories.map((category, index) => <BudgetCategory {...category} key={category.id}/>);
+    return this.props.master_category.categories.map((category, index) => <BudgetCategory category={{...category}} dispatch={this.props.dispatch} key={category.id}/>);
   }
 }
