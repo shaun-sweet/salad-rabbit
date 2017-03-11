@@ -12,6 +12,12 @@ export default class NewTransactionBar extends Component {
       type: 'text',
       className: 'new-transaction'
     });
+    let clearedProps = {
+      ...inputProps('cleared'),
+      onChange: this.props.onCheckboxChange,
+      type: 'checkbox',
+      defaultChecked: true
+    };
     return (
       <div className='new-transaction-bar'>
         <div className="row">
@@ -48,7 +54,10 @@ export default class NewTransactionBar extends Component {
             <input {...inputProps('inflow')} />
           </div>
           <div>
-            <input {...inputProps('cleared')} />
+            <label>Cleared</label>
+          </div>
+          <div>
+            <input {...clearedProps} />
           </div>
         </div>
         <RaisedButton onClick={this.props.handleSaveNewTransaction} className="save-transaction-button" label="Save" />
@@ -56,6 +65,7 @@ export default class NewTransactionBar extends Component {
       </div>
     );
   }
+
 }
 
 

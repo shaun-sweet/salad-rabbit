@@ -25,7 +25,7 @@ const Transaction = (props) => (
       {usd(props.inflow)}
     </div>
     <div className="cell">
-      {props.cleared}
+      {props.cleared ? '✓' : '✗'}
     </div>
   </div>
 )

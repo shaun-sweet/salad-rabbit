@@ -29,6 +29,7 @@ class TransactionView extends Component {
         account: 1,
         category: 1,
         date: moment(),
+        cleared: true
       },
       addingTransaction: false
     }
@@ -75,6 +76,7 @@ class TransactionView extends Component {
     return (
       <NewTransactionBar
         handleCancelTransaction={this.handleCancelTransaction}
+        onCheckboxChange={this.handleCheckboxChange}
         onChange={this.handleFormChange}
         selectedDate={this.state.formData.date}
         onDateChange={this.handleDateChange}
@@ -96,6 +98,18 @@ class TransactionView extends Component {
       formData: {
         ...this.state.formData,
         date: date
+      }
+    })
+  }
+
+  handleCheckboxChange = (e) => {
+    console.log(e.target.checked);
+    let val;
+    e.target.checked ? val = true : val = false;
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        cleared: val
       }
     })
   }
