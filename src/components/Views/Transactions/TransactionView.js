@@ -29,7 +29,7 @@ class TransactionView extends Component {
         account: 1,
         category: 1,
         date: moment(),
-        cleared: true,
+        cleared: false,
         inflow: null,
         outflow: null
       },
@@ -111,36 +111,36 @@ class TransactionView extends Component {
     let data = this.state.formData;
     this.props.dispatch((dispatch) =>{
       setTimeout(()=>{
-        let fromAccountTransaction = this.createTransferTransaction(this.props.transactionsIdGenerator, data.account, "Transfer from " + this.props.accounts[data.payee].name, null, data.outflow);
+        let fromAccountTransaction = this.createTransferTransaction(this.props.transactionsIdGenerator, data.account, "Transfer to " + this.props.accounts[data.payee].name, null, data.outflow);
         dispatch(addTransaction(this.validateFormInput(fromAccountTransaction)));
         dispatch(incrementTransactionId());
 
       }, 0)
 
       setTimeout(()=>{
-        let toAccountTransaction = this.createTransferTransaction(this.props.transactionsIdGenerator, data.payee, "Transfer to " + this.props.accounts[data.account].name, data.outflow, null);
+        let toAccountTransaction = this.createTransferTransaction(this.props.transactionsIdGenerator, data.payee, "Transfer from " + this.props.accounts[data.account].name, data.outflow, null);
         dispatch(addTransaction(this.validateFormInput(toAccountTransaction)));
         dispatch(incrementTransactionId());
 
       }, 0)
 
-      this.setState(this.initialState);
+      setTimeout(()=>{
+        this.setState(this.initialState);
+      }, 0)
+
     })
   }
 
   createTransferTransaction = (id, account, payee, inflow, outflow) => {
-    let data = this.state.formData;
     let transaction = {
       [id]: {
+        ...this.state.formData,
         id: id,
         account: account,
-        date: data.date,
         payee: payee,
         category: null,
-        memo: data.memo,
         outflow: outflow,
         inflow: inflow,
-        cleared: data.cleared
       }
     };
     return transaction;

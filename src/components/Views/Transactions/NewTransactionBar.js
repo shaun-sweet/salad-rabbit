@@ -15,7 +15,7 @@ const NewTransactionBar = (props) => {
     ...inputProps('cleared'),
     onChange: props.onCheckboxChange,
     type: 'checkbox',
-    defaultChecked: true
+    defaultChecked: false
   };
   return (
     <div className='new-transaction-bar'>
@@ -23,6 +23,7 @@ const NewTransactionBar = (props) => {
         <AccountDropdown
           onChange={props.onChange}
           accounts={props.accounts}
+          name="account"
         />
         <div className='new-transaction'>
           <DatePicker
@@ -71,7 +72,7 @@ FormInput.defaultProps = {
 
 const AccountDropdown = (props) => (
   <div className='new-transaction'>
-    <select onChange={props.onChange} name='account'>
+    <select onChange={props.onChange} name={props.name}>
       {props.accounts.map((account) => {
         return <option key={account.id} value={account.id}>{account.name}</option>
       })}
