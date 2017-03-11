@@ -8,7 +8,6 @@ import NewTransactionBar from './NewTransactionBar'
 import { normalizeCurrency } from '../../../helpers'
 import TransactionControls from './TransactionControls'
 import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
-import NewTransferBar from './NewTransferBar'
 import SearchBar from './SearchBar.js'
 
 let mapStateToProps = function(store) {
@@ -29,15 +28,6 @@ class TransactionView extends Component {
       formData: {
         account: 1,
         category: 1,
-        date: moment(),
-        cleared: true,
-        inflow: null,
-        outflow: null
-      },
-      transferFormData: {
-        fromAccount: 1,
-        toAccount: 1,
-        category: null,
         date: moment(),
         cleared: true,
         inflow: null,
@@ -97,47 +87,16 @@ class TransactionView extends Component {
 
   showNewTransferBar = () => {
     return (
-      <NewTransferBar
-        handleCancelTransfer={this.handleCancelTransfer}
-        onCheckboxChange={this.handleTransferCheckboxChange}
-        onChange={this.handleTransferFormChange}
-        selectedDate={this.state.transferFormData.date}
-        onDateChange={this.handleTransferDateChange}
-        handleSaveNewTransfer={this.handleSaveNewTransfer}
+      <NewTransactionBar
+        isTransfer={true}
+        handleCancelTransaction={this.handleCancelTransfer}
+        onCheckboxChange={this.handleCheckboxChange}
+        onChange={this.handleFormChange}
+        selectedDate={this.state.formData.date}
+        onDateChange={this.handleDateChange}
+        handleSaveNewTransaction={this.handleSaveNewTransfer}
         accounts={this.denormalizeOpenAccounts()}
       />);
-  }
-
-  handleTransferDateChange = (date) => {
-    this.setState({
-      transferFormData: {
-        ...this.state.transferFormData,
-        date: date
-      }
-    })
-  }
-
-  handleTransferCheckboxChange = (e) => {
-    console.log(e.target.checked);
-    let val;
-    e.target.checked ? val = true : val = false;
-    this.setState({
-      transferFormData: {
-        ...this.state.transferFormData,
-        cleared: val
-      }
-    })
-  }
-
-  handleTransferFormChange = (e) => {
-    const name = e.target.name;
-    const val = e.target.value;
-    this.setState({
-      transferFormData: {
-        ...this.state.transferFormData,
-        [name]: val
-      }
-    });
   }
 
   handleCancelTransfer = () => {
@@ -145,41 +104,52 @@ class TransactionView extends Component {
   }
 
   handleAddingTransfer = () => {
-    this.setState({addingTransfer: true});
+    this.setState({addingTransfer: true, formData: {...this.state.formData, payee: 1}});
   }
 
   handleSaveNewTransfer = () => {
-    let data = this.state.transferFormData;
+    let data = this.state.formData;
     this.props.dispatch((dispatch) =>{
-      dispatch(addTransaction(this.createTransferTransaction(this.props.transactionsIdGenerator, data.fromAccount, "Transfer from " + this.props.accounts[data.toAccount].name, null, normalizeCurrency(data.amount) )));
-      dispatch(incrementTransactionId());
+      setTimeout(()=>{
+        let fromAccountTransaction = this.createTransferTransaction(this.props.transactionsIdGenerator, data.account, "Transfer from " + this.props.accounts[data.payee].name, null, data.outflow);
+        dispatch(addTransaction(this.validateFormInput(fromAccountTransaction)));
+        dispatch(incrementTransactionId());
 
-      dispatch(addTransaction(this.createTransferTransaction(this.props.transactionsIdGenerator+1, data.toAccount, "Transfer to " + this.props.accounts[data.fromAccount].name, normalizeCurrency(data.amount), null)));
-      dispatch(incrementTransactionId());
+      }, 0)
+
+      setTimeout(()=>{
+        let toAccountTransaction = this.createTransferTransaction(this.props.transactionsIdGenerator, data.payee, "Transfer to " + this.props.accounts[data.account].name, data.outflow, null);
+        dispatch(addTransaction(this.validateFormInput(toAccountTransaction)));
+        dispatch(incrementTransactionId());
+
+      }, 0)
 
       this.setState(this.initialState);
     })
   }
 
   createTransferTransaction = (id, account, payee, inflow, outflow) => {
-    return {
+    let data = this.state.formData;
+    let transaction = {
       [id]: {
         id: id,
         account: account,
-        date: this.state.transferFormData.date.format("L"),
+        date: data.date,
         payee: payee,
         category: null,
-        memo: this.state.transferFormData.memo,
+        memo: data.memo,
         outflow: outflow,
         inflow: inflow,
-        cleared: this.state.transferFormData.cleared
+        cleared: data.cleared
       }
     };
+    return transaction;
   }
 
   showNewTransactionBar = () => {
     return (
       <NewTransactionBar
+        isTransfer={false}
         handleCancelTransaction={this.handleCancelTransaction}
         onCheckboxChange={this.handleCheckboxChange}
         onChange={this.handleFormChange}
@@ -209,7 +179,6 @@ class TransactionView extends Component {
   }
 
   handleCheckboxChange = (e) => {
-    console.log(e.target.checked);
     let val;
     e.target.checked ? val = true : val = false;
     this.setState({
@@ -232,7 +201,7 @@ class TransactionView extends Component {
   }
 
   validateFormInput(formData) {
-    let transactionId = this.props.transactionsIdGenerator;
+    let transactionId = Object.keys(formData)[0];
     let validatedData;
     // checks to make sure the inflow and outflow aren both set.  if so, sets inflow to null
     if (formData[transactionId].inflow && formData[transactionId].outflow) {

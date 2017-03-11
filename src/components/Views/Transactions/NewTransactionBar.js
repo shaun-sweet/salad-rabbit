@@ -32,14 +32,24 @@ const NewTransactionBar = (props) => {
             selected={props.selectedDate}
           />
         </div>
-        <FormInput {...inputProps('payee')} />
-        <CategoryDropdown
-          onChange={props.onChange}
-          categories={props.masterCategories}
-        />
+        {props.isTransfer ?
+          <AccountDropdown
+            onChange={props.onChange}
+            accounts={props.accounts}
+            name="payee"
+          />
+         :
+         <FormInput {...inputProps('payee')} />
+        }
+        {props.isTransfer ? <div></div> :
+          <CategoryDropdown
+            onChange={props.onChange}
+            categories={props.masterCategories}
+          />
+        }
         <FormInput {...inputProps('memo')} />
         <FormInput {...inputProps('outflow')} />
-        <FormInput {...inputProps('inflow')} />
+        {props.isTransfer ? <div></div> : <FormInput {...inputProps('inflow')} />}
         <FormInput {...clearedProps} />
       </div>
       <RaisedButton onClick={props.handleSaveNewTransaction} className="save-transaction-button" label="Save" />
