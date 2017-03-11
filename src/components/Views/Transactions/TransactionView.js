@@ -36,7 +36,6 @@ class TransactionView extends Component {
       addingTransaction: false
     }
     this.state = this.initialState;
-
   }
 
   render() {
