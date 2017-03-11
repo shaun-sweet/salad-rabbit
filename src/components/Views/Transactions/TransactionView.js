@@ -29,7 +29,9 @@ class TransactionView extends Component {
         account: 1,
         category: 1,
         date: moment(),
-        cleared: true
+        cleared: true,
+        inflow: null,
+        outflow: null
       },
       addingTransaction: false
     }
