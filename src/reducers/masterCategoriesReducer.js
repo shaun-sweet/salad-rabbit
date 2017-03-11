@@ -6,6 +6,7 @@ export default function reducer(state={
     hidden: false
   }
 }, action) {
+  // eslint-disable-next-line
   switch(action.type){
   	case 'ADD_MASTER_CATEGORY':
   		state = {...state, ...action.payload};
