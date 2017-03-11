@@ -5,8 +5,8 @@ import { usd, normalizeCurrency } from '../../../helpers/index'
 export default class BudgetCategory extends Component {
   constructor(props){
     super(props);
-    this.__handleAmountSubmit = this.__handleAmountSubmit.bind(this);
-    this.__handleNameSubmit = this.__handleNameSubmit.bind(this);
+    this._handleAmountSubmit = this._handleAmountSubmit.bind(this);
+    this._handleNameSubmit = this._handleNameSubmit.bind(this);
   }
 
   state = {
@@ -19,10 +19,10 @@ export default class BudgetCategory extends Component {
     return (
       <div className="budget-category">
         <div className="name column">
-          <InlineEdit defaultInputText={this.props.category.name} defaultDisplayText={this.props.category.name} handleSubmit={this.__handleNameSubmit} />
+          <InlineEdit defaultInputText={this.props.category.name} defaultDisplayText={this.props.category.name} handleSubmit={this._handleNameSubmit} />
         </div>
        	<div className="budget column">
-        	<InlineEdit defaultInputText={normalizeCurrency(this.state.budgeted)} defaultDisplayText={usd(this.state.budgeted)} handleSubmit={this.__handleAmountSubmit} />
+        	<InlineEdit defaultInputText={normalizeCurrency(this.state.budgeted)} defaultDisplayText={usd(this.state.budgeted)} handleSubmit={this._handleAmountSubmit} />
        	</div>
        	<div className="outflow column">
        		{usd(this.props.category.outflow)}
@@ -34,7 +34,7 @@ export default class BudgetCategory extends Component {
     );
   }
 
-  __handleNameSubmit(newName){
+  _handleNameSubmit(newName){
     let category = this.props.category;
     this.props.dispatch(updateCategoryName({
       [category.id]:{
@@ -46,7 +46,7 @@ export default class BudgetCategory extends Component {
     })
   }
 
-  __handleAmountSubmit(newValue){
+  _handleAmountSubmit(newValue){
     let category = this.props.category;
     this.props.dispatch(updateBudgetedAmount({
       [category.id]:{
@@ -63,9 +63,9 @@ export default class BudgetCategory extends Component {
 class InlineEdit extends Component {
   constructor(props){
     super(props);
-    this.__handleClick = this.__handleClick.bind(this);
-    this.__handleBlur = this.__handleBlur.bind(this);
-    this.__getTextField = this.__getTextField.bind(this);
+    this._handleClick = this._handleClick.bind(this);
+    this._handleBlur = this._handleBlur.bind(this);
+    this._getTextField = this._getTextField.bind(this);
   }
 
   state = {
@@ -75,32 +75,32 @@ class InlineEdit extends Component {
   render(){
     return (
       <div className="inlineEdit">
-        {this.__getTextField()}
+        {this._getTextField()}
       </div>
     );
   }
 
-  __handleClick(){
+  _handleClick(){
     this.setState({
       editable: true
     })
   }
 
-  __handleBlur(event){
+  _handleBlur(event){
     this.props.handleSubmit(event.target.value);
     this.setState({
       editable: false
     })
   }
 
-  __getTextField(){
+  _getTextField(){
     if(this.state.editable){
       return (
-        <input className="editableTextField" type="text" defaultValue={this.props.defaultInputText} onFocus={(e)=>{e.target.select()}} onBlur={this.__handleBlur} autoFocus/>
+        <input className="editableTextField" type="text" defaultValue={this.props.defaultInputText} onFocus={(e)=>{e.target.select()}} onBlur={this._handleBlur} autoFocus/>
       );
     }else{
       return (
-        <div className="uneditableTextField" onClick={this.__handleClick}>
+        <div className="uneditableTextField" onClick={this._handleClick}>
           {this.props.defaultDisplayText}
         </div>
       );
