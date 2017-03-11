@@ -57,7 +57,6 @@ class InlineEdit extends Component {
 
   state = {
     editable: false,
-    text: this.props.defaultText
   };
 
   render(){
@@ -84,7 +83,7 @@ class InlineEdit extends Component {
   __getTextField(){
     if(this.state.editable){
       return (
-        <input className="editableTextField" type="text" onBlur={this.__handleBlur} autoFocus/>
+        <input className="editableTextField" type="text" defaultValue={this.props.defaultText} onBlur={this.__handleBlur} autoFocus/>
       );
     }else{
       return (
