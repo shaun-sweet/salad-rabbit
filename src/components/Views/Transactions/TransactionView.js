@@ -6,7 +6,6 @@ import TransactionListTable from './TransactionListTable.js'
 import Transaction from './Transaction'
 import NewTransactionBar from './NewTransactionBar'
 import { normalizeCurrency } from '../../../helpers'
-
 import TransactionControls from './TransactionControls'
 import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
 

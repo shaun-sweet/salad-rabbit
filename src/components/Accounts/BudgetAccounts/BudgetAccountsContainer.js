@@ -28,6 +28,7 @@ class BudgetAccountsContainer extends Component {
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
        <CardHeader
+
          title="Budget Accounts"
          subtitle={usd(sumArray(openAccounts, (account)=> account.balance))}
          actAsExpander={true}
@@ -35,8 +36,7 @@ class BudgetAccountsContainer extends Component {
        />
        <CardMedia
          expandable={true}
-       >
-       </CardMedia>
+       />
        <CardText expandable={true}>
          <ul>
            {openAccountsComponents}
