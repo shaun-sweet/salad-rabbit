@@ -8,6 +8,7 @@ import NewTransactionBar from './NewTransactionBar'
 import { normalizeCurrency } from '../../../helpers'
 import TransactionControls from './TransactionControls'
 import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
+import SearchBar from './SearchBar.js'
 
 let mapStateToProps = function(store) {
   return {
@@ -41,6 +42,7 @@ class TransactionView extends Component {
     const transactionsList = this.denormalizeTransactions().map((transaction) => <Transaction {...transaction} key={transaction.id} />);
     return (
       <div ref="view_container" id='accounts-transaction-view'>
+        <SearchBar />
         <TransactionListTable>
           {transactionsList}
         </TransactionListTable>
