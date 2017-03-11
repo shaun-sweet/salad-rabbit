@@ -83,7 +83,7 @@ class InlineEdit extends Component {
   __getTextField(){
     if(this.state.editable){
       return (
-        <input className="editableTextField" type="text" defaultValue={this.props.defaultText} onBlur={this.__handleBlur} autoFocus/>
+        <input className="editableTextField" type="text" defaultValue={normalizeCurrency(this.props.defaultText)} onFocus={(e)=>{e.target.select()}} onBlur={this.__handleBlur} autoFocus/>
       );
     }else{
       return (
