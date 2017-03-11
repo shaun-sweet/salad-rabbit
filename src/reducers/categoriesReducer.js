@@ -27,6 +27,9 @@ export default function reducer(state={
     case "ADD_CATEGORY":
       state = {...state, ...action.payload};
     break;
+    case "CHANGE_BUDGETED_AMOUNT":
+      state = {...state, ...action.payload};
+    break;
   }
   return state;
 }
