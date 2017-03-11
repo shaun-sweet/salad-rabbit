@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import BudgetAccountListItem from './BudgetAccountListItem'
 import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
-import numeral from 'numeral'
 import { connect } from 'react-redux'
-import {usd} from '../../../helpers/index.js'
+import { usd, sumArray } from '../../../helpers/index.js'
 
 var mapStateToProps = function(store) {
   return {
@@ -22,14 +21,15 @@ class BudgetAccountsContainer extends Component {
   }
 
  render() {
-    let openAccounts = this.denormalizeOpenAccounts().map((account, index) =>
+    let openAccounts = this.denormalizeOpenAccounts();
+    let openAccountsComponents = openAccounts.map((account, index) =>
       <BudgetAccountListItem {...account} key={account.id} />
     );
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
        <CardHeader
          title="Budget Accounts"
-         subtitle={usd(3000)}
+         subtitle={usd(sumArray(openAccounts, (account)=> account.balance))}
          actAsExpander={true}
          showExpandableButton={true}
        />
@@ -39,7 +39,7 @@ class BudgetAccountsContainer extends Component {
        </CardMedia>
        <CardText expandable={true}>
          <ul>
-           {openAccounts}
+           {openAccountsComponents}
          </ul>
        </CardText>
      </Card>
