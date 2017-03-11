@@ -49,7 +49,7 @@ const NewTransactionBar = (props) => {
 }
 
 const FormInput = (props) => (
-  <div>
+  <div className={props.className}>
     <input {...props} />
   </div>
 )
@@ -60,7 +60,7 @@ FormInput.defaultProps = {
 }
 
 const AccountDropdown = (props) => (
-  <div className={props.className}>
+  <div className='new-transaction'>
     <select onChange={props.onChange} name='account'>
       {props.accounts.map((account) => {
         return <option key={account.id} value={account.id}>{account.name}</option>
@@ -71,7 +71,7 @@ const AccountDropdown = (props) => (
 
 
 const CategoryDropdown = (props) => (
-  <div className={props.className}>
+  <div className='new-transaction'>
     <select onChange={props.onChange} name='category'>
       {props.categories.map((masterCategory) => {
         return (
