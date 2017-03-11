@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { changeBudgetedAmount } from '../../../actions/categoriesActions'
+import { changeBudgetedAmount, changeCategoryName } from '../../../actions/categoriesActions'
 import { usd, normalizeCurrency } from '../../../helpers/index'
 
 export default class BudgetCategory extends Component {
   constructor(props){
     super(props);
-    this.__handleSubmit = this.__handleSubmit.bind(this);
+    this.__handleAmountSubmit = this.__handleAmountSubmit.bind(this);
+    this.__handleNameSubmit = this.__handleNameSubmit.bind(this);
   }
 
   state = {
@@ -18,10 +19,10 @@ export default class BudgetCategory extends Component {
     return (
       <div className="budget-category">
         <div className="name column">
-        	{this.props.category.name}
-       	</div>
+          <InlineEdit defaultInputText={this.props.category.name} defaultDisplayText={this.props.category.name} handleSubmit={this.__handleNameSubmit} />
+        </div>
        	<div className="budget column">
-        	<InlineEdit defaultText={usd(this.state.budgeted)} handleSubmit={this.__handleSubmit} />
+        	<InlineEdit defaultInputText={normalizeCurrency(this.state.budgeted)} defaultDisplayText={usd(this.state.budgeted)} handleSubmit={this.__handleAmountSubmit} />
        	</div>
        	<div className="outflow column">
        		{usd(this.props.category.outflow)}
@@ -33,7 +34,19 @@ export default class BudgetCategory extends Component {
     );
   }
 
-  __handleSubmit(newValue){
+  __handleNameSubmit(newName){
+    let category = this.props.category;
+    this.props.dispatch(changeCategoryName({
+      [category.id]:{
+        ...category, name: newName
+      }
+    }));
+    this.setState({
+      name: newName
+    })
+  }
+
+  __handleAmountSubmit(newValue){
     let category = this.props.category;
     this.props.dispatch(changeBudgetedAmount({
       [category.id]:{
@@ -83,12 +96,12 @@ class InlineEdit extends Component {
   __getTextField(){
     if(this.state.editable){
       return (
-        <input className="editableTextField" type="text" defaultValue={normalizeCurrency(this.props.defaultText)} onFocus={(e)=>{e.target.select()}} onBlur={this.__handleBlur} autoFocus/>
+        <input className="editableTextField" type="text" defaultValue={this.props.defaultInputText} onFocus={(e)=>{e.target.select()}} onBlur={this.__handleBlur} autoFocus/>
       );
     }else{
       return (
         <div className="uneditableTextField" onClick={this.__handleClick}>
-          {this.props.defaultText}
+          {this.props.defaultDisplayText}
         </div>
       );
     }

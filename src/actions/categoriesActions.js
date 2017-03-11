@@ -29,3 +29,11 @@ export function changeBudgetedAmount(newCategory) {
     }
   }
 }
+
+export function changeCategoryName(newCategory) {
+  return {
+    type: "CHANGE_CATEGORY_NAME", payload: {
+      ...newCategory
+    }
+  }
+}

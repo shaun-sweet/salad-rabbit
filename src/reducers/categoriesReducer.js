@@ -30,6 +30,9 @@ export default function reducer(state={
     case "CHANGE_BUDGETED_AMOUNT":
       state = {...state, ...action.payload};
     break;
+    case "CHANGE_CATEGORY_NAME":
+      state = {...state, ...action.payload};
+    break;
   }
   return state;
 }
