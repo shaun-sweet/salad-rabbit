@@ -13,7 +13,7 @@ const Transaction = (props) => (
       {props.payee}
     </div>
     <div className="cell">
-      {props.category.name}
+      {props.category ? props.category.name : 'Transfer'}
     </div>
     <div className="cell">
       {props.memo}
