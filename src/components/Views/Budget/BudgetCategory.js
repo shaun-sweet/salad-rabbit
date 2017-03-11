@@ -1,88 +1,98 @@
 import React, { Component } from 'react'
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import { changeBudgetedAmount } from '../../../actions/categoriesActions'
-import {usd} from '../../../helpers/index'
-
+import { usd, normalizeCurrency } from '../../../helpers/index'
 
 export default class BudgetCategory extends Component {
+  constructor(props){
+    super(props);
+    this.__handleSubmit = this.__handleSubmit.bind(this);
+  }
+
   state = {
     open: false,
     value: 1,
-    budgeted: this.props.budgeted,
+    budgeted: this.props.category.budgeted,
   };
 
   render() {
-    const actions = [
-        <FlatButton
-          label="Cancel"
-          primary={true}
-          onTouchTap={this.handleClose}
-        />,
-        <FlatButton
-          label="Submit"
-          primary={true}
-          keyboardFocused={true}
-          onTouchTap={this.handleSubmit}
-
-        />,
-      ];
     return (
       <div className="budget-category">
         <div className="name column">
-        	{this.props.name}
+        	{this.props.category.name}
        	</div>
        	<div className="budget column">
-        	<div
-            id="budget-text-field"
-            onClick={this.handleOpen}
-         >
-            {usd(this.state.budgeted)}
-          </div>
-          <Dialog
-            className="change-budgeted-amount"
-            title="Change Budgeted Amount"
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-          >
-            <TextField
-              defaultValue={usd(this.state.budgeted)}
-              name="name"
-              onChange={this.handleChange.bind(this)}
-            />
-          </Dialog>
+        	<InlineEdit defaultText={usd(this.state.budgeted)} handleSubmit={this.__handleSubmit} />
        	</div>
        	<div className="outflow column">
-       		{usd(this.props.outflow)}
+       		{usd(this.props.category.outflow)}
        	</div>
        	<div className="balance column">
-       		{usd(this.props.budgeted - this.props.outflow)}
+       		{usd(this.props.category.budgeted - this.props.category.outflow)}
        	</div>
       </div>
     );
   }
 
-  handleSubmit = (event) => {
-    var indexParent = this.props.indexParent;
-    var index = this.props.index;
-    this.props.dispatch(changeBudgetedAmount(this.state.budgeted, indexParent, index));
-    this.handleClose();
+  __handleSubmit(newValue){
+    let category = this.props.category;
+    this.props.dispatch(changeBudgetedAmount({
+      [category.id]:{
+        ...category, budgeted: normalizeCurrency(newValue)
+      }
+    }));
+    this.setState({
+        budgeted: newValue
+      });
+    }
+
   }
 
-  handleChange(event, value) {
-  this.setState({
-      budgeted: value
-    });
+class InlineEdit extends Component {
+  constructor(props){
+    super(props);
+    this.__handleClick = this.__handleClick.bind(this);
+    this.__handleBlur = this.__handleBlur.bind(this);
+    this.__getTextField = this.__getTextField.bind(this);
   }
 
-  handleOpen = () => {
-  this.setState({open: true});
+  state = {
+    editable: false,
+    text: this.props.defaultText
   };
 
-  handleClose = () => {
-  this.setState({open: false});
-  };
+  render(){
+    return (
+      <div className="inlineEdit">
+        {this.__getTextField()}
+      </div>
+    );
+  }
+
+  __handleClick(){
+    this.setState({
+      editable: true
+    })
+  }
+
+  __handleBlur(event){
+    this.props.handleSubmit(event.target.value);
+    this.setState({
+      editable: false
+    })
+  }
+
+  __getTextField(){
+    if(this.state.editable){
+      return (
+        <input className="editableTextField" type="text" onBlur={this.__handleBlur} autoFocus/>
+      );
+    }else{
+      return (
+        <div className="uneditableTextField" onClick={this.__handleClick}>
+          {this.props.defaultText}
+        </div>
+      );
+    }
+  }
+
 }

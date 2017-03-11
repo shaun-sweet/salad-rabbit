@@ -19,7 +19,7 @@ export default class BudgetView extends Component {
     return (
       <div id="budget-view">
         <BudgetHeader accounts={this.denormalizeOpenAccounts()} master_categories={denormalizedCategories}/>
-        <BudgetCategoriesContainer master_categories={denormalizedCategories}/>
+        <BudgetCategoriesContainer dispatch={this.props.dispatch} master_categories={denormalizedCategories}/>
       </div>
     );
   }

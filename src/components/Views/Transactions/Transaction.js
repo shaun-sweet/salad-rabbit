@@ -1,5 +1,5 @@
 import React from 'react'
-import { usd, normalizeCurrency } from '../../../helpers'
+import { usd } from '../../../helpers'
 
 const Transaction = (props) => (
   <div className="row" key={props.id}>
