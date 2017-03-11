@@ -22,10 +22,18 @@ export function addCategoryToMaster(newMasterCategory) {
   }
 }
 
-export function changeBudgetedAmount(newCategory) {
+export function updateBudgetedAmount(updatedCategory) {
   return {
-    type: "CHANGE_BUDGETED_AMOUNT", payload: {
-      ...newCategory
+    type: "UPDATE_BUDGETED_AMOUNT", payload: {
+      ...updatedCategory
+    }
+  }
+}
+
+export function updateCategoryName(updatedCategory) {
+  return {
+    type: "UPDATE_CATEGORY_NAME", payload: {
+      ...updatedCategory
     }
   }
 }
