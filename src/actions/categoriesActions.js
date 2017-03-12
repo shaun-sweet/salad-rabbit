@@ -37,3 +37,11 @@ export function updateCategoryName(updatedCategory) {
     }
   }
 }
+
+export function addOutflow(updatedCategory) {
+  return {
+    type: "ADD_OUTFLOW", payload: {
+      ...updatedCategory
+    }
+  }
+}

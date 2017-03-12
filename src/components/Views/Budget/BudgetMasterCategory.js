@@ -7,7 +7,7 @@ export default class BudgetMasterCategory extends Component {
 
   render() {
     const budgeted = sumArray(this.props.master_category.categories, (item) => item.budgeted);
-    const outflows = sumArray(this.props.master_category.categories, (item) => item.outflow);
+    const outflow = sumArray(this.props.master_category.categories, (item) => item.outflow);
 
     return (
       <div className="budget-master-category-container">
@@ -20,10 +20,10 @@ export default class BudgetMasterCategory extends Component {
             {usd(budgeted)}
           </div>
           <div className="outflows column">
-            {usd(outflows)}
+            {usd(outflow)}
           </div>
           <div className="balance column">
-            {usd(budgeted-outflows)}
+            {usd(budgeted-outflow)}
           </div>
         </div>
         {this.categoriesList()}

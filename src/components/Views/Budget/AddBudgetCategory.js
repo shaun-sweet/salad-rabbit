@@ -21,7 +21,7 @@ export default class AddBudgetCategory extends Component {
     category: {
       name: "",
       budgeted: 0,
-      outflow: 0,
+      outflows: [],
       balance: 0
     }
   };
@@ -78,8 +78,8 @@ export default class AddBudgetCategory extends Component {
       dispatch(addCategoryToMaster({
         [master_category.id]:{
           ...master_category, categories: master_category.categories.map((category)=>category.id).concat([categoryId])
-        }        
-      }));      
+        }
+      }));
       dispatch(incrementCategoryId());
 
       this.handleClose();

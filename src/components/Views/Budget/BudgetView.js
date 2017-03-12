@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BudgetHeader from './BudgetHeader'
 import BudgetCategoriesContainer from './BudgetCategoriesContainer'
 import { connect } from 'react-redux'
+import { sumArray } from '../../../helpers/index'
 
 var mapStateToProps = function(store) {
   return {
@@ -9,6 +10,7 @@ var mapStateToProps = function(store) {
     accounts: store.accounts,
     openAccounts: store.openAccounts,
     masterCategories: store.masterCategories,
+    transactions: store.transactions
   };
 }
 
@@ -25,10 +27,16 @@ export default class BudgetView extends Component {
   }
 
   denormalizeCategories(){
+    //denormalize to add category information to master categories as well as calculate total outflows from transactions
     let masterCategories = this.props.masterCategories;
     return Object.keys(masterCategories).map((masterCategoryId)=>{
-      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=>
-        this.props.categories[categoryId])};
+      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=>{
+        return {
+          ...this.props.categories[categoryId],
+          outflow: sumArray(this.props.categories[categoryId].outflows.map((transactionId)=> this.props.transactions[transactionId].outflow), (elem) => elem )
+          }
+        }
+      )};
     })
   }
 

@@ -9,6 +9,7 @@ import { normalizeCurrency } from '../../../helpers'
 import TransactionControls from './TransactionControls'
 import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
 import SearchBar from './SearchBar.js'
+import { addOutflow } from '../../../actions/categoriesActions'
 
 let mapStateToProps = function(store) {
   return {
@@ -240,6 +241,18 @@ class TransactionView extends Component {
     let transaction = this.normalizeFormData();
     this.props.dispatch((dispatch) =>{
       dispatch(addTransaction(transaction));
+
+      let transactionId = transaction[Object.keys(transaction)[0]].id;
+      let categoryId = transaction[Object.keys(transaction)[0]].category;
+      let updatedCategory = {
+        [categoryId]:{
+          ...this.props.categories[categoryId],
+          outflows: this.props.categories[categoryId].outflows.concat([transactionId])
+        }
+      };
+      console.log(updatedCategory);
+      dispatch(addOutflow(updatedCategory));
+
       dispatch(incrementTransactionId());
       this.setState(this.initialState);
     })
