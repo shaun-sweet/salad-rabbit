@@ -3,3 +3,9 @@ export function addOpenAccount(accountId) {
     type: "ADD_OPEN_ACCOUNT", payload: accountId
   }
 }
+
+export function closeOpenAccount(updatedAccounts) {
+  return {
+    type: "CLOSE_OPEN_ACCOUNT", payload: updatedAccounts
+  }
+}

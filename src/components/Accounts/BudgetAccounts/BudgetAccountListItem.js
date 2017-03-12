@@ -10,8 +10,8 @@ export default class BudgetAccountListItem extends Component {
   render() {
     return (
       <li>
-        <span className="account-name"> {this.props.account.name} </span>        
-        <EditAccountButton account={{...this.props.account}} submitAccountNameEdit={this.props.submitAccountNameEdit}/>
+        <span className="account-name"> {this.props.account.name} </span>
+        <EditAccountButton {...this.props}/>
         <span className="account-balance"  style={{float: "right"}} >{usd(this.props.balance)}</span>
       </li>
     );
@@ -30,6 +30,12 @@ class EditAccountButton extends Component {
 
   render() {
     const actions = [
+      <FlatButton
+        label="Close Account"
+        primary={true}
+        onTouchTap={this.handleCloseAccount.bind(this)}
+
+      />,
       <FlatButton
         label="Cancel"
         primary={true}
@@ -76,7 +82,11 @@ class EditAccountButton extends Component {
     this.setState({account: {
       name: "",
     }});
-}
+  }
+
+  handleCloseAccount(event){
+    this.props.submitCloseAccount(this.props.account.id);
+  }
 
   handleAccountNameChange(event, value) {
     this.setState({

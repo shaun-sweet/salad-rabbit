@@ -4,6 +4,7 @@ import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 import { connect } from 'react-redux'
 import { usd, sumArray } from '../../../helpers/index.js'
 import { updateAccountName } from '../../../actions/accountsActions'
+import { closeOpenAccount } from '../../../actions/openAccountsActions'
 
 var mapStateToProps = function(store) {
   return {
@@ -24,7 +25,7 @@ class BudgetAccountsContainer extends Component {
  render() {
     let openAccounts = this.denormalizeOpenAccounts();
     let openAccountsComponents = openAccounts.map((account, index) =>
-      <BudgetAccountListItem account={{...account}} submitAccountNameEdit={this.submitAccountNameEdit.bind(this)} key={account.id} />
+      <BudgetAccountListItem account={{...account}} submitCloseAccount={this.submitCloseAccount.bind(this)} submitAccountNameEdit={this.submitAccountNameEdit.bind(this)} key={account.id} />
     );
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -46,6 +47,14 @@ class BudgetAccountsContainer extends Component {
      </Card>
    );
  }
+
+ submitCloseAccount = (accountId) => {
+   let closedAccounts = this.props.closedAccounts.concat([accountId]);
+   let openAccounts = this.props.openAccounts.filter((currentAccountId)=> currentAccountId !== accountId );
+   this.props.dispatch((dispatch) => {
+     dispatch(closeOpenAccount(openAccounts));
+   });
+ };
 
  submitAccountNameEdit = (updatedAccount) => {
    this.props.dispatch(updateAccountName(updatedAccount));

@@ -4,6 +4,9 @@ export default function reducer(state=[1], action) {
   	case "ADD_OPEN_ACCOUNT":
   		state = state.concat(action.payload);
   	break;
+    case "CLOSE_OPEN_ACCOUNT":
+      state = action.payload;
+    break;
   }
   return state;
 }
