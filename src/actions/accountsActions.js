@@ -5,3 +5,11 @@ export function addAccount(account) {
     }
   }
 }
+
+export function updateAccountName(account) {
+  return {
+    type: "UPDATE_ACCOUNT_NAME", payload: {
+      ...account
+    }
+  }
+}

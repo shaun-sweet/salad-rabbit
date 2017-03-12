@@ -14,6 +14,9 @@ export default function reducer(state={
   	case "ADD_ACCOUNT":
   		state = {...state, ...action.payload};
   	break;
+    case "UPDATE_ACCOUNT_NAME":
+      state = {...state, ...action.payload};
+    break;
   }
   return state;
 }

@@ -3,6 +3,7 @@ import BudgetAccountListItem from './BudgetAccountListItem'
 import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 import { connect } from 'react-redux'
 import { usd, sumArray } from '../../../helpers/index.js'
+import { updateAccountName } from '../../../actions/accountsActions'
 
 var mapStateToProps = function(store) {
   return {
@@ -23,7 +24,7 @@ class BudgetAccountsContainer extends Component {
  render() {
     let openAccounts = this.denormalizeOpenAccounts();
     let openAccountsComponents = openAccounts.map((account, index) =>
-      <BudgetAccountListItem {...account} key={account.id} />
+      <BudgetAccountListItem account={{...account}} submitAccountNameEdit={this.submitAccountNameEdit.bind(this)} key={account.id} />
     );
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -45,6 +46,10 @@ class BudgetAccountsContainer extends Component {
      </Card>
    );
  }
+
+ submitAccountNameEdit = (updatedAccount) => {
+   this.props.dispatch(updateAccountName(updatedAccount));
+ };
 
   handleExpandChange = (expanded) => {
     this.setState({expanded: expanded});
