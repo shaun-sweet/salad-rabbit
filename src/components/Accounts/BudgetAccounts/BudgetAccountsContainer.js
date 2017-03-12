@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { usd, sumArray } from '../../../helpers/index.js'
 import { updateAccountName } from '../../../actions/accountsActions'
 import { closeOpenAccount } from '../../../actions/openAccountsActions'
+import { addClosedAccount } from '../../../actions/closedAccountsActions'
 
 var mapStateToProps = function(store) {
   return {
@@ -49,10 +50,10 @@ class BudgetAccountsContainer extends Component {
  }
 
  submitCloseAccount = (accountId) => {
-   let closedAccounts = this.props.closedAccounts.concat([accountId]);
    let openAccounts = this.props.openAccounts.filter((currentAccountId)=> currentAccountId !== accountId );
    this.props.dispatch((dispatch) => {
      dispatch(closeOpenAccount(openAccounts));
+     dispatch(addClosedAccount([accountId]));
    });
  };
 
