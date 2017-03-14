@@ -13,7 +13,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
         <IndexRoute component={BudgetView}/>
-        <Route path="accounts" component={TransactionView} />
+        <Route path="accounts/:id" component={TransactionView} />
       </Route>
     </Router>
   </Provider>,

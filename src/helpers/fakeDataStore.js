@@ -8,13 +8,15 @@ class FakeObjectDataListStore {
 
   createTransaction(id){
     return {
-      id: id,
-      date: faker.date.past(),
-      payee: faker.company.companyName(),
-      memo: faker.lorem.sentence(),
-      outflow: faker.random.number(),
-      inflow: 0,
-      cleared: false
+      [id]:  {
+        id: id,
+        date: faker.date.past(),
+        payee: faker.company.companyName(),
+        memo: faker.lorem.sentence(),
+        outflow: faker.random.number(),
+        inflow: 0,
+        cleared: false
+      }
     };
   }
 
