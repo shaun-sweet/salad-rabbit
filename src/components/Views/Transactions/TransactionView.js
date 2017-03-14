@@ -37,7 +37,6 @@ class TransactionView extends Component {
       addingTransfer: false
     }
     this.state = this.initialState;
-    this.transactions = this.denormalizeTransactions();
   }
 
   filteredTransactions = (accountId) => {
