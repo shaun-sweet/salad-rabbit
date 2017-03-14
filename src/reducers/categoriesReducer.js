@@ -6,6 +6,7 @@ export default function reducer(state={
     masterCategory: 1,
     name: "Rent",
     budgeted: 500,
+    outflows: [],
     outflow: 0,
     inflow: 0,
     balance: 0,
@@ -16,6 +17,7 @@ export default function reducer(state={
     masterCategory: 1,
     name: "Cell Phone",
     budgeted: 100.23,
+    outflows: [1],
     outflow: 0,
     inflow: 0,
     balance: 0,
@@ -32,6 +34,9 @@ export default function reducer(state={
     break;
     case "UPDATE_CATEGORY_NAME":
       state = {...state, ...action.payload};
+    break;
+    case "ADD_OUTFLOW":
+      state = {...state, ...action.payload}
     break;
   }
   return state;
