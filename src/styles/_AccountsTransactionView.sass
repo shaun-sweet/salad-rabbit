@@ -1,0 +1,19 @@
+#accounts-transaction-view,  .transaction-headers, .transaction-table, .row
+  display: flex
+
+#accounts-transaction-view, .transaction-table
+  flex-direction: column
+
+.transaction-headers div, .cell, .table-wrapper, #accounts-transaction-view, .transaction-table
+  flex: 1
+
+.new-transaction
+  width: 100%
+  border: none
+  box-shadow: inset 0px 0px 5px -2px rgba(0,0,0,0.75)
+
+.transaction-controls .add-transaction-button, .new-transaction-bar .save-transaction-button
+  margin-right: 1em
+
+.SearchBar
+  align-self: flex-end

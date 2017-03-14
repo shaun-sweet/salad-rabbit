@@ -1,10 +1,15 @@
-export function addAccount() {
+export function addAccount(account) {
   return {
     type: "ADD_ACCOUNT", payload: {
-      name: "Checkinggggggggggg :)",
-      type: "checking",
-      balance: 100000,
-      note: "String"
+      ...account
+    }
+  }
+}
+
+export function updateAccountName(account) {
+  return {
+    type: "UPDATE_ACCOUNT_NAME", payload: {
+      ...account
     }
   }
 }
