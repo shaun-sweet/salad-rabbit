@@ -4,16 +4,20 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import { Link } from 'react-router'
+
 
 export default class BudgetAccountListItem extends Component {
 
   render() {
     return (
-      <li>
-        <span className="account-name"> {this.props.account.name} </span>
-        <EditAccountButton {...this.props}/>
-        <span className="account-balance"  style={{float: "right"}} >{usd(this.props.balance)}</span>
-      </li>
+      <Link style={{textDecoration: 'none'}} to={'/accounts/' +this.props.account.id}>
+        <li>
+          <span className="account-name"> {this.props.account.name} </span>
+          <EditAccountButton {...this.props}/>
+          <span className="account-balance"  style={{float: "right"}} >{usd(this.props.balance)}</span>
+        </li>
+      </Link>
     );
   }
 }

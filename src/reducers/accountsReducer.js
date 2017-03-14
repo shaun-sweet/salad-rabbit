@@ -5,8 +5,17 @@ export default function reducer(state={
     id: 1,
     name: "Checking",
     type: "checking",
-    balance: 100000,
-    note: "string"
+    balance: 5000,
+    note: "string",
+    open: true
+  },
+  "2": {
+    id: 2,
+    name: "Savings",
+    type: "savings",
+    balance: 5000,
+    note: "string",
+    open: true
   }
 }, action) {
   // eslint-disable-next-line

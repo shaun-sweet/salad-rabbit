@@ -37,13 +37,26 @@ class TransactionView extends Component {
       addingTransfer: false
     }
     this.state = this.initialState;
+    this.transactions = this.denormalizeTransactions();
   }
 
+  filteredTransactions = (accountId) => {
+    return this.denormalizeTransactions().filter(( transaction ) => {
+      if (accountId === "all") {
+        return true;
+      }else{
+      return (transaction.account.id.toString() === accountId)
+    }
+    })
+  }
+
+
   render() {
-    const transactionsList = this.denormalizeTransactions().map((transaction) => <Transaction {...transaction} key={transaction.id} />);
+    const transactionsList = this.filteredTransactions(this.props.params.id).map((transaction) => <Transaction {...transaction} key={transaction.id} />);
+
     return (
       <div ref="view_container" id='accounts-transaction-view'>
-        <SearchBar />
+        <h2> Filtered By: {this.props.params.id === "all" ? "All Transactions" : this.props.accounts[this.props.params.id].name + " account"}</h2>
         <TransactionListTable>
           {transactionsList}
         </TransactionListTable>
