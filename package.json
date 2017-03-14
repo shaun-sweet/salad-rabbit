@@ -24,8 +24,10 @@
     "redux-thunk": "^2.2.0"
   },
   "main": "src/electron-starter.js",
+  "homepage": "./",
   "scripts": {
-    "start": "nf start",
+    "electron-dev": "set ELECTRON_START_URL=http://localhost:3000",
+    "start": "react-scripts start",
     "build": "sass src/styles/stylesheet.sass:src/styles/css/stylesheet.css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
