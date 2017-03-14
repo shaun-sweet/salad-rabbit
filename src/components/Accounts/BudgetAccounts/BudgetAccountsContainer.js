@@ -26,7 +26,7 @@ class BudgetAccountsContainer extends Component {
  render() {
     let openAccounts = this.denormalizeOpenAccounts();
     let openAccountsComponents = openAccounts.map((account, index) =>
-      <BudgetAccountListItem account={{...account}} submitCloseAccount={this.submitCloseAccount.bind(this)} submitAccountNameEdit={this.submitAccountNameEdit.bind(this)} key={account.id} />
+      <BudgetAccountListItem {...account} submitCloseAccount={this.submitCloseAccount.bind(this)} submitAccountNameEdit={this.submitAccountNameEdit.bind(this)} key={account.id} />
     );
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>

@@ -11,9 +11,9 @@ export default class BudgetAccountListItem extends Component {
 
   render() {
     return (
-      <Link style={{textDecoration: 'none'}} to={'/accounts/' +this.props.account.id}>
+      <Link style={{textDecoration: 'none'}} to={'/accounts/' +this.props.id}>
         <li>
-          <span className="account-name"> {this.props.account.name} </span>
+          <span className="account-name"> {this.props.name} </span>
           <EditAccountButton {...this.props}/>
           <span className="account-balance"  style={{float: "right"}} >{usd(this.props.balance)}</span>
         </li>
@@ -65,7 +65,7 @@ class EditAccountButton extends Component {
           onRequestClose={this.handleClose}
         >
           <TextField
-            defaultValue={this.props.account.name}
+            defaultValue={this.props.name}
             floatingLabelText="Name"
             name="name"
             onChange={this.handleAccountNameChange.bind(this)}
@@ -79,8 +79,8 @@ class EditAccountButton extends Component {
   handleSubmit = (event) => {
     this.handleClose();
     this.props.submitAccountNameEdit({
-      [this.props.account.id]: {
-        ...this.props.account, name: this.state.account.name
+      [this.props.id]: {
+        ...this.props, name: this.state.account.name
       }
     });
     this.setState({account: {
@@ -89,7 +89,7 @@ class EditAccountButton extends Component {
   }
 
   handleCloseAccount(event){
-    this.props.submitCloseAccount(this.props.account.id);
+    this.props.submitCloseAccount(this.props.id);
   }
 
   handleAccountNameChange(event, value) {
