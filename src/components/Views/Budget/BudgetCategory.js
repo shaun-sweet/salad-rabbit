@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { updateBudgetedAmount, updateCategoryName } from '../../../actions/categoriesActions'
-import { usd, normalizeCurrency } from '../../../helpers/index'
+import { usd, normalizeCurrency, sumArray } from '../../../helpers/index'
 
 export default class BudgetCategory extends Component {
   constructor(props){
@@ -48,11 +48,12 @@ export default class BudgetCategory extends Component {
 
   _handleAmountSubmit(newValue){
     let category = this.props.category;
-    this.props.dispatch(updateBudgetedAmount({
+    let updatedCategory = {
       [category.id]:{
         ...category, budgeted: normalizeCurrency(newValue)
       }
-    }));
+    };
+    this.props.dispatch(updateBudgetedAmount(updatedCategory));
     this.setState({
         budgeted: newValue
       });
