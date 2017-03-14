@@ -1,4 +1,4 @@
-export default function reducer(state=[1], action) {
+export default function reducer(state=[1,2], action) {
   // eslint-disable-next-line
   switch (action.type){
   	case "ADD_OPEN_ACCOUNT":

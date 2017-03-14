@@ -4,16 +4,20 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import { Link } from 'react-router'
+
 
 export default class BudgetAccountListItem extends Component {
 
   render() {
     return (
-      <li>
-        <span className="account-name"> {this.props.account.name} </span>
-        <EditAccountButton {...this.props}/>
-        <span className="account-balance"  style={{float: "right"}} >{usd(this.props.balance)}</span>
-      </li>
+      <Link style={{textDecoration: 'none'}} to={'/accounts/' +this.props.id}>
+        <li>
+          <span className="account-name"> {this.props.name} </span>
+          <EditAccountButton {...this.props}/>
+          <span className="account-balance"  style={{float: "right"}} >{usd(this.props.balance)}</span>
+        </li>
+      </Link>
     );
   }
 }
@@ -61,7 +65,7 @@ class EditAccountButton extends Component {
           onRequestClose={this.handleClose}
         >
           <TextField
-            defaultValue={this.props.account.name}
+            defaultValue={this.props.name}
             floatingLabelText="Name"
             name="name"
             onChange={this.handleAccountNameChange.bind(this)}
@@ -75,8 +79,8 @@ class EditAccountButton extends Component {
   handleSubmit = (event) => {
     this.handleClose();
     this.props.submitAccountNameEdit({
-      [this.props.account.id]: {
-        ...this.props.account, name: this.state.account.name
+      [this.props.id]: {
+        ...this.props, name: this.state.account.name
       }
     });
     this.setState({account: {
@@ -85,7 +89,7 @@ class EditAccountButton extends Component {
   }
 
   handleCloseAccount(event){
-    this.props.submitCloseAccount(this.props.account.id);
+    this.props.submitCloseAccount(this.props.id);
   }
 
   handleAccountNameChange(event, value) {
