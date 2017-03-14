@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { updateBudgetedAmount, updateCategoryName } from '../../../actions/categoriesActions'
-import { usd, normalizeCurrency, sumArray } from '../../../helpers/index'
+import { usd, normalizeCurrency } from '../../../helpers/index'
 
 export default class BudgetCategory extends Component {
   constructor(props){

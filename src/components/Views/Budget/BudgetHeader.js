@@ -11,9 +11,6 @@ export default class BudgetHeader extends Component {
     const budgeted = sumArray(this.props.master_categories, (item) => sumArray(item.categories, (subitem)=> subitem.budgeted));
     // //total all outflows columns
     const outflows = sumArray(this.props.master_categories, (item) => sumArray(item.categories, (subitem)=> subitem.outflow));
-    // const accounts = 0;
-    // const budgeted = 0;
-    // const outflows = 0;
 
     return (
       <div id="budget">
