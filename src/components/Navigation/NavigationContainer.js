@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import NavButton from './NavButton'
 import Paper from 'material-ui/Paper'
-import { Link } from 'react-router'
 import Menu from 'material-ui/Menu'
 import FontIcon from 'material-ui/FontIcon';
 const style = {
@@ -23,20 +22,3 @@ export default class Navigation extends Component {
     );
   }
 }
-
-
-
-
-
-//
-// const MenuExampleSimple = () => (
-//
-//     <Paper style={style}>
-//       <Menu>
-//         <MenuItem primaryText="Refresh" />
-//         <MenuItem primaryText="Help &amp; feedback" />
-//         <MenuItem primaryText="Settings" />
-//         <MenuItem primaryText="Sign out" />
-//       </Menu>
-//     </Paper>
-//   )

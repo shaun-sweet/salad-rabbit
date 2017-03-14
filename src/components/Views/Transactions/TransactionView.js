@@ -8,7 +8,6 @@ import NewTransactionBar from './NewTransactionBar'
 import { normalizeCurrency } from '../../../helpers'
 import TransactionControls from './TransactionControls'
 import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
-import SearchBar from './SearchBar.js'
 import { addOutflow } from '../../../actions/categoriesActions'
 
 let mapStateToProps = function(store) {
