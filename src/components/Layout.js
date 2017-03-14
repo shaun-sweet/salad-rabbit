@@ -1,18 +1,22 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-import Navigation from './Navigation/NavigationContainer'
-import Paper from 'material-ui/Paper'
-import BudgetAccountsContainer from './Accounts/BudgetAccounts/BudgetAccountsContainer'
-import ClosedAccountsContainer from './Accounts/ClosedAccountsContainer'
-import AddAccountContainer from './Accounts/AddAccountContainer'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../styles/css/stylesheet.css'
-import 'fixed-data-table/dist/fixed-data-table.css'
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import injectTapEventPlugin from "react-tap-event-plugin";
+import Navigation from "./Navigation/NavigationContainer";
+import Paper from "material-ui/Paper";
+import BudgetAccountsContainer from "./Accounts/BudgetAccounts/BudgetAccountsContainer";
+import ClosedAccountsContainer from "./Accounts/ClosedAccountsContainer";
+import AddAccountContainer from "./Accounts/AddAccountContainer";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import "../styles/css/stylesheet.css";
+//testing the transaction bar, remove from this page when transaction bar is added to transactions page
+// import AddTransaction from "./Views/Transactions/AddTransaction";
 injectTapEventPlugin();
+
+
 var mapStateToProps = function(store) {
   return {
-    accounts: store.accounts
+    accounts: store.accounts,
+    accountsIdGenerator: store.accountsIdGenerator
   };
 }
 
@@ -27,7 +31,8 @@ class Layout extends Component {
                 <Navigation />
                 <BudgetAccountsContainer />
                 <ClosedAccountsContainer />
-                <AddAccountContainer />
+                <AddAccountContainer accounts={this.props.accounts} accountId={this.props.accountsIdGenerator}/>
+                {/*<AddTransaction />*/}
               </div>
               <Paper id='display' zDepth={1}>
                 {this.props.children}

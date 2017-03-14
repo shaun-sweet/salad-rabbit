@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
+
+var mapStateToProps = function(store) {
+  return {
+    closedAccounts: store.closedAccounts,
+    accounts: store.accounts
+  };
+}
 
 export default class ClosedAccountsContainer extends Component {
 
@@ -11,6 +19,10 @@ export default class ClosedAccountsContainer extends Component {
   }
 
   render() {
+    let closedAccounts = this.denormalizeClosedAccounts();
+    let closedAccountsList = closedAccounts.map(function(account, index){
+      return <li key={index}>{account.name}</li>
+    });
     return (
       <Card className="closed-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <CardHeader
@@ -23,9 +35,10 @@ export default class ClosedAccountsContainer extends Component {
         >
         </CardMedia>
         <CardText expandable={true}>
-         <ul>
-           Closed Accounts Here
-         </ul>
+
+          <ul>
+            {closedAccountsList}
+          </ul>
         </CardText>
       </Card>
     );
@@ -47,4 +60,12 @@ export default class ClosedAccountsContainer extends Component {
    this.setState({expanded: false});
  };
 
+ denormalizeClosedAccounts() {
+   return this.props.closedAccounts.map((accountId, index) => {
+     return this.props.accounts[accountId];
+   });
+ }
+
 }
+
+module.exports = connect(mapStateToProps)(ClosedAccountsContainer);

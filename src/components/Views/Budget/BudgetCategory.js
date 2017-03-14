@@ -1,38 +1,111 @@
 import React, { Component } from 'react'
-import BudgetSubcategory from './BudgetSubcategory'
-import AddBudgetSubcategory from './AddBudgetSubcategory'
+import { updateBudgetedAmount, updateCategoryName } from '../../../actions/categoriesActions'
+import { usd, normalizeCurrency, sumArray } from '../../../helpers/index'
 
 export default class BudgetCategory extends Component {
+  constructor(props){
+    super(props);
+    this._handleAmountSubmit = this._handleAmountSubmit.bind(this);
+    this._handleNameSubmit = this._handleNameSubmit.bind(this);
+  }
+
+  state = {
+    open: false,
+    value: 1,
+    budgeted: this.props.category.budgeted,
+  };
 
   render() {
-    //total all budgeted columns
-    const budgeted = this.props.subcategories.reduce((accumulator, element)=> accumulator + parseInt(element.budgeted, 10), 0);
-    //total all outflows columns
-    const outflows = this.props.subcategories.reduce((accumulator, element)=> accumulator + parseInt(element.outflow, 10), 0);
-
     return (
-      <div className="budget-category-container">
-        <div className="budget-category">
-          <div className="master-category column">
-          	{this.props.master_category}
-            <AddBudgetSubcategory index={this.props.index}/>
-         	</div>
-         	<div className="budget column">
-          	{budgeted}
-         	</div>
-         	<div className="outflows column">
-         		{outflows}
-         	</div>
-         	<div className="balance column">
-         		{budgeted-outflows}
-         	</div>
+      <div className="budget-category">
+        <div className="name column">
+          <InlineEdit defaultInputText={this.props.category.name} defaultDisplayText={this.props.category.name} handleSubmit={this._handleNameSubmit} />
         </div>
-        {this.subcategoriesList()}
+       	<div className="budget column">
+        	<InlineEdit defaultInputText={normalizeCurrency(this.state.budgeted)} defaultDisplayText={usd(this.state.budgeted)} handleSubmit={this._handleAmountSubmit} />
+       	</div>
+       	<div className="outflow column">
+       		{usd(this.props.category.outflow)}
+       	</div>
+       	<div className="balance column">
+       		{usd(this.props.category.budgeted - this.props.category.outflow)}
+       	</div>
       </div>
     );
   }
 
-  subcategoriesList() {
-    return this.props.subcategories.map((subcategory, index) => <BudgetSubcategory {...subcategory} indexParent={this.props.index} index={index} key={index}/>);
+  _handleNameSubmit(newName){
+    let category = this.props.category;
+    this.props.dispatch(updateCategoryName({
+      [category.id]:{
+        ...category, name: newName
+      }
+    }));
+    this.setState({
+      name: newName
+    })
   }
+
+  _handleAmountSubmit(newValue){
+    let category = this.props.category;
+    let updatedCategory = {
+      [category.id]:{
+        ...category, budgeted: normalizeCurrency(newValue)
+      }
+    };
+    this.props.dispatch(updateBudgetedAmount(updatedCategory));
+    this.setState({
+        budgeted: newValue
+      });
+    }
+
+  }
+
+class InlineEdit extends Component {
+  constructor(props){
+    super(props);
+    this._handleClick = this._handleClick.bind(this);
+    this._handleBlur = this._handleBlur.bind(this);
+    this._getTextField = this._getTextField.bind(this);
+  }
+
+  state = {
+    editable: false,
+  };
+
+  render(){
+    return (
+      <div className="inlineEdit">
+        {this._getTextField()}
+      </div>
+    );
+  }
+
+  _handleClick(){
+    this.setState({
+      editable: true
+    })
+  }
+
+  _handleBlur(event){
+    this.props.handleSubmit(event.target.value);
+    this.setState({
+      editable: false
+    })
+  }
+
+  _getTextField(){
+    if(this.state.editable){
+      return (
+        <input className="editableTextField" type="text" defaultValue={this.props.defaultInputText} onFocus={(e)=>{e.target.select()}} onBlur={this._handleBlur} autoFocus/>
+      );
+    }else{
+      return (
+        <div className="uneditableTextField" onClick={this._handleClick}>
+          {this.props.defaultDisplayText}
+        </div>
+      );
+    }
+  }
+
 }

@@ -1,9 +1,31 @@
-export default function reducer(state=[], action) {
+
+// new reducers
+export default function reducer(state={
+  "1": {
+    id: 1,
+    name: "Checking",
+    type: "checking",
+    balance: 5000,
+    note: "string",
+    open: true
+  },
+  "2": {
+    id: 2,
+    name: "Savings",
+    type: "savings",
+    balance: 5000,
+    note: "string",
+    open: true
+  }
+}, action) {
   // eslint-disable-next-line
-  switch (action.type) {
-    case "ADD_ACCOUNT":
-      state = state.concat([action.payload])
-      break;
+  switch (action.type){
+  	case "ADD_ACCOUNT":
+  		state = {...state, ...action.payload};
+  	break;
+    case "UPDATE_ACCOUNT_NAME":
+      state = {...state, ...action.payload};
+    break;
   }
   return state;
 }

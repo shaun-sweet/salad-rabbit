@@ -1,3 +1,11 @@
+export function addMasterCategory(master_category) {
+  return {
+    type: "ADD_MASTER_CATEGORY", payload: {
+      ...master_category
+    }
+  }
+}
+
 export function addCategory(category) {
   return {
     type: "ADD_CATEGORY", payload: {
@@ -6,22 +14,34 @@ export function addCategory(category) {
   }
 }
 
-export function addSubcategory(subcategory, index) {
-  console.log(subcategory, index);
+export function addCategoryToMaster(newMasterCategory) {
   return {
-    type: "ADD_SUBCATEGORY", payload: {
-      subcategory: subcategory,
-      index: index
+    type: "ADD_CATEGORY_TO_MASTER", payload: {
+      ...newMasterCategory
     }
   }
 }
 
-export function changeBudgetedAmount(value, indexParent, index) {
+export function updateBudgetedAmount(updatedCategory) {
   return {
-    type: "CHANGE_BUDGETED_AMOUNT", payload: {
-      value: value,
-      indexParent: indexParent,
-      index: index
+    type: "UPDATE_BUDGETED_AMOUNT", payload: {
+      ...updatedCategory
+    }
+  }
+}
+
+export function updateCategoryName(updatedCategory) {
+  return {
+    type: "UPDATE_CATEGORY_NAME", payload: {
+      ...updatedCategory
+    }
+  }
+}
+
+export function addOutflow(updatedCategory) {
+  return {
+    type: "ADD_OUTFLOW", payload: {
+      ...updatedCategory
     }
   }
 }

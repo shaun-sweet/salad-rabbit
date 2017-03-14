@@ -1,26 +1,43 @@
-export default function reducer(state=[], action) {
-  // eslint-disable-next-line
-  switch (action.type) {
-    case "ADD_CATEGORY":
-      state = state.concat([action.payload])
-      break;
-    case "ADD_SUBCATEGORY":
-      //make copy of old category
-   	  var category = {...state[action.payload.index]};
-   	  //push the new subcategory onto the category
-   	  category.subcategories.push(action.payload.subcategory);
-   	  //add the rest of the array to either side of the changed master category
-      state = state.slice(0, action.payload.index).concat([category]).concat(state.slice(action.payload.index + 1));
-      break;
-    case "CHANGE_BUDGETED_AMOUNT":
-      //make copy of old master category of the subcategory you're changing
-      var oldCategory = {...state[action.payload.indexParent]};
-      //set the budgeted amount in the subcategory to the new value
-      oldCategory.subcategories[action.payload.index].budgeted = action.payload.value;
-      //add the rest of the array to either side of the changed master category
-      state = state.slice(0, action.payload.indexParent).concat([oldCategory]).concat(state.slice(action.payload.indexParent + 1));
-      break;
+// new reducer
+//
+export default function reducer(state={
+  "1": {
+    id: 1,
+    masterCategory: 1,
+    name: "Rent",
+    budgeted: 500,
+    outflows: [],
+    outflow: 0,
+    inflow: 0,
+    balance: 0,
+    hidden: false
+  },
+  "2": {
+    id: 2,
+    masterCategory: 1,
+    name: "Cell Phone",
+    budgeted: 100.23,
+    outflows: [1],
+    outflow: 0,
+    inflow: 0,
+    balance: 0,
+    hidden: false
   }
-
+}, action) {
+  // eslint-disable-next-line
+  switch(action.type){
+    case "ADD_CATEGORY":
+      state = {...state, ...action.payload};
+    break;
+    case "UPDATE_BUDGETED_AMOUNT":
+      state = {...state, ...action.payload};
+    break;
+    case "UPDATE_CATEGORY_NAME":
+      state = {...state, ...action.payload};
+    break;
+    case "ADD_OUTFLOW":
+      state = {...state, ...action.payload}
+    break;
+  }
   return state;
 }

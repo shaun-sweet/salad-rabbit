@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import BudgetAccountListItem from './BudgetAccountListItem'
 import {Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
-import numeral from 'numeral'
 import { connect } from 'react-redux'
+import { usd, sumArray } from '../../../helpers/index.js'
+import { updateAccountName } from '../../../actions/accountsActions'
+import { closeOpenAccount } from '../../../actions/openAccountsActions'
+import { addClosedAccount } from '../../../actions/closedAccountsActions'
 
 var mapStateToProps = function(store) {
   return {
+    openAccounts: store.openAccounts,
+    closedAccounts: store.closedAccounts,
     accounts: store.accounts
   };
 }
@@ -19,26 +24,42 @@ class BudgetAccountsContainer extends Component {
   }
 
  render() {
+    let openAccounts = this.denormalizeOpenAccounts();
+    let openAccountsComponents = openAccounts.map((account, index) =>
+      <BudgetAccountListItem {...account} submitCloseAccount={this.submitCloseAccount.bind(this)} submitAccountNameEdit={this.submitAccountNameEdit.bind(this)} key={account.id} />
+    );
    return (
      <Card className="budget-accounts-container" expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
        <CardHeader
+
          title="Budget Accounts"
-         subtitle={numeral(3000).format('$0,0.00')}
+         subtitle={usd(sumArray(openAccounts, (account)=> account.balance))}
          actAsExpander={true}
          showExpandableButton={true}
        />
        <CardMedia
          expandable={true}
-       >
-       </CardMedia>
+       />
        <CardText expandable={true}>
-        <ul>
-          {this.accountsList()}
-        </ul>
+         <ul>
+           {openAccountsComponents}
+         </ul>
        </CardText>
      </Card>
    );
  }
+
+ submitCloseAccount = (accountId) => {
+   let openAccounts = this.props.openAccounts.filter((currentAccountId)=> currentAccountId !== accountId );
+   this.props.dispatch((dispatch) => {
+     dispatch(closeOpenAccount(openAccounts));
+     dispatch(addClosedAccount([accountId]));
+   });
+ };
+
+ submitAccountNameEdit = (updatedAccount) => {
+   this.props.dispatch(updateAccountName(updatedAccount));
+ };
 
   handleExpandChange = (expanded) => {
     this.setState({expanded: expanded});
@@ -56,8 +77,10 @@ class BudgetAccountsContainer extends Component {
     this.setState({expanded: false});
   };
 
-  accountsList() {
-    return this.props.accounts.map((account, index) => <BudgetAccountListItem {...account} key={index} />);
+  denormalizeOpenAccounts() {
+    return this.props.openAccounts.map((accountId, index) => {
+      return this.props.accounts[accountId];
+    });
   }
 
 }
