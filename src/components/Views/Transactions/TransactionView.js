@@ -9,6 +9,7 @@ import { normalizeCurrency } from '../../../helpers'
 import TransactionControls from './TransactionControls'
 import { incrementTransactionId } from '../../../actions/transactionsIdGeneratorActions'
 import { addOutflow } from '../../../actions/categoriesActions'
+import {denormalizeData, transactionsCallback, openAccountsCallback, masterCategoriesCallback} from '../../../helpers/denormalizingFunctions'
 
 let mapStateToProps = function(store) {
   return {
@@ -40,7 +41,7 @@ class TransactionView extends Component {
   }
 
   filteredTransactions = (accountId) => {
-    return this.denormalizeTransactions().filter(( transaction ) => {
+    return denormalizeData(this.props.transactions, transactionsCallback).filter(( transaction ) => {
       if (accountId === "all") {
         return true;
       }else{
@@ -74,29 +75,6 @@ class TransactionView extends Component {
     }
   }
 
-  denormalizeTransactions = () => {
-    return Object.keys(this.props.transactions).map((transactionId, index)=>{
-      let transaction = {...this.props.transactions[transactionId]};
-      transaction.category = this.props.categories[transaction.category];
-      transaction.account = this.props.accounts[transaction.account];
-      return transaction;
-    });
-  }
-
-  denormalizeMasterCategories = () => {
-    let masterCategories = this.props.masterCategories;
-    return Object.keys(masterCategories).map((masterCategoryId)=>{
-      return {...masterCategories[masterCategoryId], categories: masterCategories[masterCategoryId].categories.map((categoryId)=>
-        this.props.categories[categoryId])};
-    })
-  }
-
-  denormalizeOpenAccounts = () => {
-    return this.props.openAccounts.map((accountId) => {
-      return this.props.accounts[accountId];
-    });
-  }
-
   showNewTransferBar = () => {
     return (
       <NewTransactionBar
@@ -107,7 +85,7 @@ class TransactionView extends Component {
         selectedDate={this.state.formData.date}
         onDateChange={this.handleDateChange}
         handleSaveNewTransaction={this.handleSaveNewTransfer}
-        accounts={this.denormalizeOpenAccounts()}
+        accounts={denormalizeData(this.props.openAccounts, openAccountsCallback)}
       />);
   }
 
@@ -168,8 +146,8 @@ class TransactionView extends Component {
         selectedDate={this.state.formData.date}
         onDateChange={this.handleDateChange}
         handleSaveNewTransaction={this.handleSaveNewTransaction}
-        accounts={this.denormalizeOpenAccounts()}
-        masterCategories={this.denormalizeMasterCategories()}
+        accounts={denormalizeData(this.props.openAccounts, openAccountsCallback)}
+        masterCategories={denormalizeData(this.props.masterCategories, masterCategoriesCallback)}
       />);
   }
 

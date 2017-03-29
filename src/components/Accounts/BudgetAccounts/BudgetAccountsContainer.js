@@ -6,13 +6,12 @@ import { usd, sumArray } from '../../../helpers/index.js'
 import { updateAccountName } from '../../../actions/accountsActions'
 import { closeOpenAccount } from '../../../actions/openAccountsActions'
 import { addClosedAccount } from '../../../actions/closedAccountsActions'
-import { denormalizeData, getOpenAccounts } from '../../../helpers/denormalizingFunctions'
+import { denormalizeData, openAccountsCallback } from '../../../helpers/denormalizingFunctions'
 
 var mapStateToProps = function(store) {
   return {
     openAccounts: store.openAccounts,
-    closedAccounts: store.closedAccounts,
-    accounts: store.accounts
+    closedAccounts: store.closedAccounts
   };
 }
 class BudgetAccountsContainer extends Component {
@@ -25,7 +24,7 @@ class BudgetAccountsContainer extends Component {
   }
 
  render() {
-    let openAccounts = denormalizeData(this.props.openAccounts, getOpenAccounts)
+    let openAccounts = denormalizeData(this.props.openAccounts, openAccountsCallback)
 
     let openAccountsComponents = openAccounts.map((account, index) =>
       <BudgetAccountListItem {...account} submitCloseAccount={this.submitCloseAccount.bind(this)} submitAccountNameEdit={this.submitAccountNameEdit.bind(this)} key={account.id} />
