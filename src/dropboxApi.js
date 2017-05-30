@@ -1,5 +1,6 @@
 var Dropbox = require('dropbox');
 
+// All methods return a promise
 class DropboxApiCall {
 
   constructor(config) {
