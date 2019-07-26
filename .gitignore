@@ -13,7 +13,6 @@
 *.map
 .idea
 .DS_Store
-.env
 .sass-cache
 npm-debug.log
 *.css
