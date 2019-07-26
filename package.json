@@ -10,6 +10,7 @@
     "antd": "3.20.3",
     "babel-plugin-import": "1.12.0",
     "customize-cra": "0.4.1",
+    "dropbox": "^4.0.28",
     "gh-pages": "2.0.1",
     "react": "^16.8.6",
     "react-app-rewired": "2.1.3",
