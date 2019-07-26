@@ -6,7 +6,8 @@ const dbx = new Dropbox({ clientId: 'kl4fz9vabg5el9q', fetch: fetch });
 
 const authUrl = dbx.getAuthenticationUrl('http://localhost:3000');
 const App: React.FC = () => {
-  console.log(process.env)
+  console.log(process.env);
+  
   return (
     <div className="App">
     <a href={authUrl}>
